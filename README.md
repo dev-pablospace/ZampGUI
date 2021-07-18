@@ -1,6 +1,6 @@
-# ManZamp
+# ZampGUI
 
-ManZamp is the gui form application for the project [ManZamp](https://sourceforge.net/projects/manzamp/) - full portable wamp stack
+ZampGUI is the gui form application for the project [ZampGUI](https://sourceforge.net/projects/manzamp/) - full portable wamp stack
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ Once you have zamp zip application on your pc decompress it and then run
 RunApp.cmd
 ```
 
-This will run ManZamp Gui Form Application and from there launch apache and mariadb, PHPMyAdmin ecc...
+This will run ZampGUI Form Application and from there launch apache and mariadb, PHPMyAdmin ecc...
 
 
 ### Built With
