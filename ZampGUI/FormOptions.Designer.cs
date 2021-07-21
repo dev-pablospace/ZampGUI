@@ -49,7 +49,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(238, 15);
+            this.label1.Size = new System.Drawing.Size(305, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Default Editor (Insert full path)";
             // 
@@ -57,7 +57,7 @@
             // 
             this.txtPathEditor.Location = new System.Drawing.Point(15, 27);
             this.txtPathEditor.Name = "txtPathEditor";
-            this.txtPathEditor.Size = new System.Drawing.Size(632, 21);
+            this.txtPathEditor.Size = new System.Drawing.Size(632, 24);
             this.txtPathEditor.TabIndex = 1;
             // 
             // label2
@@ -65,7 +65,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 15);
+            this.label2.Size = new System.Drawing.Size(152, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Apache http port";
             // 
@@ -78,7 +78,7 @@
             0,
             0});
             this.numericUpDown_http.Name = "numericUpDown_http";
-            this.numericUpDown_http.Size = new System.Drawing.Size(114, 21);
+            this.numericUpDown_http.Size = new System.Drawing.Size(114, 24);
             this.numericUpDown_http.TabIndex = 4;
             this.numericUpDown_http.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -91,7 +91,7 @@
             0,
             0});
             this.numericUpDown_https.Name = "numericUpDown_https";
-            this.numericUpDown_https.Size = new System.Drawing.Size(121, 21);
+            this.numericUpDown_https.Size = new System.Drawing.Size(121, 24);
             this.numericUpDown_https.TabIndex = 6;
             this.numericUpDown_https.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_https.Visible = false;
@@ -101,7 +101,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(134, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 15);
+            this.label3.Size = new System.Drawing.Size(161, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Apache https port";
             this.label3.Visible = false;
@@ -115,7 +115,7 @@
             0,
             0});
             this.numericUpDown_mariadb.Name = "numericUpDown_mariadb";
-            this.numericUpDown_mariadb.Size = new System.Drawing.Size(121, 21);
+            this.numericUpDown_mariadb.Size = new System.Drawing.Size(121, 24);
             this.numericUpDown_mariadb.TabIndex = 8;
             this.numericUpDown_mariadb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -124,7 +124,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(263, 56);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 15);
+            this.label4.Size = new System.Drawing.Size(116, 17);
             this.label4.TabIndex = 7;
             this.label4.Text = "MariaDB port";
             // 
@@ -152,10 +152,10 @@
             // 
             // FormOptions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(669, 116);
+            this.ClientSize = new System.Drawing.Size(667, 108);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.numericUpDown_mariadb);
@@ -172,7 +172,7 @@
             this.MinimumSize = new System.Drawing.Size(685, 155);
             this.Name = "FormOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormOptions";
+            this.Text = "Options";
             this.Load += new System.EventHandler(this.FormOptions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_http)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_https)).EndInit();

@@ -61,10 +61,10 @@
             this.tabPage1.Controls.Add(this.btnBackup);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.comboBoxDbBackup);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(757, 170);
+            this.tabPage1.Size = new System.Drawing.Size(757, 168);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Backup";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -84,7 +84,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(17, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 15);
+            this.label1.Size = new System.Drawing.Size(80, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Database";
             // 
@@ -94,7 +94,7 @@
             this.comboBoxDbBackup.FormattingEnabled = true;
             this.comboBoxDbBackup.Location = new System.Drawing.Point(104, 26);
             this.comboBoxDbBackup.Name = "comboBoxDbBackup";
-            this.comboBoxDbBackup.Size = new System.Drawing.Size(647, 23);
+            this.comboBoxDbBackup.Size = new System.Drawing.Size(647, 25);
             this.comboBoxDbBackup.TabIndex = 0;
             // 
             // tabPage2
@@ -104,10 +104,10 @@
             this.tabPage2.Controls.Add(this.btnRestore);
             this.tabPage2.Controls.Add(this.btnSelectSqlFile);
             this.tabPage2.Controls.Add(this.txtPathSQLFile);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(757, 170);
+            this.tabPage2.Size = new System.Drawing.Size(757, 168);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Restore";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(76, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 15);
+            this.label2.Size = new System.Drawing.Size(80, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "Database";
             // 
@@ -127,7 +127,7 @@
             this.comboBoxDbRestore.FormattingEnabled = true;
             this.comboBoxDbRestore.Location = new System.Drawing.Point(163, 69);
             this.comboBoxDbRestore.Name = "comboBoxDbRestore";
-            this.comboBoxDbRestore.Size = new System.Drawing.Size(588, 23);
+            this.comboBoxDbRestore.Size = new System.Drawing.Size(588, 25);
             this.comboBoxDbRestore.TabIndex = 4;
             // 
             // btnRestore
@@ -154,7 +154,7 @@
             // 
             this.txtPathSQLFile.Location = new System.Drawing.Point(163, 31);
             this.txtPathSQLFile.Name = "txtPathSQLFile";
-            this.txtPathSQLFile.Size = new System.Drawing.Size(588, 21);
+            this.txtPathSQLFile.Size = new System.Drawing.Size(588, 24);
             this.txtPathSQLFile.TabIndex = 1;
             // 
             // openFileDialog1
@@ -163,7 +163,7 @@
             // 
             // FormBackupRestore
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 223);
             this.Controls.Add(this.tabControl1);
@@ -171,7 +171,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormBackupRestore";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "BackupRestore";
+            this.Text = "Backup and Restore";
             this.Load += new System.EventHandler(this.FormBackupRestore_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

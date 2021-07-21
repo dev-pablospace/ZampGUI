@@ -65,7 +65,7 @@ namespace ZampGUI
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(59, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.Size = new System.Drawing.Size(107, 17);
             this.label1.TabIndex = 13;
             this.label1.Text = "PHP Version";
             // 
@@ -74,7 +74,7 @@ namespace ZampGUI
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(66, 88);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 15);
+            this.label2.Size = new System.Drawing.Size(98, 17);
             this.label2.TabIndex = 14;
             this.label2.Text = "DB Version";
             // 
@@ -84,7 +84,7 @@ namespace ZampGUI
             this.comboBoxPHP_Vers.FormattingEnabled = true;
             this.comboBoxPHP_Vers.Location = new System.Drawing.Point(205, 42);
             this.comboBoxPHP_Vers.Name = "comboBoxPHP_Vers";
-            this.comboBoxPHP_Vers.Size = new System.Drawing.Size(135, 23);
+            this.comboBoxPHP_Vers.Size = new System.Drawing.Size(135, 25);
             this.comboBoxPHP_Vers.TabIndex = 15;
             // 
             // comboBoxDB_Vers
@@ -93,15 +93,15 @@ namespace ZampGUI
             this.comboBoxDB_Vers.FormattingEnabled = true;
             this.comboBoxDB_Vers.Location = new System.Drawing.Point(205, 85);
             this.comboBoxDB_Vers.Name = "comboBoxDB_Vers";
-            this.comboBoxDB_Vers.Size = new System.Drawing.Size(135, 23);
+            this.comboBoxDB_Vers.Size = new System.Drawing.Size(135, 25);
             this.comboBoxDB_Vers.TabIndex = 16;
             // 
             // FormChangeVers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(412, 200);
+            this.ClientSize = new System.Drawing.Size(410, 192);
             this.Controls.Add(this.comboBoxDB_Vers);
             this.Controls.Add(this.comboBoxPHP_Vers);
             this.Controls.Add(this.label2);
@@ -114,7 +114,7 @@ namespace ZampGUI
             this.MinimumSize = new System.Drawing.Size(428, 239);
             this.Name = "FormChangeVers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormChangeVers";
+            this.Text = "Change PHP/DB Version";
             this.ResumeLayout(false);
             this.PerformLayout();
 

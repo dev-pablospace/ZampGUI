@@ -48,7 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Untitled-3.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ZampGUI.Program</StartupObject>
@@ -220,11 +221,6 @@
     <None Include="Resources\bullet._red.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="iconfinder_dolphin_3406442.ico" />
-    <Content Include="icons8-logo-delfino-256.ico" />
-    <Content Include="passaggi.txt" />
-    <Content Include="Untitled-2.ico" />
-    <Content Include="Untitled-3.ico" />
     <None Include="Resources\iconfinder_f-command_256_282475.png" />
     <None Include="Resources\php_icona.png" />
     <None Include="Resources\mariadb_icona.png" />
@@ -233,13 +229,17 @@
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\iconfinder_info_370079.png" />
     <None Include="Resources\noun_terminal_6140AAAAAAAAA40.png" />
-    <Content Include="todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZampLib\ZampLib.csproj">
       <Project>{292e5e38-6b91-496a-9bf1-3b68f329bfbd}</Project>
       <Name>ZampLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\Black Text Icons Icon Set.png" />
+    <Content Include="img\ZampGUI logo mini.ico" />
+    <Content Include="img\ZampGUI logo mini.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

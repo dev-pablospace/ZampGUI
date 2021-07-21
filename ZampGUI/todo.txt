@@ -1,6 +1,0 @@
-- creare installer
-- trovare metodo alternativo per gestire il fatto che un processo è stato terminato esternamente (senza timer)
-
-
-non sono iriuscito a fare
-- settare la variabile per leggere il percorso assoluto in php.ini

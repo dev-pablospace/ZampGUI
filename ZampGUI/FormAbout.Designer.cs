@@ -49,9 +49,9 @@ namespace ZampGUI
             // linkLabel1
             // 
             this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel1.Location = new System.Drawing.Point(20, 404);
+            this.linkLabel1.Location = new System.Drawing.Point(20, 396);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(504, 17);
+            this.linkLabel1.Size = new System.Drawing.Size(502, 17);
             this.linkLabel1.TabIndex = 1;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "ZampGUI Software Home page";
@@ -61,9 +61,9 @@ namespace ZampGUI
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(20, 370);
+            this.label1.Location = new System.Drawing.Point(20, 362);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(504, 34);
+            this.label1.Size = new System.Drawing.Size(502, 34);
             this.label1.TabIndex = 2;
             this.label1.Text = "ZampGUI \r\nGUI interface for running Web Server and Database";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -71,9 +71,9 @@ namespace ZampGUI
             // 
             // FormAbout
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 441);
+            this.ClientSize = new System.Drawing.Size(542, 433);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.pictureBox1);
@@ -84,7 +84,7 @@ namespace ZampGUI
             this.Name = "FormAbout";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormAbout";
+            this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

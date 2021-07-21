@@ -50,7 +50,7 @@ namespace ZampGUI
         {
             try
             {
-                this.Text += " - (User: " + ZampLib.ManZampLib.getNameCurrent_user() + ")";
+                //this.Text += " - (User: " + ZampLib.ManZampLib.getNameCurrent_user() + ")";
                 
                 if (!System.IO.Directory.Exists(cv.pathBase))
                 {

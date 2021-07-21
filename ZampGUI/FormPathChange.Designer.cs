@@ -49,7 +49,7 @@
             // 
             this.txt_mainpath.Location = new System.Drawing.Point(14, 40);
             this.txt_mainpath.Name = "txt_mainpath";
-            this.txt_mainpath.Size = new System.Drawing.Size(617, 21);
+            this.txt_mainpath.Size = new System.Drawing.Size(617, 24);
             this.txt_mainpath.TabIndex = 1;
             // 
             // label1
@@ -57,13 +57,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(14, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 15);
+            this.label1.Size = new System.Drawing.Size(233, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Absolute Path ZAMP Folder";
             // 
             // FormPathChange
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(656, 121);
@@ -74,7 +74,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormPathChange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormPathChange";
+            this.Text = "Path Change";
             this.Load += new System.EventHandler(this.FormPathChange_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

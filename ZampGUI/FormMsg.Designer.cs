@@ -63,7 +63,7 @@
             // 
             // FormMsg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(584, 261);
@@ -74,7 +74,7 @@
             this.MinimumSize = new System.Drawing.Size(600, 300);
             this.Name = "FormMsg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormMsg";
+            this.Text = "Text";
             this.ResumeLayout(false);
             this.PerformLayout();
 
