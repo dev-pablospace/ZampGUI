@@ -20,43 +20,43 @@
     "pid_currentproc_mariadb": ""
   },
   "pc_cameretta": {
-    "pathBase": "H:\\SVL\\zamp\\zamp_multiversion_1.2.01",
+    "pathBase": "H:\\SVL\\zamp\\ZampGUI_1.0.00",
     "pathMariaDB": {
-      "mariadb-10.5.10": "H:\\SVL\\zamp\\zamp_multiversion_1.2.01\\Apps\\mariadb-10.5.10",
-      "mariadb-10.4.19": "H:\\SVL\\zamp\\zamp_multiversion_1.2.01\\Apps\\mariadb-10.4.19"
+      "mariadb-10.5.10": "H:\\SVL\\zamp\\ZampGUI_1.0.00\\Apps\\mariadb-10.5.10",
+      "mariadb-10.6.3": "H:\\SVL\\zamp\\ZampGUI_1.0.00\\Apps\\mariadb-10.6.3"
     },
-    "MariaDB_scelta": "mariadb-10.5.10",
-    "pathApache": "H:\\SVL\\zamp\\zamp_multiversion_1.2.01\\Apps\\Apache24",
+    "MariaDB_scelta": "mariadb-10.6.3",
+    "pathApache": "H:\\SVL\\zamp\\ZampGUI_1.0.00\\Apps\\Apache24",
     "pathPHP": {
-      "php-8.0.7": "H:\\SVL\\zamp\\zamp_multiversion_1.2.01\\Apps\\php-8.0.7",
-      "php-7.4.20": "H:\\SVL\\zamp\\zamp_multiversion_1.2.01\\Apps\\php-7.4.20"
+      "php-8.0.8": "H:\\SVL\\zamp\\ZampGUI_1.0.00\\Apps\\php-8.0.8",
+      "php-7.4.21": "H:\\SVL\\zamp\\ZampGUI_1.0.00\\Apps\\php-7.4.21"
     },
-    "PHP_scelta": "php-8.0.7",
+    "PHP_scelta": "php-8.0.8",
     "default_editor_path": "C:\\Program Files (x86)\\Notepad++\\notepad++.exe",
     "apache_http_port": "80",
     "apache_https_port": "443",
     "mariadb_port": "3306",
     "pid_currentproc_apache": "",
-    "pid_currentproc_mariadb": "1444"
+    "pid_currentproc_mariadb": ""
   },
   "acer_nitro": {
-    "pathBase": "C:\\Users\\pablo\\Desktop\\varie\\portable\\zamp_multiversion_1.2.01",
+    "pathBase": "C:\\Users\\pablo\\Desktop\\varie\\portable\\ZampGUI_1.0.00",
     "pathMariaDB": {
-      "mariadb-10.5.10": "C:\\Users\\pablo\\Desktop\\varie\\portable\\zamp_multiversion_1.2.01\\Apps\\mariadb-10.5.10",
-      "mariadb-10.4.19": "C:\\Users\\pablo\\Desktop\\varie\\portable\\zamp_multiversion_1.2.01\\Apps\\mariadb-10.4.19"
+      "mariadb-10.5.10": "C:\\Users\\pablo\\Desktop\\varie\\portable\\ZampGUI_1.0.00\\Apps\\mariadb-10.5.10",
+      "mariadb-10.6.3": "C:\\Users\\pablo\\Desktop\\varie\\portable\\ZampGUI_1.0.00\\Apps\\mariadb-10.6.3"
     },
-    "MariaDB_scelta": "mariadb-10.5.10",
-    "pathApache": "C:\\Users\\pablo\\Desktop\\varie\\portable\\zamp_multiversion_1.2.01\\Apps\\Apache24",
+    "MariaDB_scelta": "mariadb-10.6.3",
+    "pathApache": "C:\\Users\\pablo\\Desktop\\varie\\portable\\ZampGUI_1.0.00\\Apps\\Apache24",
     "pathPHP": {
-      "php-8.0.7": "C:\\Users\\pablo\\Desktop\\varie\\portable\\zamp_multiversion_1.2.01\\Apps\\php-8.0.7",
-      "php-7.4.20": "C:\\Users\\pablo\\Desktop\\varie\\portable\\zamp_multiversion_1.2.01\\Apps\\php-7.4.20"
+      "php-8.0.8": "C:\\Users\\pablo\\Desktop\\varie\\portable\\ZampGUI_1.0.00\\Apps\\php-8.0.8",
+      "php-7.4.21": "C:\\Users\\pablo\\Desktop\\varie\\portable\\ZampGUI_1.0.00\\Apps\\php-7.4.21"
     },
-    "PHP_scelta": "php-8.0.7",
+    "PHP_scelta": "php-8.0.8",
     "default_editor_path": "C:\\Program Files (x86)\\Notepad++\\notepad++.exe",
     "apache_http_port": "80",
     "apache_https_port": "443",
     "mariadb_port": "3306",
     "pid_currentproc_apache": "",
-    "pid_currentproc_mariadb": "1444"
+    "pid_currentproc_mariadb": ""
   }
 }
