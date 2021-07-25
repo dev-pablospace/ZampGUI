@@ -133,6 +133,16 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap noun_Cursor {
+            get {
+                object obj = ResourceManager.GetObject("noun_Cursor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap noun_terminal_6140AAAAAAAAA40 {
             get {
                 object obj = ResourceManager.GetObject("noun_terminal_6140AAAAAAAAA40", resourceCulture);

@@ -38,6 +38,8 @@ namespace ZampLib.Business
         public string composer_vers { get; set; }
 
 
+        public List<string> ListPathConsole { get; set; } //percorsi aggiuntivi che devo aggiungere alla %PATH% QUANDO apro la console
+
         public string MariaDB_bin
         {
             get
@@ -235,6 +237,8 @@ namespace ZampLib.Business
             this.mariadb_port = (string)jobj[_env]["mariadb_port"];
             this.pid_currentproc_apache = (string)jobj[_env]["pid_currentproc_apache"];
             this.pid_currentproc_mariadb = (string)jobj[_env]["pid_currentproc_mariadb"];
+
+            this.ListPathConsole = ((string)jobj[_env]["ListPathConsole"]).Split('|').ToList();
         }
 
         public string validateSetting()
@@ -312,6 +316,13 @@ namespace ZampLib.Business
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
             */
+        }
+
+        public void updateAdditionalPath()
+        {
+            JObject jobj = ManZampLib.getJson_Env();
+            jobj[_env]["ListPathConsole"] = String.Join("|", this.ListPathConsole.ToArray());
+            ManZampLib.setJson_Env(jobj);
         }
 
         public void updatePort()

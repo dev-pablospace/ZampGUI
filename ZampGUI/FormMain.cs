@@ -162,6 +162,7 @@ namespace ZampGUI
             {
                 cv = frm2.cv;
                 cv.updatePort();
+                cv.updateAdditionalPath();
                 cv.updateDefaultEditor(cv.default_editor_path);
             }
             frm2.Close();
@@ -311,7 +312,38 @@ namespace ZampGUI
             refreshStatusForm();
             frm2.Close();
         }
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://zampgui.dhost.org/support");
+        }
+
+        private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string contents;
+            using (var wc = new System.Net.WebClient())
+                contents = wc.DownloadString("http://zampgui.dhost.org/assets/ver.txt");
+
+            string ver = ManZampLib.getval_from_appsetting("ver");
+            if(ver.Equals(contents))
+            {
+                MessageBox.Show("You have the latest version of ZampGUI");
+            }
+            else
+            {
+                FormUpdateProgram frm2 = new FormUpdateProgram();
+                DialogResult dr = frm2.ShowDialog(this);
+                if (dr == DialogResult.OK)
+                {
+
+                }
+                frm2.Close();
+            }
+
+            
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FormAbout frm2 = new FormAbout();
             DialogResult dr = frm2.ShowDialog(this);
@@ -334,13 +366,14 @@ namespace ZampGUI
 
             string drive_letter = System.IO.Path.GetPathRoot(cv.pathBase).Substring(0, 1);
             //MessageBox.Show(drive_letter);
+            string ListPathConsole = String.Join(";", cv.ListPathConsole.ToArray());
 
             //ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
             //        new string[] { apache_dir_bin, cv.pathPHP, mariadb_dir_bin, composer_path, node_path, sass_path, drive_letter, cv.pathBase }
             //);
 
             ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
-                    new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase }
+                    new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
             );
         }
         private void refreshStatusForm()
@@ -465,6 +498,7 @@ namespace ZampGUI
 
 
         }
+
 
 
 
