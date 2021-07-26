@@ -319,28 +319,33 @@ namespace ZampGUI
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            string contents;
-            using (var wc = new System.Net.WebClient())
-                contents = wc.DownloadString("http://zampgui.dhost.org/assets/ver.txt");
-
-            string ver = ManZampLib.getval_from_appsetting("ver");
-            if(ver.Equals(contents))
+            try
             {
-                MessageBox.Show("You have the latest version of ZampGUI");
-            }
-            else
-            {
-                FormUpdateProgram frm2 = new FormUpdateProgram();
-                DialogResult dr = frm2.ShowDialog(this);
-                if (dr == DialogResult.OK)
+                string contents;
+                using (var wc = new System.Net.WebClient())
+                    contents = wc.DownloadString("http://zampgui.dhost.org/assets/ver.txt");
+
+                string ver = ManZampLib.getval_from_appsetting("ver");
+                if (ver.Equals(contents))
                 {
-
+                    MessageBox.Show("You have the latest version of ZampGUI");
                 }
-                frm2.Close();
+                else
+                {
+                    FormUpdateProgram frm2 = new FormUpdateProgram();
+                    DialogResult dr = frm2.ShowDialog(this);
+                    if (dr == DialogResult.OK)
+                    {
+
+                    }
+                    frm2.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Service not available at the moment");
             }
 
-            
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
