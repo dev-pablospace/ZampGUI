@@ -29,7 +29,7 @@ namespace ZampGUI
             string svalidate = cv.validateSetting();
             if (!string.IsNullOrEmpty(svalidate))
             {
-                ManZampLib.printMsg_and_exit(svalidate);
+                ZampGUILib.printMsg_and_exit(svalidate);
             }
 
             txtPathEditor.Text = cv.default_editor_path;
@@ -95,7 +95,7 @@ namespace ZampGUI
 
         private bool procs_port()
         {
-            return ManZampLib.checkRunningProc(cv.getPID_apache) || ManZampLib.checkRunningProc(cv.getPID_mariadb);
+            return ZampGUILib.checkRunningProc(cv.getPID_apache) || ZampGUILib.checkRunningProc(cv.getPID_mariadb);
         }
 
         private void btnSelectEdit_Click(object sender, EventArgs e)

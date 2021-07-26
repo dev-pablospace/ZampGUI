@@ -69,7 +69,7 @@ namespace ZampGUI
                 return;
             }
 
-            List<string> all_db = ManZampLib.getAllDB(cv.mariadb_port);
+            List<string> all_db = ZampGUILib.getAllDB(cv.mariadb_port);
             foreach (string s in all_db)
             {
                 if (s.Equals(nome_db))
@@ -268,7 +268,7 @@ namespace ZampGUI
 
             string bin_mysql = Path.Combine(cv.MariaDB_path_scelto, "bin", "mysql.exe"); 
 
-            string sout = ManZampLib.startProc_and_wait_output(bin_mysql, "-u root --password=root -h localhost --port=" + cv.mariadb_port + " -e \""
+            string sout = ZampGUILib.startProc_and_wait_output(bin_mysql, "-u root --password=root -h localhost --port=" + cv.mariadb_port + " -e \""
                 + "CREATE DATABASE " + txt_dbname.Text + " CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
                 + "\"");
 
@@ -322,13 +322,13 @@ namespace ZampGUI
 
 
             //riavvio processi
-            addOutput(ManZampLib.killproc(cv, typeProg.apache));
-            addOutput(ManZampLib.killproc(cv, typeProg.mariadb));
+            addOutput(ZampGUILib.killproc(cv, typeProg.apache));
+            addOutput(ZampGUILib.killproc(cv, typeProg.mariadb));
 
             System.Threading.Thread.Sleep(1000);
 
-            addOutput(ManZampLib.startProc(cv, typeProg.apache, new string[] { }));
-            addOutput(ManZampLib.startProc(cv, typeProg.mariadb, new string[] { }));
+            addOutput(ZampGUILib.startProc(cv, typeProg.apache, new string[] { }));
+            addOutput(ZampGUILib.startProc(cv, typeProg.mariadb, new string[] { }));
 
             //messaggio con link
             progressBar1.PerformStep();

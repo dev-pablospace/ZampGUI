@@ -26,7 +26,7 @@ namespace ZampGUI
             this.cv = cv;
 
 
-            this._env = ManZampLib.getval_from_appsetting("env");
+            this._env = ZampGUILib.getval_from_appsetting("env");
 
             int index_sel_mariadb = 0;
             k = 0;
@@ -59,14 +59,14 @@ namespace ZampGUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            JObject jobj = ManZampLib.getJson_Env();
+            JObject jobj = ZampGUILib.getJson_Env();
 
             jobj[_env]["MariaDB_scelta"] = comboBoxDB_Vers.SelectedItem.ToString();
             jobj[_env]["PHP_scelta"] = comboBoxPHP_Vers.SelectedItem.ToString();
 
             aggiorna_apache_httpd_conf_php(comboBoxPHP_Vers.SelectedItem.ToString());
 
-            ManZampLib.setJson_Env(jobj);
+            ZampGUILib.setJson_Env(jobj);
 
             cv = new ConfigVar();
             this.Close();

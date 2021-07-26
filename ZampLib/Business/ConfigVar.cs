@@ -212,8 +212,8 @@ namespace ZampLib.Business
 
         public ConfigVar()
         {
-            _env = ManZampLib.getval_from_appsetting("env");
-            JObject jobj = ManZampLib.getJson_Env();
+            _env = ZampGUILib.getval_from_appsetting("env");
+            JObject jobj = ZampGUILib.getJson_Env();
             this.pathBase = (string)jobj[_env]["pathBase"];
             this.pathApache = (string)jobj[_env]["pathApache"];
 
@@ -280,14 +280,14 @@ namespace ZampLib.Business
 
             if(!string.IsNullOrEmpty(pid_currentproc_apache))
             {
-                if(!int.TryParse(pid_currentproc_apache, out int nd) || !ManZampLib.checkRunningProc(pid_currentproc_apache) || ManZampLib.getNameProc_fromPID(pid_currentproc_apache) != this.procApache)
+                if(!int.TryParse(pid_currentproc_apache, out int nd) || !ZampGUILib.checkRunningProc(pid_currentproc_apache) || ZampGUILib.getNameProc_fromPID(pid_currentproc_apache) != this.procApache)
                 {
                     updatePID(typeProg.apache, typeStartorKill.kill, Convert.ToInt32(pid_currentproc_apache));
                 }
             }
             if (!string.IsNullOrEmpty(pid_currentproc_mariadb))
             {
-                if (!int.TryParse(pid_currentproc_mariadb, out int ne) || !ManZampLib.checkRunningProc(pid_currentproc_mariadb) || ManZampLib.getNameProc_fromPID(pid_currentproc_mariadb) != this.procMariaDB)
+                if (!int.TryParse(pid_currentproc_mariadb, out int ne) || !ZampGUILib.checkRunningProc(pid_currentproc_mariadb) || ZampGUILib.getNameProc_fromPID(pid_currentproc_mariadb) != this.procMariaDB)
                 {
                     updatePID(typeProg.mariadb, typeStartorKill.kill, Convert.ToInt32(pid_currentproc_mariadb));
                 }
@@ -300,9 +300,9 @@ namespace ZampLib.Business
 
         public void updateDefaultEditor(string default_editor_path)
         {
-            JObject jobj = ManZampLib.getJson_Env();
+            JObject jobj = ZampGUILib.getJson_Env();
             jobj[_env]["default_editor_path"] = default_editor_path;
-            ManZampLib.setJson_Env(jobj);
+            ZampGUILib.setJson_Env(jobj);
 
             /*
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -320,24 +320,24 @@ namespace ZampLib.Business
 
         public void updateAdditionalPath()
         {
-            JObject jobj = ManZampLib.getJson_Env();
+            JObject jobj = ZampGUILib.getJson_Env();
             jobj[_env]["ListPathConsole"] = String.Join("|", this.ListPathConsole.ToArray());
-            ManZampLib.setJson_Env(jobj);
+            ZampGUILib.setJson_Env(jobj);
         }
 
         public void updatePort()
         {
-            JObject jobj = ManZampLib.getJson_Env();
+            JObject jobj = ZampGUILib.getJson_Env();
             jobj[_env]["apache_http_port"] = apache_http_port;
             jobj[_env]["apache_https_port"] = apache_https_port;
             jobj[_env]["mariadb_port"] = mariadb_port;
-            ManZampLib.setJson_Env(jobj);
+            ZampGUILib.setJson_Env(jobj);
             change_port();
         }
 
         public void updatePID(typeProg type_program, typeStartorKill type_op, int? pid)
         {
-            JObject jobj = ManZampLib.getJson_Env();
+            JObject jobj = ZampGUILib.getJson_Env();
             switch (type_program)
             {
                 case typeProg.apache:
@@ -363,18 +363,18 @@ namespace ZampLib.Business
                     jobj[_env]["pid_currentproc_mariadb"] = getPID_mariadb;
                     break;
             }
-            ManZampLib.setJson_Env(jobj);
+            ZampGUILib.setJson_Env(jobj);
         }
 
         public void updatePath(string abs_main_path)
         {
-            JObject jobj = ManZampLib.getJson_Env();
+            JObject jobj = ZampGUILib.getJson_Env();
 
             //pathMariaDB = ManLib.ManZampLib.get_first_dir(abs_main_path, "mariadb");
             //pathPHP = ManLib.ManZampLib.get_first_dir(abs_main_path, "php");
             //string _pathMariaDB = System.IO.Path.Combine(abs_main_path, "Apps", this.MariaDB_scelta);
             //string _pathPHP = System.IO.Path.Combine(abs_main_path, "Apps", this.PHP_scelta);
-            pathApache = ZampLib.ManZampLib.get_first_dir(abs_main_path, "Apache");
+            pathApache = ZampLib.ZampGUILib.get_first_dir(abs_main_path, "Apache");
             
 
             jobj[_env]["pathBase"] = abs_main_path;
@@ -402,7 +402,7 @@ namespace ZampLib.Business
             }
 
 
-            ManZampLib.setJson_Env(jobj);
+            ZampGUILib.setJson_Env(jobj);
 
             change_path(abs_main_path);
 
@@ -434,7 +434,7 @@ namespace ZampLib.Business
             Match match;
 
 
-            apache_vers = ManZampLib.startProc_and_wait_output(Apache_bin, "-v", true);
+            apache_vers = ZampGUILib.startProc_and_wait_output(Apache_bin, "-v", true);
             regex = new Regex(@"Apache.\d+\.\d+\.\d+");
             match = regex.Match(apache_vers);
             if (match.Success)
@@ -443,7 +443,7 @@ namespace ZampLib.Business
             }
 
 
-            php_vers = ManZampLib.startProc_and_wait_output(PHP_bin, "-v", true);
+            php_vers = ZampGUILib.startProc_and_wait_output(PHP_bin, "-v", true);
             regex = new Regex(@"PHP \d+\.\d+.\d+");
             match = regex.Match(php_vers);
             if (match.Success)
@@ -451,7 +451,7 @@ namespace ZampLib.Business
                 php_vers = match.Value;
             }
 
-            mariadb_vers = ManZampLib.startProc_and_wait_output(MariaDB_bin, "--version", true);
+            mariadb_vers = ZampGUILib.startProc_and_wait_output(MariaDB_bin, "--version", true);
             regex = new Regex(@"Ver \d+\.\d+\.\d+");
             match = regex.Match(mariadb_vers);
             if (match.Success)
@@ -460,7 +460,7 @@ namespace ZampLib.Business
             }
 
 
-            composer_vers = ManZampLib.startProc_and_wait_output(Composer_bin, "--version", true, PHP_path_scelto);
+            composer_vers = ZampGUILib.startProc_and_wait_output(Composer_bin, "--version", true, PHP_path_scelto);
             regex = new Regex(@"Composer version \d+\.\d+\.\d+");
             match = regex.Match(composer_vers);
             if (match.Success)
@@ -492,7 +492,7 @@ namespace ZampLib.Business
             {
                 if(!System.IO.File.Exists(f))
                 {
-                    ManZampLib.printMsg_and_exit("file " + f + " not found" , true);
+                    ZampGUILib.printMsg_and_exit("file " + f + " not found" , true);
                     continue;
                 }
                 string text = System.IO.File.ReadAllText(f);
@@ -515,7 +515,7 @@ namespace ZampLib.Business
                         //    text = Regex.Replace(text, @"^zend_extension.*", "zend_extension = \"" + name_xdebug_file + "\"", RegexOptions.Multiline);
                         //}
                         dirName = new DirectoryInfo(f).Parent.FullName;
-                        string name_xdebug_file = ZampLib.ManZampLib.get_first_file(Path.Combine(dirName, "ext"), "xdebug");
+                        string name_xdebug_file = ZampLib.ZampGUILib.get_first_file(Path.Combine(dirName, "ext"), "xdebug");
                         text = Regex.Replace(text, @"^extension_dir.*", "extension_dir = \"" + Path.Combine(dirName, "ext") + "\"", RegexOptions.Multiline);
                         if(!string.IsNullOrEmpty(name_xdebug_file))
                         {
@@ -561,7 +561,7 @@ namespace ZampLib.Business
             {
                 if (!System.IO.File.Exists(f))
                 {
-                    ManZampLib.printMsg_and_exit("file " + f + " not found", true);
+                    ZampGUILib.printMsg_and_exit("file " + f + " not found", true);
                     continue;
                 }
 

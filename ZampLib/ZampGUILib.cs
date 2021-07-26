@@ -19,7 +19,7 @@ using System.Security.Principal;
 
 namespace ZampLib
 {
-    public class ManZampLib
+    public class ZampGUILib
     {
         public static string getval_from_appsetting(string pathprog)
         {
@@ -320,7 +320,7 @@ namespace ZampLib
                 return false;
             }
 
-            Process proc = ManZampLib.GetProcByID(pid);
+            Process proc = ZampGUILib.GetProcByID(pid);
             if (proc != null)
             {
                 return true;
@@ -339,7 +339,7 @@ namespace ZampLib
             }
             else
             {
-                Process proc = ManZampLib.GetProcByID(pid);
+                Process proc = ZampGUILib.GetProcByID(pid);
                 return proc.ProcessName;
             }
             //return "";
@@ -355,7 +355,7 @@ namespace ZampLib
                 return friendly_name + " not running" + Environment.NewLine;
             }
 
-            Process proc = ManZampLib.GetProcByID(pid);
+            Process proc = ZampGUILib.GetProcByID(pid);
             string sout = "";
             if (proc != null)
             {
@@ -560,7 +560,7 @@ namespace ZampLib
         public static List<string> getListSite(ConfigVar cv)
         {
             List<string> _list = new List<string>();
-            string arrtest = ManZampLib.startProc_and_wait_output(cv.Apache_bin, "-S", true);
+            string arrtest = ZampGUILib.startProc_and_wait_output(cv.Apache_bin, "-S", true);
             string pattern = @"\d*\snamevhost\s(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?";
             Regex rgx = new Regex(pattern);
             string sentence = arrtest;

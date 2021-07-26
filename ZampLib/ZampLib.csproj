@@ -68,7 +68,7 @@
   <ItemGroup>
     <Compile Include="Business\ConfigVar.cs" />
     <Compile Include="Business\EnumVari.cs" />
-    <Compile Include="ManZampLib.cs" />
+    <Compile Include="ZampGUILib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

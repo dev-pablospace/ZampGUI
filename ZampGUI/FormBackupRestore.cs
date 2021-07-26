@@ -35,7 +35,7 @@ namespace ZampGUI
         {
             try
             {
-                all_db = ManZampLib.getAllDB(cv.mariadb_port);
+                all_db = ZampGUILib.getAllDB(cv.mariadb_port);
                 foreach(string s in all_db)
                 {
                     comboBoxDbRestore.Items.Add(s);
@@ -45,7 +45,7 @@ namespace ZampGUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                ManZampLib.printMsg_and_exit();
+                ZampGUILib.printMsg_and_exit();
             }
 
 
@@ -54,12 +54,12 @@ namespace ZampGUI
                 string svalidate = cv.validateSetting();
                 if (!string.IsNullOrEmpty(svalidate))
                 {
-                    ManZampLib.printMsg_and_exit(svalidate);
+                    ZampGUILib.printMsg_and_exit(svalidate);
                 }
             }
             catch (ConfigurationErrorsException er)
             {
-                ManZampLib.printMsg_and_exit(er.ToString());
+                ZampGUILib.printMsg_and_exit(er.ToString());
             }
 
         }
@@ -77,7 +77,7 @@ namespace ZampGUI
                 nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
 
                 //eseguibackup(str_db, nomebackup_file);
-                List<string> l_res = ManZampLib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Backup.bat"),
+                List<string> l_res = ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Backup.bat"),
                     new string[] { str_db, "root", "root", nomebackup_file, System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), "127.0.0.1", cv.mariadb_port }
                 );
 
@@ -132,7 +132,7 @@ namespace ZampGUI
                 string str_db = comboBoxDbRestore.SelectedItem.ToString();
 
                 //eseguiRestore(comboBoxDbRestore.SelectedItem.ToString(), txtPathSQLFile.Text);
-                List<string> l_res= ManZampLib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Restore.bat"), 
+                List<string> l_res= ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Restore.bat"), 
                     new string[] { "root", "root", comboBoxDbRestore.SelectedItem.ToString(), txtPathSQLFile.Text, "127.0.0.1", System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), cv.mariadb_port }
                 );
 

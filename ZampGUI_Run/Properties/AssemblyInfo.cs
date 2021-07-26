@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ZampGUI")]
+[assembly: AssemblyTitle("ZampGUI_Run")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ZampGUI")]
+[assembly: AssemblyProduct("ZampGUI_Run")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cabc48f6-254d-4cea-bc0b-8b1f63030b3d")]
+[assembly: Guid("1b32ba5a-c461-4531-8675-5b37252f7a08")]
 
 // Version information for an assembly consists of the following four values:
 //

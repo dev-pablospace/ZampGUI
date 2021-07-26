@@ -33,10 +33,10 @@ namespace ZampGUI
             string assemblyFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string root_folder = System.IO.Directory.GetParent(assemblyFolder).Parent.FullName;
 
-            this.YN_DEBUG = ManZampLib.getval_from_appsetting("YN_DEBUG");
+            this.YN_DEBUG = ZampGUILib.getval_from_appsetting("YN_DEBUG");
             if(this.YN_DEBUG.Equals("Y"))
             {
-                root_folder = ManZampLib.getval_from_appsetting("temp_folder");
+                root_folder = ZampGUILib.getval_from_appsetting("temp_folder");
             }
 
             cv.updatePath(root_folder);
@@ -54,27 +54,27 @@ namespace ZampGUI
                 
                 if (!System.IO.Directory.Exists(cv.pathBase))
                 {
-                    ManZampLib.printMsg_and_exit("Path '" + cv.pathBase + "' does not exist", true, this);
+                    ZampGUILib.printMsg_and_exit("Path '" + cv.pathBase + "' does not exist", true, this);
                 }
 
 
                 string svalidate = cv.validateSetting();
                 if(!string.IsNullOrEmpty(svalidate))
                 {
-                    ManZampLib.printMsg_and_exit(svalidate);
+                    ZampGUILib.printMsg_and_exit(svalidate);
                 }
                 
                 string msg_port_in_use = "";
                 
-                if(ManZampLib.port_in_use(cv.apache_http_port, cv.pid_currentproc_apache))
+                if(ZampGUILib.port_in_use(cv.apache_http_port, cv.pid_currentproc_apache))
                 {
                     msg_port_in_use += "http port \"" + cv.apache_http_port + "\" in use" + Environment.NewLine;
                 }
-                if (ManZampLib.port_in_use(cv.apache_https_port, cv.pid_currentproc_apache))
+                if (ZampGUILib.port_in_use(cv.apache_https_port, cv.pid_currentproc_apache))
                 {
                     msg_port_in_use += "https port \"" + cv.apache_https_port + "\" in use" + Environment.NewLine;
                 }
-                if (ManZampLib.port_in_use(cv.mariadb_port, cv.pid_currentproc_mariadb))
+                if (ZampGUILib.port_in_use(cv.mariadb_port, cv.pid_currentproc_mariadb))
                 {
                     msg_port_in_use += "MariaDB port \"" + cv.mariadb_port + "\" in use" + Environment.NewLine;
                 }
@@ -89,14 +89,14 @@ namespace ZampGUI
                 cv.get_software_version();
                 refreshStatusForm();
 
-                List<string> arrListSite = ManZampLib.getListSite(cv);
+                List<string> arrListSite = ZampGUILib.getListSite(cv);
                 crealinkSite(arrListSite);
 
             }
             catch (ConfigurationErrorsException er)
             {
                 MessageBox.Show(er.ToString());
-                ManZampLib.printMsg_and_exit();
+                ZampGUILib.printMsg_and_exit();
             }
         }
 
@@ -104,7 +104,7 @@ namespace ZampGUI
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ManZampLib.printMsg_and_exit("", true);
+            ZampGUILib.printMsg_and_exit("", true);
         }
         private void runAllProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -112,26 +112,26 @@ namespace ZampGUI
             check_and_kill_other_instance(typeProg.mariadb);
 
 
-            addOutput(ManZampLib.startProc(cv, typeProg.apache, new string[] { }));
-            addOutput(ManZampLib.startProc(cv, typeProg.mariadb, new string[] { }));
+            addOutput(ZampGUILib.startProc(cv, typeProg.apache, new string[] { }));
+            addOutput(ZampGUILib.startProc(cv, typeProg.mariadb, new string[] { }));
 
-            addOutput(ManZampLib.getStatusProc(cv, typeProg.apache));
-            addOutput(ManZampLib.getStatusProc(cv, typeProg.mariadb));
+            addOutput(ZampGUILib.getStatusProc(cv, typeProg.apache));
+            addOutput(ZampGUILib.getStatusProc(cv, typeProg.mariadb));
 
             
             refreshStatusForm();
         }
         private void stopAllProgrammToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            addOutput(ManZampLib.killproc(cv, typeProg.apache));
-            addOutput(ManZampLib.killproc(cv, typeProg.mariadb));
+            addOutput(ZampGUILib.killproc(cv, typeProg.apache));
+            addOutput(ZampGUILib.killproc(cv, typeProg.mariadb));
 
             refreshStatusForm();
         }
         private void checkStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            addOutput(ManZampLib.getStatusProc(cv, typeProg.apache));
-            addOutput(ManZampLib.getStatusProc(cv, typeProg.mariadb));
+            addOutput(ZampGUILib.getStatusProc(cv, typeProg.apache));
+            addOutput(ZampGUILib.getStatusProc(cv, typeProg.mariadb));
         }
         private void changeConfig_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -152,7 +152,7 @@ namespace ZampGUI
                     filename_config = cv.MariaDB_ini;
                     break;
             }
-            ManZampLib.startProc(cv, typeProg.editor, new string[] { filename_config });
+            ZampGUILib.startProc(cv, typeProg.editor, new string[] { filename_config });
         }
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -169,7 +169,7 @@ namespace ZampGUI
         }
         private void backupRestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!ManZampLib.checkRunningProc(cv.getPID_mariadb))
+            if(!ZampGUILib.checkRunningProc(cv.getPID_mariadb))
             {
                 MessageBox.Show("MariaDB is not running");
                 return;
@@ -186,26 +186,26 @@ namespace ZampGUI
         private void btnStartStopApache_Click(object sender, EventArgs e)
         {
             check_and_kill_other_instance(typeProg.apache);
-            if (ManZampLib.checkRunningProc(cv.getPID_apache))
+            if (ZampGUILib.checkRunningProc(cv.getPID_apache))
             {
-                addOutput(ManZampLib.killproc(cv, typeProg.apache));
+                addOutput(ZampGUILib.killproc(cv, typeProg.apache));
             }
             else
             {
-                addOutput(ManZampLib.startProc(cv, typeProg.apache, new string[] { }));
+                addOutput(ZampGUILib.startProc(cv, typeProg.apache, new string[] { }));
             }
             refreshStatusForm();
         }
         private void btnStartStopMariaDB_Click(object sender, EventArgs e)
         {
             check_and_kill_other_instance(typeProg.mariadb);
-            if (ManZampLib.checkRunningProc(cv.getPID_mariadb))
+            if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
             {
-                addOutput(ManZampLib.killproc(cv, typeProg.mariadb));
+                addOutput(ZampGUILib.killproc(cv, typeProg.mariadb));
             }
             else
             {
-                addOutput(ManZampLib.startProc(cv, typeProg.mariadb, new string[] { }));
+                addOutput(ZampGUILib.startProc(cv, typeProg.mariadb, new string[] { }));
             }
             refreshStatusForm();
         }
@@ -264,14 +264,14 @@ namespace ZampGUI
         private void hostFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string path_host_file = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"drivers\etc\hosts");
-            ManZampLib.startProc_as_admin(cv.default_editor_path, path_host_file);
+            ZampGUILib.startProc_as_admin(cv.default_editor_path, path_host_file);
         }
         private void wordpressToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("function not available at the moment");
             return;
             
-            if (!ManZampLib.checkRunningProc(cv.getPID_mariadb))
+            if (!ZampGUILib.checkRunningProc(cv.getPID_mariadb))
             {
                 MessageBox.Show("MariaDB is not running");
                 return;
@@ -289,17 +289,17 @@ namespace ZampGUI
         }
         private void reloadSitesFromVhostToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> arrListSite = ManZampLib.getListSite(cv);
+            List<string> arrListSite = ZampGUILib.getListSite(cv);
             crealinkSite(arrListSite);
         }
         private void ChangeVersStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ManZampLib.checkRunningProc(cv.getPID_mariadb))
+            if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
             {
                 MessageBox.Show("Please close MariaDB");
                 return;
             }
-            if (ManZampLib.checkRunningProc(cv.getPID_apache))
+            if (ZampGUILib.checkRunningProc(cv.getPID_apache))
             {
                 MessageBox.Show("Please close Apache");
                 return;
@@ -325,7 +325,7 @@ namespace ZampGUI
                 using (var wc = new System.Net.WebClient())
                     contents = wc.DownloadString("http://zampgui.dhost.org/assets/ver.txt");
 
-                string ver = ManZampLib.getval_from_appsetting("ver");
+                string ver = ZampGUILib.getval_from_appsetting("ver");
                 if (ver.Equals(contents))
                 {
                     MessageBox.Show("You have the latest version of ZampGUI");
@@ -377,7 +377,7 @@ namespace ZampGUI
             //        new string[] { apache_dir_bin, cv.pathPHP, mariadb_dir_bin, composer_path, node_path, sass_path, drive_letter, cv.pathBase }
             //);
 
-            ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
+            ZampGUILib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
                     new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
             );
         }
@@ -386,7 +386,7 @@ namespace ZampGUI
             lbVersion.Text = "Env: " + cv._env;
             lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
 
-            bool bRunProc = ManZampLib.checkRunningProc(cv.getPID_apache);
+            bool bRunProc = ZampGUILib.checkRunningProc(cv.getPID_apache);
             if (bRunProc)
             {
                 pictureBoxApache.Image = Properties.Resources.bullet_green;
@@ -405,7 +405,7 @@ namespace ZampGUI
 
 
 
-            bRunProc = ManZampLib.checkRunningProc(cv.getPID_mariadb);
+            bRunProc = ZampGUILib.checkRunningProc(cv.getPID_mariadb);
             if (bRunProc)
             {
                 pictureBoxMariaDB.Image = Properties.Resources.bullet_green;
@@ -459,9 +459,9 @@ namespace ZampGUI
         }
         private void _check_and_kill_other_instance(string pid, string nameproc, string friendly_name)
         {
-            if (string.IsNullOrEmpty(pid) && ManZampLib.checkstatusProc_byName(nameproc))
+            if (string.IsNullOrEmpty(pid) && ZampGUILib.checkstatusProc_byName(nameproc))
             {
-                ManZampLib.killproc_byName(nameproc); //kill in any case 
+                ZampGUILib.killproc_byName(nameproc); //kill in any case 
 
                 //DialogResult dialogResult = MessageBox.Show(friendly_name + " running from another program ? Do you want to kill every " + friendly_name + " process ?", friendly_name + " running", MessageBoxButtons.YesNo);
                 //if (dialogResult == DialogResult.Yes)

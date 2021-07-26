@@ -39,12 +39,12 @@ namespace ZampGUI
                 string[] subdir = (from x in Directory.GetDirectories(abs_main_path) select new DirectoryInfo(x).Name).ToArray();
                 if(!subdir.Contains("Apps"))
                 {
-                    ManZampLib.printMsg_and_exit("directory App not found inside " + abs_main_path, true);
+                    ZampGUILib.printMsg_and_exit("directory App not found inside " + abs_main_path, true);
                 }
             }
             else
             {
-                ManZampLib.printMsg_and_exit("base directory not found", true);
+                ZampGUILib.printMsg_and_exit("base directory not found", true);
             }
         }
 
