@@ -238,7 +238,14 @@ namespace ZampLib.Business
             this.pid_currentproc_apache = (string)jobj[_env]["pid_currentproc_apache"];
             this.pid_currentproc_mariadb = (string)jobj[_env]["pid_currentproc_mariadb"];
 
-            this.ListPathConsole = ((string)jobj[_env]["ListPathConsole"]).Split('|').ToList();
+
+            string temp = (string)jobj[_env]["ListPathConsole"];
+            this.ListPathConsole = new List<string>();
+            if(!string.IsNullOrEmpty(temp))
+            {
+                this.ListPathConsole = temp.Split('|').ToList();
+            }
+            
         }
 
         public string validateSetting()

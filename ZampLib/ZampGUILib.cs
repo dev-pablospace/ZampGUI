@@ -486,7 +486,7 @@ namespace ZampLib
             l_res.Add(ExitCode.ToString());
             return l_res;
         }
-        public static bool ExecuteBatchFile_dont_wait(string batchFileName, string[] argumentsToBatchFile)
+        public static bool ExecuteBatchFile_dont_wait(string batchFileName, string[] argumentsToBatchFile, string AddToPath = "")
         {
             string argumentsString = string.Empty;
             try
@@ -507,6 +507,12 @@ namespace ZampLib
                 DBProcessStartInfo.RedirectStandardOutput = false;
                 DBProcessStartInfo.RedirectStandardError = false;
 
+                if(string.IsNullOrEmpty(AddToPath))
+                {
+                    string PATH = Environment.GetEnvironmentVariable("PATH");
+                    DBProcessStartInfo.EnvironmentVariables["PATH"] = AddToPath + ";" + PATH;
+                }
+                
 
                 Process dbProcess = Process.Start(DBProcessStartInfo);
                 return true;

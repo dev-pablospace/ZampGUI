@@ -371,15 +371,37 @@ namespace ZampGUI
 
             string drive_letter = System.IO.Path.GetPathRoot(cv.pathBase).Substring(0, 1);
             //MessageBox.Show(drive_letter);
-            string ListPathConsole = String.Join(";", cv.ListPathConsole.ToArray());
+            string ListPathConsole = cv.ListPathConsole.Count == 0 ? "": ";\"" + String.Join("\";\"", cv.ListPathConsole.ToArray()) + "\"";
 
             //ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
             //        new string[] { apache_dir_bin, cv.pathPHP, mariadb_dir_bin, composer_path, node_path, sass_path, drive_letter, cv.pathBase }
             //);
 
-            ZampGUILib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
-                    new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
-            );
+            //System.Diagnostics.Process process = new System.Diagnostics.Process();
+            //System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            //startInfo.FileName = "cmd.exe";
+            ////startInfo.Arguments = "/C copy /b Image1.jpg + Archive.rar Image2.jpg";
+            //process.StartInfo = startInfo;
+            //process.Start();
+
+            ProcessStartInfo pro = new ProcessStartInfo();
+            pro.FileName = "cmd.exe";
+            pro.UseShellExecute = false;
+            pro.WorkingDirectory = cv.pathBase;
+            Process proStart = new Process();
+            proStart.StartInfo = pro;
+
+            string addToPath = "\"" + apache_dir_bin + "\";\"" + cv.PHP_path_scelto + "\";\"" + mariadb_dir_bin + "\";\"" + composer_path + "\"" + ListPathConsole;
+            string PATH = Environment.GetEnvironmentVariable("PATH");
+            pro.EnvironmentVariables["PATH"] = addToPath + ";" + PATH;
+            proStart.Start();
+            
+            //proStart.StandardInput.WriteLine("cls");
+
+            //ZampGUILib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
+            //        new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
+            //);
         }
         private void refreshStatusForm()
         {
