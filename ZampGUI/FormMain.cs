@@ -13,7 +13,7 @@ using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using ZampLib;
 using ZampLib.Business;
-
+using Newtonsoft.Json.Linq;
 
 namespace ZampGUI
 {
@@ -314,19 +314,38 @@ namespace ZampGUI
         }
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://zampgui.dhost.org/support");
+            string HOME = ZampGUILib.getval_from_appsetting("HOME");
+            System.Diagnostics.Process.Start(HOME + "/support");
         }
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string contents;
-                using (var wc = new System.Net.WebClient())
-                    contents = wc.DownloadString("http://zampgui.dhost.org/assets/ver.txt");
-
+                //recupero i config dal app.config
+                string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
-                if (ver.Equals(contents))
+                
+
+                string contents = "";// "{\"ver\": \"1.0.00\",\"homepage\": \"pippo\"}";
+                using (var wc = new System.Net.WebClient())
+                {
+                    contents = wc.DownloadString(HOME + "/assets/ver.txt");
+                }
+                JObject jobj = JObject.Parse(contents);
+
+                //salvo il config nell app.config
+                string home_web = jobj.Value<string>("homepage");
+                Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                config.AppSettings.Settings.Remove("HOME");
+                config.AppSettings.Settings.Add("HOME", home_web);
+                config.Save(ConfigurationSaveMode.Minimal);
+
+
+                //mi occupo di fare il check sulla versione
+                string ver_web = jobj.Value<string>("ver");
+                
+                if (ver.Equals(ver_web))
                 {
                     MessageBox.Show("You have the latest version of ZampGUI");
                 }

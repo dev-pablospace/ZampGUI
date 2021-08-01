@@ -24,7 +24,8 @@ namespace ZampGUI
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://zampgui.dhost.org/");
+            string HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
+            System.Diagnostics.Process.Start(HOME);
         }
     }
 }
