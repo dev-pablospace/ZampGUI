@@ -184,10 +184,10 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(16, 68);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(483, 30);
+            this.label5.Size = new System.Drawing.Size(399, 30);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Additional Directory Path (for the Console). This will change %PATH%\r\nOne \"full d" +
-    "irectory path\" per row";
+            this.label5.Text = "Add the following directories to the %PATH% env variable\r\nOne \"full directory pat" +
+    "h\" per row";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // FormOptions
