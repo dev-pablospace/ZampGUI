@@ -67,13 +67,16 @@ namespace ZampGUI
                 cv.ListPathConsole = new List<string>();
                 foreach (var s in lines)
                 {
-                    if (!string.IsNullOrEmpty(s))
+                    if (!string.IsNullOrWhiteSpace(s))
                     {
                         if (!System.IO.Directory.Exists(s))
                         {
                             MessageBox.Show("Directory \"" + s + "\" does not exist");
                         }
-                        cv.ListPathConsole.Add(s.Trim());
+                        else
+                        {
+                            cv.ListPathConsole.Add(s.Trim().Trim('\\'));
+                        }
                     }
                 }
                     
