@@ -82,6 +82,13 @@ namespace ZampLib.Business
                 return System.IO.Path.Combine(pathApache, "conf", "extra", "httpd-vhosts.conf");
             }
         }
+        public string Apache_zampgui_conf
+        {
+            get
+            {
+                return System.IO.Path.Combine(pathApache, "conf", "extra", "zampgui.conf");
+            }
+        }
         public string phpmyadmin_config 
         { 
             get 
@@ -483,6 +490,7 @@ namespace ZampLib.Business
             //string[] arrfiles = { Apache_httpd_conf, PHP_ini, MariaDB_ini, Path.Combine(newpath, "scripts", "start_all.vbs") };
             List<string> arrfiles = new List<string>();
             arrfiles.Add(Apache_httpd_conf);
+            //arrfiles.Add(Apache_zampgui_conf);
             arrfiles.Add(Path.Combine(newpath, "scripts", "start_all.vbs"));
             foreach (var kv in pathMariaDB)
             {
