@@ -21,18 +21,16 @@
     "ListPathConsole" :  ""
   },
   "pc_cameretta": {
-    "pathBase": "H:\\temp\\ZampGUI_1.0.03",
+    "pathBase": "H:\\SVL\\zampgui\\ZampGUI_1.0.06_php7",
     "pathMariaDB": {
-      "mariadb-10.6.4": "H:\\temp\\ZampGUI_1.0.03\\Apps\\mariadb-10.6.4",
-      "mariadb-10.5.12": "H:\\temp\\ZampGUI_1.0.03\\Apps\\mariadb-10.5.12"
+      "mariadb-10.6.5": "H:\\SVL\\zampgui\\ZampGUI_1.0.06_php7\\mariadb-10.6.5"
     },
-    "MariaDB_scelta": "mariadb-10.6.4",
-    "pathApache": "H:\\temp\\ZampGUI_1.0.03\\Apps\\Apache24",
+    "MariaDB_scelta": "mariadb-10.6.5",
+    "pathApache": "H:\\SVL\\zampgui\\ZampGUI_1.0.06_php7\\Apache24",
     "pathPHP": {
-      "php-8.0.12": "H:\\temp\\ZampGUI_1.0.03\\Apps\\php-8.0.12",
-      "php-7.4.25": "H:\\temp\\ZampGUI_1.0.03\\Apps\\php-7.4.25"
+      "php-7.4.27": "H:\\SVL\\zampgui\\ZampGUI_1.0.06_php7\\php-7.4.27"
     },
-    "PHP_scelta": "php-8.0.12",
+    "PHP_scelta": "php-7.4.27",
     "default_editor_path": "notepad.exe",
     "apache_http_port": "80",
     "apache_https_port": "443",

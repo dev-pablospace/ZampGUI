@@ -113,6 +113,12 @@
     <Compile Include="FormChangeVers.Designer.cs">
       <DependentUpon>FormChangeVers.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDonate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDonate.Designer.cs">
+      <DependentUpon>FormDonate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormChangeVers.resx">
       <DependentUpon>FormChangeVers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDonate.resx">
+      <DependentUpon>FormDonate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -247,8 +256,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="img\Black Text Icons Icon Set.png" />
+    <Content Include="img\menu_circle_exclamation_icon.png" />
+    <Content Include="img\menu_play_icon.png" />
+    <Content Include="img\menu_x_circle_icon.png" />
     <Content Include="img\ZampGUI logo mini.ico" />
     <Content Include="img\ZampGUI logo mini.png" />
+    <None Include="Resources\form_copy_icon.png" />
+    <None Include="Resources\ethereum.png" />
+    <None Include="Resources\cryptocurrency.png" />
+    <None Include="Resources\menu_coin_dollar_money_icon.png" />
+    <None Include="Resources\form_stop_icon.png" />
+    <None Include="Resources\form_select_icon.png" />
+    <None Include="Resources\menu_globe_icon.png" />
+    <None Include="Resources\menu_menu_icon.png" />
+    <None Include="Resources\menu_hand_icon.png" />
+    <None Include="Resources\menu_arrow_down_icon%281%29.png" />
+    <None Include="Resources\menu_switch_horizontal_icon.png" />
+    <None Include="Resources\menu_alt_pencil_icon.png" />
+    <None Include="Resources\menu_logout_icon.png" />
+    <None Include="Resources\menu_terminal_icon.png" />
+    <None Include="Resources\menu_refresh_icon.png" />
+    <None Include="Resources\menu_database_icon.png" />
+    <None Include="Resources\menu_cog_icon.png" />
+    <None Include="Resources\menu_x_circle_icon.png" />
+    <None Include="Resources\menu_play_icon.png" />
+    <None Include="Resources\menu_circle_exclamation_icon.png" />
     <None Include="Resources\noun_Cursor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

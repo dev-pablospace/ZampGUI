@@ -315,7 +315,7 @@ namespace ZampGUI
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string HOME = ZampGUILib.getval_from_appsetting("HOME");
-            System.Diagnostics.Process.Start(HOME + "/support");
+            System.Diagnostics.Process.Start(HOME + "/support.php");
         }
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -377,6 +377,41 @@ namespace ZampGUI
             }
             frm2.Close();
         }
+        private void donateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //recupero i config dal app.config
+                string HOME = ZampGUILib.getval_from_appsetting("HOME");
+
+
+                string contents = "";// "{\"ver\": \"1.0.00\",\"homepage\": \"pippo\"}";
+                using (var wc = new System.Net.WebClient())
+                {
+                    contents = wc.DownloadString(HOME + "/assets/ver.txt");
+                }
+                JObject jobj = JObject.Parse(contents);
+
+
+                //mi occupo di fare il check sulla versione
+                string indirizzo_eth = jobj.Value<string>("indirizzo_eth");
+                string indirizzo_bit = jobj.Value<string>("indirizzo_bit");
+
+                FormDonate frm2 = new FormDonate(indirizzo_eth, indirizzo_bit);
+                DialogResult dr = frm2.ShowDialog(this);
+                if (dr == DialogResult.OK)
+                {
+
+                }
+                frm2.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Service not available at the moment");
+            }
+
+
+        }
         #endregion
 
         #region private method
@@ -424,18 +459,18 @@ namespace ZampGUI
         }
         private void refreshStatusForm()
         {
-            lbVersion.Text = "Env: " + cv._env;
+            //lbVersion.Text = "Env: " + cv._env;
             lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
 
             bool bRunProc = ZampGUILib.checkRunningProc(cv.getPID_apache);
             if (bRunProc)
             {
-                pictureBoxApache.Image = Properties.Resources.bullet_green;
+                pictureBoxApache.Image = Properties.Resources.form_select_icon;
                 btnStartStopApache.Text = "Stop";
             }
             else
             {
-                pictureBoxApache.Image = Properties.Resources.bullet_red;
+                pictureBoxApache.Image = Properties.Resources.form_stop_icon;
                 btnStartStopApache.Text = "Start";
                 if(!string.IsNullOrEmpty(cv.getPID_apache))
                 {
@@ -449,12 +484,12 @@ namespace ZampGUI
             bRunProc = ZampGUILib.checkRunningProc(cv.getPID_mariadb);
             if (bRunProc)
             {
-                pictureBoxMariaDB.Image = Properties.Resources.bullet_green;
+                pictureBoxMariaDB.Image = Properties.Resources.form_select_icon;
                 btnStartStopMariaDB.Text = "Stop";
             }
             else
             {
-                pictureBoxMariaDB.Image = Properties.Resources.bullet_red;
+                pictureBoxMariaDB.Image = Properties.Resources.form_stop_icon;
                 btnStartStopMariaDB.Text = "Start";
                 if (!string.IsNullOrEmpty(cv.getPID_mariadb))
                 {
@@ -544,6 +579,7 @@ namespace ZampGUI
 
 
         }
+
 
 
 
