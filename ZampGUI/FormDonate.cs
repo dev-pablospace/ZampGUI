@@ -25,6 +25,10 @@ namespace ZampGUI
 
             txtBitcoin.Text = string.IsNullOrEmpty(indirizzo_bit)? "--": indirizzo_bit;
             txtEthereum.Text = string.IsNullOrEmpty(indirizzo_eth) ? "--" : indirizzo_eth;
+
+            this.pictureQRBitcoin.ImageLocation = "https://zampgui.dghost.org/img/BIT.png";
+            this.pictureQReth.ImageLocation = "https://zampgui.dghost.org/img/ETH.png";
+
             this.label1.Focus();
         }
 

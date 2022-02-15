@@ -133,7 +133,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(712, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(712, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -146,14 +146,14 @@
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.operationToolStripMenuItem.Name = "operationToolStripMenuItem";
-            this.operationToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.operationToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.operationToolStripMenuItem.Text = "Server";
             // 
             // checkStatusToolStripMenuItem
             // 
             this.checkStatusToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_circle_exclamation_icon;
             this.checkStatusToolStripMenuItem.Name = "checkStatusToolStripMenuItem";
-            this.checkStatusToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.checkStatusToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.checkStatusToolStripMenuItem.Text = "Check status";
             this.checkStatusToolStripMenuItem.Click += new System.EventHandler(this.checkStatusToolStripMenuItem_Click);
             // 
@@ -161,7 +161,7 @@
             // 
             this.stopAllProgrammToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_x_circle_icon;
             this.stopAllProgrammToolStripMenuItem.Name = "stopAllProgrammToolStripMenuItem";
-            this.stopAllProgrammToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.stopAllProgrammToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.stopAllProgrammToolStripMenuItem.Text = "Stop All";
             this.stopAllProgrammToolStripMenuItem.Click += new System.EventHandler(this.stopAllProgrammToolStripMenuItem_Click);
             // 
@@ -169,20 +169,20 @@
             // 
             this.runAllProgramToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_play_icon;
             this.runAllProgramToolStripMenuItem.Name = "runAllProgramToolStripMenuItem";
-            this.runAllProgramToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.runAllProgramToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.runAllProgramToolStripMenuItem.Text = "Run All";
             this.runAllProgramToolStripMenuItem.Click += new System.EventHandler(this.runAllProgramToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_logout_icon;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -195,7 +195,7 @@
             this.ChangeVersStripMenuItem,
             this.optionsToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // filesConfigToolStripMenuItem
@@ -211,76 +211,76 @@
             this.hostFileToolStripMenuItem});
             this.filesConfigToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_alt_pencil_icon;
             this.filesConfigToolStripMenuItem.Name = "filesConfigToolStripMenuItem";
-            this.filesConfigToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.filesConfigToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
             this.filesConfigToolStripMenuItem.Text = "Edit config";
             // 
             // apacheHttpdconfToolStripMenuItem
             // 
             this.apacheHttpdconfToolStripMenuItem.Name = "apacheHttpdconfToolStripMenuItem";
-            this.apacheHttpdconfToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.apacheHttpdconfToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.apacheHttpdconfToolStripMenuItem.Text = "apache httpd.conf";
             this.apacheHttpdconfToolStripMenuItem.Click += new System.EventHandler(this.changeConfig_ToolStripMenuItem_Click);
             // 
             // apacheHttpdvhostsconfToolStripMenuItem
             // 
             this.apacheHttpdvhostsconfToolStripMenuItem.Name = "apacheHttpdvhostsconfToolStripMenuItem";
-            this.apacheHttpdvhostsconfToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.apacheHttpdvhostsconfToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.apacheHttpdvhostsconfToolStripMenuItem.Text = "apache httpd-vhosts.conf";
             this.apacheHttpdvhostsconfToolStripMenuItem.Click += new System.EventHandler(this.changeConfig_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(256, 6);
             // 
             // phpiniToolStripMenuItem
             // 
             this.phpiniToolStripMenuItem.Name = "phpiniToolStripMenuItem";
-            this.phpiniToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.phpiniToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.phpiniToolStripMenuItem.Text = "php ini";
             this.phpiniToolStripMenuItem.Click += new System.EventHandler(this.changeConfig_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(256, 6);
             // 
             // mariadbIniToolStripMenuItem
             // 
             this.mariadbIniToolStripMenuItem.Name = "mariadbIniToolStripMenuItem";
-            this.mariadbIniToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.mariadbIniToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.mariadbIniToolStripMenuItem.Text = "mariadb ini";
             this.mariadbIniToolStripMenuItem.Click += new System.EventHandler(this.changeConfig_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(256, 6);
             // 
             // hostFileToolStripMenuItem
             // 
             this.hostFileToolStripMenuItem.Name = "hostFileToolStripMenuItem";
-            this.hostFileToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.hostFileToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.hostFileToolStripMenuItem.Text = "Host File";
             this.hostFileToolStripMenuItem.Click += new System.EventHandler(this.hostFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(242, 6);
             // 
             // backupRestoreToolStripMenuItem
             // 
             this.backupRestoreToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_switch_horizontal_icon;
             this.backupRestoreToolStripMenuItem.Name = "backupRestoreToolStripMenuItem";
-            this.backupRestoreToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.backupRestoreToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
             this.backupRestoreToolStripMenuItem.Text = "Backup - Restore";
             this.backupRestoreToolStripMenuItem.Click += new System.EventHandler(this.backupRestoreToolStripMenuItem_Click);
             // 
             // ChangeVersStripMenuItem
             // 
             this.ChangeVersStripMenuItem.Name = "ChangeVersStripMenuItem";
-            this.ChangeVersStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.ChangeVersStripMenuItem.Size = new System.Drawing.Size(245, 26);
             this.ChangeVersStripMenuItem.Text = "Change PHP - MariaDB";
             this.ChangeVersStripMenuItem.Visible = false;
             this.ChangeVersStripMenuItem.Click += new System.EventHandler(this.ChangeVersStripMenuItem_Click);
@@ -289,7 +289,7 @@
             // 
             this.optionsToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_cog_icon;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -302,7 +302,7 @@
             this.sitesToolStripMenuItem,
             this.reloadSitesFromVhostToolStripMenuItem});
             this.browserToolStripMenuItem.Name = "browserToolStripMenuItem";
-            this.browserToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.browserToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.browserToolStripMenuItem.Text = "Link";
             // 
             // apacheHomeToolStripMenuItem
@@ -311,13 +311,13 @@
             this.phpinfoToolStripMenuItem});
             this.apacheHomeToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_globe_icon;
             this.apacheHomeToolStripMenuItem.Name = "apacheHomeToolStripMenuItem";
-            this.apacheHomeToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.apacheHomeToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
             this.apacheHomeToolStripMenuItem.Text = "Apache";
             // 
             // phpinfoToolStripMenuItem
             // 
             this.phpinfoToolStripMenuItem.Name = "phpinfoToolStripMenuItem";
-            this.phpinfoToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.phpinfoToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.phpinfoToolStripMenuItem.Text = "phpinfo";
             this.phpinfoToolStripMenuItem.Click += new System.EventHandler(this.phpinfoToolStripMenuItem_Click);
             // 
@@ -328,38 +328,38 @@
             this.adminerToolStripMenuItem});
             this.mariaDBToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_database_icon;
             this.mariaDBToolStripMenuItem.Name = "mariaDBToolStripMenuItem";
-            this.mariaDBToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.mariaDBToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
             this.mariaDBToolStripMenuItem.Text = "MariaDB ";
             // 
             // phpMyAdminToolStripMenuItem
             // 
             this.phpMyAdminToolStripMenuItem.Name = "phpMyAdminToolStripMenuItem";
-            this.phpMyAdminToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.phpMyAdminToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.phpMyAdminToolStripMenuItem.Text = "phpMyAdmin";
             this.phpMyAdminToolStripMenuItem.Click += new System.EventHandler(this.phpMyAdminToolStripMenuItem_Click);
             // 
             // adminerToolStripMenuItem
             // 
             this.adminerToolStripMenuItem.Name = "adminerToolStripMenuItem";
-            this.adminerToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.adminerToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.adminerToolStripMenuItem.Text = "adminer";
             this.adminerToolStripMenuItem.Click += new System.EventHandler(this.adminerToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(204, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(252, 6);
             // 
             // sitesToolStripMenuItem
             // 
             this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
-            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
             this.sitesToolStripMenuItem.Text = "Sites";
             // 
             // reloadSitesFromVhostToolStripMenuItem
             // 
             this.reloadSitesFromVhostToolStripMenuItem.Name = "reloadSitesFromVhostToolStripMenuItem";
-            this.reloadSitesFromVhostToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.reloadSitesFromVhostToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
             this.reloadSitesFromVhostToolStripMenuItem.Text = "Reload Sites from vhosts";
             this.reloadSitesFromVhostToolStripMenuItem.Click += new System.EventHandler(this.reloadSitesFromVhostToolStripMenuItem_Click);
             // 
@@ -369,14 +369,14 @@
             this.showHostEntryToolStripMenuItem,
             this.onleClickInstallToolStripMenuItem});
             this.extraToolStripMenuItem.Name = "extraToolStripMenuItem";
-            this.extraToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.extraToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.extraToolStripMenuItem.Text = "Extra";
             // 
             // showHostEntryToolStripMenuItem
             // 
             this.showHostEntryToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_alt_pencil_icon;
             this.showHostEntryToolStripMenuItem.Name = "showHostEntryToolStripMenuItem";
-            this.showHostEntryToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.showHostEntryToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.showHostEntryToolStripMenuItem.Text = "Show Host entry";
             this.showHostEntryToolStripMenuItem.Click += new System.EventHandler(this.showHostEntryToolStripMenuItem_Click);
             // 
@@ -385,21 +385,21 @@
             this.onleClickInstallToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wordpressToolStripMenuItem});
             this.onleClickInstallToolStripMenuItem.Name = "onleClickInstallToolStripMenuItem";
-            this.onleClickInstallToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.onleClickInstallToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.onleClickInstallToolStripMenuItem.Text = "Easy Install";
             this.onleClickInstallToolStripMenuItem.Visible = false;
             // 
             // wordpressToolStripMenuItem
             // 
             this.wordpressToolStripMenuItem.Name = "wordpressToolStripMenuItem";
-            this.wordpressToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.wordpressToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.wordpressToolStripMenuItem.Text = "Wordpress";
             this.wordpressToolStripMenuItem.Click += new System.EventHandler(this.wordpressToolStripMenuItem_Click);
             // 
             // consoleToolStripMenuItem
             // 
             this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
             this.consoleToolStripMenuItem.Text = "Open Console";
             this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
             // 
@@ -412,27 +412,27 @@
             this.aboutToolStripMenuItem1,
             this.donateToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_hand_icon;
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.helpToolStripMenuItem1.Text = "Doc Online";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(221, 6);
             // 
             // checkForUpdateToolStripMenuItem
             // 
             this.checkForUpdateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_arrow_down_icon_1_;
             this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
             this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
@@ -440,7 +440,7 @@
             // 
             this.aboutToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_menu_icon;
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -448,8 +448,9 @@
             // 
             this.donateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_coin_dollar_money_icon;
             this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Visible = false;
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
             // btnStartStopApache
@@ -467,7 +468,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 150);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "Output";
             // 
@@ -476,7 +477,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(57, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 15);
+            this.label2.Size = new System.Drawing.Size(62, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "Apache";
             // 
@@ -485,7 +486,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(53, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.Size = new System.Drawing.Size(71, 17);
             this.label3.TabIndex = 10;
             this.label3.Text = "MariaDB";
             // 
@@ -565,7 +566,7 @@
             this.lbComposer_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lbComposer_ver.Location = new System.Drawing.Point(9, 92);
             this.lbComposer_ver.Name = "lbComposer_ver";
-            this.lbComposer_ver.Size = new System.Drawing.Size(112, 15);
+            this.lbComposer_ver.Size = new System.Drawing.Size(143, 17);
             this.lbComposer_ver.TabIndex = 15;
             this.lbComposer_ver.Text = "Composer Vers: ";
             // 
@@ -577,7 +578,7 @@
             this.lb_baseFolder.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lb_baseFolder.Location = new System.Drawing.Point(9, 8);
             this.lb_baseFolder.Name = "lb_baseFolder";
-            this.lb_baseFolder.Size = new System.Drawing.Size(56, 15);
+            this.lb_baseFolder.Size = new System.Drawing.Size(71, 17);
             this.lb_baseFolder.TabIndex = 3;
             this.lb_baseFolder.Text = "Folder:";
             // 
@@ -589,7 +590,7 @@
             this.lbPHP_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lbPHP_ver.Location = new System.Drawing.Point(9, 72);
             this.lbPHP_ver.Name = "lbPHP_ver";
-            this.lbPHP_ver.Size = new System.Drawing.Size(77, 15);
+            this.lbPHP_ver.Size = new System.Drawing.Size(98, 17);
             this.lbPHP_ver.TabIndex = 0;
             this.lbPHP_ver.Text = "PHP Vers: ";
             // 
@@ -601,7 +602,7 @@
             this.lbApache_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lbApache_ver.Location = new System.Drawing.Point(9, 29);
             this.lbApache_ver.Name = "lbApache_ver";
-            this.lbApache_ver.Size = new System.Drawing.Size(98, 15);
+            this.lbApache_ver.Size = new System.Drawing.Size(125, 17);
             this.lbApache_ver.TabIndex = 7;
             this.lbApache_ver.Text = "Apache Vers: ";
             // 
@@ -613,7 +614,7 @@
             this.lbMariaDB_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lbMariaDB_ver.Location = new System.Drawing.Point(9, 51);
             this.lbMariaDB_ver.Name = "lbMariaDB_ver";
-            this.lbMariaDB_ver.Size = new System.Drawing.Size(105, 15);
+            this.lbMariaDB_ver.Size = new System.Drawing.Size(134, 17);
             this.lbMariaDB_ver.TabIndex = 1;
             this.lbMariaDB_ver.Text = "MariaDB Vers: ";
             // 
@@ -624,7 +625,7 @@
             this.lbVersion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lbVersion.Location = new System.Drawing.Point(613, 291);
             this.lbVersion.Name = "lbVersion";
-            this.lbVersion.Size = new System.Drawing.Size(35, 15);
+            this.lbVersion.Size = new System.Drawing.Size(44, 17);
             this.lbVersion.TabIndex = 2;
             this.lbVersion.Text = "Env:";
             this.lbVersion.Visible = false;
@@ -649,7 +650,7 @@
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(712, 426);
