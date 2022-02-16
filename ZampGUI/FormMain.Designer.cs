@@ -81,22 +81,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxMariaDB = new System.Windows.Forms.PictureBox();
             this.pictureBoxApache = new System.Windows.Forms.PictureBox();
-            this.btnConsole = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbComposer_ver = new System.Windows.Forms.Label();
-            this.lb_baseFolder = new System.Windows.Forms.Label();
-            this.lbPHP_ver = new System.Windows.Forms.Label();
-            this.lbApache_ver = new System.Windows.Forms.Label();
-            this.lbMariaDB_ver = new System.Windows.Forms.Label();
-            this.lbVersion = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.timer_refresh = new System.Windows.Forms.Timer(this.components);
+            this.listViewInfo = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxApache)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // txtOut
@@ -106,12 +96,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOut.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtOut.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOut.Location = new System.Drawing.Point(15, 170);
+            this.txtOut.Location = new System.Drawing.Point(15, 188);
             this.txtOut.Multiline = true;
             this.txtOut.Name = "txtOut";
             this.txtOut.ReadOnly = true;
             this.txtOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOut.Size = new System.Drawing.Size(686, 238);
+            this.txtOut.Size = new System.Drawing.Size(834, 302);
             this.txtOut.TabIndex = 1;
             // 
             // contextMenuStrip1
@@ -133,7 +123,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(712, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(860, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -419,20 +409,20 @@
             // 
             this.helpToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_hand_icon;
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(207, 26);
             this.helpToolStripMenuItem1.Text = "Doc Online";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(204, 6);
             // 
             // checkForUpdateToolStripMenuItem
             // 
             this.checkForUpdateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_arrow_down_icon_1_;
             this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
             this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
@@ -440,7 +430,7 @@
             // 
             this.aboutToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_menu_icon;
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(207, 26);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -448,9 +438,8 @@
             // 
             this.donateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_coin_dollar_money_icon;
             this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.donateToolStripMenuItem.Text = "Donate";
-            this.donateToolStripMenuItem.Visible = false;
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
             // btnStartStopApache
@@ -466,7 +455,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 150);
+            this.label1.Location = new System.Drawing.Point(12, 168);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 6;
@@ -510,9 +499,9 @@
             this.panel1.Controls.Add(this.btnStartStopApache);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(467, 28);
+            this.panel1.Location = new System.Drawing.Point(606, 41);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 119);
+            this.panel1.Size = new System.Drawing.Size(231, 124);
             this.panel1.TabIndex = 11;
             // 
             // pictureBoxMariaDB
@@ -533,131 +522,31 @@
             this.pictureBoxApache.TabIndex = 12;
             this.pictureBoxApache.TabStop = false;
             // 
-            // btnConsole
-            // 
-            this.btnConsole.BackgroundImage = global::ZampGUI.Properties.Resources.noun_terminal_6140AAAAAAAAA40;
-            this.btnConsole.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnConsole.Location = new System.Drawing.Point(606, 360);
-            this.btnConsole.Name = "btnConsole";
-            this.btnConsole.Size = new System.Drawing.Size(62, 38);
-            this.btnConsole.TabIndex = 14;
-            this.btnConsole.UseVisualStyleBackColor = true;
-            this.btnConsole.Visible = false;
-            this.btnConsole.Click += new System.EventHandler(this.btnConsole_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.lbComposer_ver);
-            this.panel2.Controls.Add(this.lb_baseFolder);
-            this.panel2.Controls.Add(this.lbPHP_ver);
-            this.panel2.Controls.Add(this.lbApache_ver);
-            this.panel2.Controls.Add(this.lbMariaDB_ver);
-            this.panel2.Location = new System.Drawing.Point(15, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(446, 119);
-            this.panel2.TabIndex = 12;
-            // 
-            // lbComposer_ver
-            // 
-            this.lbComposer_ver.AutoSize = true;
-            this.lbComposer_ver.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbComposer_ver.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbComposer_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbComposer_ver.Location = new System.Drawing.Point(9, 92);
-            this.lbComposer_ver.Name = "lbComposer_ver";
-            this.lbComposer_ver.Size = new System.Drawing.Size(143, 17);
-            this.lbComposer_ver.TabIndex = 15;
-            this.lbComposer_ver.Text = "Composer Vers: ";
-            // 
-            // lb_baseFolder
-            // 
-            this.lb_baseFolder.AutoSize = true;
-            this.lb_baseFolder.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lb_baseFolder.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_baseFolder.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lb_baseFolder.Location = new System.Drawing.Point(9, 8);
-            this.lb_baseFolder.Name = "lb_baseFolder";
-            this.lb_baseFolder.Size = new System.Drawing.Size(71, 17);
-            this.lb_baseFolder.TabIndex = 3;
-            this.lb_baseFolder.Text = "Folder:";
-            // 
-            // lbPHP_ver
-            // 
-            this.lbPHP_ver.AutoSize = true;
-            this.lbPHP_ver.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbPHP_ver.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPHP_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbPHP_ver.Location = new System.Drawing.Point(9, 72);
-            this.lbPHP_ver.Name = "lbPHP_ver";
-            this.lbPHP_ver.Size = new System.Drawing.Size(98, 17);
-            this.lbPHP_ver.TabIndex = 0;
-            this.lbPHP_ver.Text = "PHP Vers: ";
-            // 
-            // lbApache_ver
-            // 
-            this.lbApache_ver.AutoSize = true;
-            this.lbApache_ver.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbApache_ver.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbApache_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbApache_ver.Location = new System.Drawing.Point(9, 29);
-            this.lbApache_ver.Name = "lbApache_ver";
-            this.lbApache_ver.Size = new System.Drawing.Size(125, 17);
-            this.lbApache_ver.TabIndex = 7;
-            this.lbApache_ver.Text = "Apache Vers: ";
-            // 
-            // lbMariaDB_ver
-            // 
-            this.lbMariaDB_ver.AutoSize = true;
-            this.lbMariaDB_ver.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbMariaDB_ver.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMariaDB_ver.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbMariaDB_ver.Location = new System.Drawing.Point(9, 51);
-            this.lbMariaDB_ver.Name = "lbMariaDB_ver";
-            this.lbMariaDB_ver.Size = new System.Drawing.Size(134, 17);
-            this.lbMariaDB_ver.TabIndex = 1;
-            this.lbMariaDB_ver.Text = "MariaDB Vers: ";
-            // 
-            // lbVersion
-            // 
-            this.lbVersion.AutoSize = true;
-            this.lbVersion.BackColor = System.Drawing.Color.White;
-            this.lbVersion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbVersion.Location = new System.Drawing.Point(613, 291);
-            this.lbVersion.Name = "lbVersion";
-            this.lbVersion.Size = new System.Drawing.Size(44, 17);
-            this.lbVersion.TabIndex = 2;
-            this.lbVersion.Text = "Env:";
-            this.lbVersion.Visible = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Image = global::ZampGUI.Properties.Resources.iconfinder_info_370079;
-            this.pictureBox3.Location = new System.Drawing.Point(629, 323);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(19, 16);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Visible = false;
-            // 
             // timer_refresh
             // 
             this.timer_refresh.Enabled = true;
             this.timer_refresh.Interval = 5000;
             this.timer_refresh.Tick += new System.EventHandler(this.timer_refresh_Tick);
             // 
+            // listViewInfo
+            // 
+            this.listViewInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewInfo.HideSelection = false;
+            this.listViewInfo.Location = new System.Drawing.Point(15, 41);
+            this.listViewInfo.Name = "listViewInfo";
+            this.listViewInfo.Size = new System.Drawing.Size(585, 124);
+            this.listViewInfo.TabIndex = 15;
+            this.listViewInfo.UseCompatibleStateImageBehavior = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(712, 426);
-            this.Controls.Add(this.btnConsole);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.lbVersion);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(860, 508);
+            this.Controls.Add(this.listViewInfo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
@@ -665,7 +554,7 @@
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(638, 465);
+            this.MinimumSize = new System.Drawing.Size(878, 555);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ZampGUI";
@@ -676,9 +565,6 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxApache)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -711,9 +597,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBoxApache;
         private System.Windows.Forms.PictureBox pictureBoxMariaDB;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lbMariaDB_ver;
-        private System.Windows.Forms.Label lbPHP_ver;
         private System.Windows.Forms.ToolStripMenuItem browserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem apacheHomeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phpinfoToolStripMenuItem;
@@ -721,10 +604,6 @@
         private System.Windows.Forms.ToolStripMenuItem phpMyAdminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminerToolStripMenuItem;
         private System.Windows.Forms.Timer timer_refresh;
-        private System.Windows.Forms.Label lbVersion;
-        private System.Windows.Forms.Label lb_baseFolder;
-        private System.Windows.Forms.Button btnConsole;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
@@ -736,8 +615,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem sitesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadSitesFromVhostToolStripMenuItem;
-        private System.Windows.Forms.Label lbApache_ver;
-        private System.Windows.Forms.Label lbComposer_ver;
         private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ChangeVersStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -746,6 +623,7 @@
         private System.Windows.Forms.ToolStripMenuItem checkForUpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
+        private System.Windows.Forms.ListView listViewInfo;
     }
 }
 

@@ -29,6 +29,16 @@ namespace ZampGUI
         {
             InitializeComponent();
 
+            listViewInfo.View = View.Details;
+            listViewInfo.GridLines = true;
+            listViewInfo.FullRowSelect = true;
+
+            //Add column header
+            listViewInfo.Columns.Add("Name", 80);
+            listViewInfo.Columns.Add("Value");
+            listViewInfo.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+
             cv = new ConfigVar();
             string assemblyFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string root_folder = System.IO.Directory.GetParent(assemblyFolder).Parent.FullName;
@@ -459,8 +469,20 @@ namespace ZampGUI
         }
         private void refreshStatusForm()
         {
+            listViewInfo.Items.Clear();
+
             //lbVersion.Text = "Env: " + cv._env;
-            lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
+            //lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
+            //lbApache_ver.Text = cv.apache_vers;
+            //lbPHP_ver.Text = cv.php_vers;
+            //lbMariaDB_ver.Text = cv.mariadb_vers;
+            //lbComposer_ver.Text = cv.composer_vers;
+
+            listViewInfo.Items.Add(new ListViewItem(new string[] { "Folder", cv.pathBase }));
+            listViewInfo.Items.Add(new ListViewItem(new string[] { "Apache", cv.apache_vers }));
+            listViewInfo.Items.Add(new ListViewItem(new string[] { "MariaDB", cv.mariadb_vers }));
+            listViewInfo.Items.Add(new ListViewItem(new string[] { "PHP", cv.php_vers }));
+            listViewInfo.Items.Add(new ListViewItem(new string[] { "Composer", cv.composer_vers }));
 
             bool bRunProc = ZampGUILib.checkRunningProc(cv.getPID_apache);
             if (bRunProc)
@@ -498,10 +520,7 @@ namespace ZampGUI
                     
             }
 
-            lbApache_ver.Text = cv.apache_vers;
-            lbPHP_ver.Text = cv.php_vers;
-            lbMariaDB_ver.Text = cv.mariadb_vers;
-            lbComposer_ver.Text = cv.composer_vers;
+            
         }
         private void addOutput(string testo)
         {

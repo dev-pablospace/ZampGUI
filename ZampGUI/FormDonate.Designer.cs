@@ -136,7 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 649);
+            this.ClientSize = new System.Drawing.Size(894, 648);
             this.Controls.Add(this.pictureQReth);
             this.Controls.Add(this.pictureQRBitcoin);
             this.Controls.Add(this.txtEthereum);
