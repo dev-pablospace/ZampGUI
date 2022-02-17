@@ -324,8 +324,28 @@ namespace ZampGUI
         }
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string HOME = ZampGUILib.getval_from_appsetting("HOME");
-            System.Diagnostics.Process.Start(HOME + "/support.php");
+            try
+            {
+                //recupero i config dal app.config
+                string HOME = ZampGUILib.getval_from_appsetting("HOME");
+
+
+                string contents = "";// "{\"ver\": \"1.0.00\",\"homepage\": \"pippo\"}";
+                using (var wc = new System.Net.WebClient())
+                {
+                    contents = wc.DownloadString(HOME + "/assets/ver.txt");
+                }
+                JObject jobj = JObject.Parse(contents);
+
+
+                //mi occupo di fare il check sulla versione
+                string supporto_pagina = jobj.Value<string>("supporto_pagina");
+                System.Diagnostics.Process.Start(HOME + "/" + supporto_pagina);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Service not available at the moment");
+            }
         }
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
