@@ -61,7 +61,7 @@ namespace ZampGUI
         {
             JObject jobj = ZampGUILib.getJson_Env();
 
-            jobj[_env]["MariaDB_scelta"] = comboBoxDB_Vers.SelectedItem.ToString();
+            //jobj[_env]["MariaDB_scelta"] = comboBoxDB_Vers.SelectedItem.ToString();
             jobj[_env]["PHP_scelta"] = comboBoxPHP_Vers.SelectedItem.ToString();
 
             aggiorna_apache_httpd_conf_php(comboBoxPHP_Vers.SelectedItem.ToString(), comboBoxDB_Vers.SelectedItem.ToString());
@@ -75,21 +75,21 @@ namespace ZampGUI
         private void aggiorna_apache_httpd_conf_php(string PHP_scelta, string DB_scelta)
         {
             //aggiorno il file zampgui.conf
-            string text = File.ReadAllText(cv.Apache_zampgui_conf);
+            //string text = File.ReadAllText(cv.Apache_zampgui_conf);
 
-            text = System.Text.RegularExpressions.Regex.Replace(text, "^PHPIniDir .*$", "PHPIniDir \"${ZAMPROOT}/Apps/" + PHP_scelta + "\"", System.Text.RegularExpressions.RegexOptions.Multiline);
-            text = System.Text.RegularExpressions.Regex.Replace(text, "^SetEnv MYSQL_HOME .*$", "SetEnv MYSQL_HOME \"${ZAMPROOT}\\\\Apps\\\\" + DB_scelta + "\\\\bin\"", System.Text.RegularExpressions.RegexOptions.Multiline);
-            if (PHP_scelta.Contains("php-8"))
-            {
-                text = text.Replace("LoadFile \"${PHPROOT}/php7ts.dll\"", "LoadFile \"${PHPROOT}/php8ts.dll\"");
-                text = text.Replace("LoadModule php7_module \"${PHPROOT}/php7apache2_4.dll\"", "LoadModule php_module \"${PHPROOT}/php8apache2_4.dll\"");
-            }
-            else if (PHP_scelta.Contains("php-7"))
-            {
-                text = text.Replace("LoadFile \"${PHPROOT}/php8ts.dll\"", "LoadFile \"${PHPROOT}/php7ts.dll\"");
-                text = text.Replace("LoadModule php_module \"${PHPROOT}/php8apache2_4.dll\"", "LoadModule php7_module \"${PHPROOT}/php7apache2_4.dll\"");
-            }
-            File.WriteAllText(cv.Apache_zampgui_conf, text);
+            //text = System.Text.RegularExpressions.Regex.Replace(text, "^PHPIniDir .*$", "PHPIniDir \"${ZAMPROOT}/Apps/" + PHP_scelta + "\"", System.Text.RegularExpressions.RegexOptions.Multiline);
+            ////text = System.Text.RegularExpressions.Regex.Replace(text, "^SetEnv MYSQL_HOME .*$", "SetEnv MYSQL_HOME \"${ZAMPROOT}\\\\Apps\\\\" + DB_scelta + "\\\\bin\"", System.Text.RegularExpressions.RegexOptions.Multiline);
+            //if (PHP_scelta.Contains("php-8"))
+            //{
+            //    text = text.Replace("LoadFile \"${PHPROOT}/php7ts.dll\"", "LoadFile \"${PHPROOT}/php8ts.dll\"");
+            //    text = text.Replace("LoadModule php7_module \"${PHPROOT}/php7apache2_4.dll\"", "LoadModule php_module \"${PHPROOT}/php8apache2_4.dll\"");
+            //}
+            //else if (PHP_scelta.Contains("php-7"))
+            //{
+            //    text = text.Replace("LoadFile \"${PHPROOT}/php8ts.dll\"", "LoadFile \"${PHPROOT}/php7ts.dll\"");
+            //    text = text.Replace("LoadModule php_module \"${PHPROOT}/php8apache2_4.dll\"", "LoadModule php7_module \"${PHPROOT}/php7apache2_4.dll\"");
+            //}
+            //File.WriteAllText(cv.Apache_zampgui_conf, text);
 
 
 
@@ -97,8 +97,12 @@ namespace ZampGUI
 
 
             //aggiorno il file httpd.conf
-            text = File.ReadAllText(cv.Apache_httpd_conf);
+            string num = PHP_scelta.Substring(4, 3).Replace(".", "");
+            string text = File.ReadAllText(cv.Apache_httpd_conf);
             text = System.Text.RegularExpressions.Regex.Replace(text, "^Define PHPROOT.*$", "Define PHPROOT \"${ZAMPROOT}/Apps/" + PHP_scelta + "\"", System.Text.RegularExpressions.RegexOptions.Multiline);
+            text = System.Text.RegularExpressions.Regex.Replace(text, @"^Include conf/extra/zampgui_\d\d.conf", "#$&", System.Text.RegularExpressions.RegexOptions.Multiline);
+            text = System.Text.RegularExpressions.Regex.Replace(text, @"^#Include conf/extra/zampgui_" + num + ".conf", "Include conf/extra/zampgui_" + num + ".conf", System.Text.RegularExpressions.RegexOptions.Multiline);
+
             File.WriteAllText(cv.Apache_httpd_conf, text);
         }
     }

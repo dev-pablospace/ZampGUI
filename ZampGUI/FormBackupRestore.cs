@@ -72,12 +72,18 @@ namespace ZampGUI
             }
             else
             {
+                string nomescript_backup = "MySql_Backup.bat";
                 string str_db = comboBoxDbBackup.SelectedItem.ToString();
                 string nomebackup_file = str_db + "_" + DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_-_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + "_" + DateTime.Now.Millisecond + ".sql";
                 nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
 
+                if(checkBoxAddCreateDB.Checked)
+                {
+                    nomescript_backup = "MySql_Backup_addcreate.bat";
+                }
+                
                 //eseguibackup(str_db, nomebackup_file);
-                List<string> l_res = ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Backup.bat"),
+                List<string> l_res = ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", nomescript_backup),
                     new string[] { str_db, "root", "root", nomebackup_file, System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), "127.0.0.1", cv.mariadb_port }
                 );
 
@@ -211,9 +217,10 @@ namespace ZampGUI
             process.Close();
             MessageBox.Show("Restore " + str_db + " with file " + nomebackup_file + " completed");
         }
+
+
         #endregion
 
-
-
+       
     }
 }

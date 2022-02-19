@@ -63,6 +63,46 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap about_email {
+            get {
+                object obj = ResourceManager.GetObject("about_email", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap about_github {
+            get {
+                object obj = ResourceManager.GetObject("about_github", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap about_home {
+            get {
+                object obj = ResourceManager.GetObject("about_home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap about_Sourceforge {
+            get {
+                object obj = ResourceManager.GetObject("about_Sourceforge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bullet_green {
             get {
                 object obj = ResourceManager.GetObject("bullet_green", resourceCulture);
@@ -196,6 +236,16 @@ namespace ZampGUI.Properties {
         internal static System.Drawing.Bitmap menu_arrow_down_icon_1_ {
             get {
                 object obj = ResourceManager.GetObject("menu_arrow_down_icon(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_backup {
+            get {
+                object obj = ResourceManager.GetObject("menu_backup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

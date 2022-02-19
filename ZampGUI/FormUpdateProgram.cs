@@ -12,9 +12,11 @@ namespace ZampGUI
 {
     public partial class FormUpdateProgram : Form
     {
-        public FormUpdateProgram()
+        public string latest_vers;
+        public FormUpdateProgram(string latest_vers)
         {
             InitializeComponent();
+            this.latest_vers = latest_vers;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -24,7 +26,7 @@ namespace ZampGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://sourceforge.net/projects/zampgui/files/latest/download");
+            System.Diagnostics.Process.Start(this.latest_vers);
         }
     }
 }

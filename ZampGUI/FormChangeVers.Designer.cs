@@ -90,6 +90,7 @@ namespace ZampGUI
             // comboBoxDB_Vers
             // 
             this.comboBoxDB_Vers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDB_Vers.Enabled = false;
             this.comboBoxDB_Vers.FormattingEnabled = true;
             this.comboBoxDB_Vers.Location = new System.Drawing.Point(205, 85);
             this.comboBoxDB_Vers.Name = "comboBoxDB_Vers";

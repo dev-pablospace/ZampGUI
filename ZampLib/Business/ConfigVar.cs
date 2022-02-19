@@ -18,11 +18,15 @@ namespace ZampLib.Business
         public string _env { get; set; }
         public string pathBase { get; set; }
         public Dictionary<string, string> pathMariaDB { get; set; } = new Dictionary<string, string>();
-        //public string pathMariaDB { get; set; }
         public string MariaDB_scelta { get; set; }
         public string pathApache { get; set; }
         //public string pathPHP { get; set; }
         public Dictionary<string, string> pathPHP { get; set; } = new Dictionary<string, string>();
+        public string pathGit { get; set; }
+        public string pathSass { get; set; }
+        public string pathNode { get; set; }
+        public string wp_cli { get; set; }
+
         public string PHP_scelta { get; set; }
         public string default_editor_path { get; set; }
         public string apache_http_port { get; set; }
@@ -36,6 +40,10 @@ namespace ZampLib.Business
         public string php_vers { get; set; }
         public string mariadb_vers { get; set; }
         public string composer_vers { get; set; }
+        public string git_vers { get; set; }
+        public string sass_vers { get; set; }
+        public string node_vers { get; set; }
+        public string wp_cli_vers { get; set; }
 
 
         public List<string> ListPathConsole { get; set; } //percorsi aggiuntivi che devo aggiungere alla %PATH% QUANDO apro la console
@@ -82,13 +90,13 @@ namespace ZampLib.Business
                 return System.IO.Path.Combine(pathApache, "conf", "extra", "httpd-vhosts.conf");
             }
         }
-        public string Apache_zampgui_conf
-        {
-            get
-            {
-                return System.IO.Path.Combine(pathApache, "conf", "extra", "zampgui.conf");
-            }
-        }
+        //public string Apache_zampgui_conf
+        //{
+        //    get
+        //    {
+        //        return System.IO.Path.Combine(pathApache, "conf", "extra", "zampgui.conf");
+        //    }
+        //}
         public string phpmyadmin_config 
         { 
             get 
@@ -151,9 +159,7 @@ namespace ZampLib.Business
             }
         }
         public string MariaDB_path_scelto { 
-            get {
-                return this.pathMariaDB[this.MariaDB_scelta];
-            } 
+            get { return this.pathMariaDB[this.MariaDB_scelta]; } 
         }
         public string PHP_path_scelto
         {
@@ -222,22 +228,89 @@ namespace ZampLib.Business
             _env = ZampGUILib.getval_from_appsetting("env");
             JObject jobj = ZampGUILib.getJson_Env();
             this.pathBase = (string)jobj[_env]["pathBase"];
-            this.pathApache = (string)jobj[_env]["pathApache"];
+            this.pathApache = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathApache"]);
 
 
             foreach (Newtonsoft.Json.Linq.JProperty kv in jobj[_env]["pathMariaDB"])
             {
-                this.pathMariaDB.Add(kv.Name, kv.Value.ToString());
+                this.pathMariaDB.Add(kv.Name, System.IO.Path.Combine(this.pathBase, "Apps", kv.Value.ToString()));
             }
             this.MariaDB_scelta = (string)jobj[_env]["MariaDB_scelta"];
 
             foreach (Newtonsoft.Json.Linq.JProperty kv in jobj[_env]["pathPHP"])
             {
-                this.pathPHP.Add(kv.Name, kv.Value.ToString());
+                this.pathPHP.Add(kv.Name, System.IO.Path.Combine(this.pathBase, "Apps", kv.Value.ToString()));
             }
             this.PHP_scelta = (string)jobj[_env]["PHP_scelta"];
+
+
+            //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
+            if(!string.IsNullOrEmpty((string)jobj[_env]["pathGit"]))
+            {
+                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathGit"]);
+                if (System.IO.Directory.Exists(temp2))
+                {
+                    this.pathGit = temp2;
+                }
+                else
+                {
+                    this.pathGit = (string)jobj[_env]["pathGit"];
+                }
+            }
+            else { this.pathGit = ""; }
+
+
+            //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
+            if (!string.IsNullOrEmpty((string)jobj[_env]["pathSass"]))
+            {
+                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathSass"]);
+                if (System.IO.Directory.Exists(temp2))
+                {
+                    this.pathSass = temp2;
+                }
+                else
+                {
+                    this.pathSass = (string)jobj[_env]["pathSass"];
+                }
+            }
+            else { this.pathSass = ""; }
+
+
+            //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
+            if (!string.IsNullOrEmpty((string)jobj[_env]["pathNode"]))
+            {
+                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathNode"]);
+                if (System.IO.Directory.Exists(temp2))
+                {
+                    this.pathNode = temp2;
+                }
+                else
+                {
+                    this.pathNode = (string)jobj[_env]["pathNode"];
+                }
+            }
+            else { this.pathNode = ""; }
+
+
+            //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
+            if (!string.IsNullOrEmpty((string)jobj[_env]["wpcli"]))
+            {
+                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["wpcli"]);
+                if (System.IO.Directory.Exists(temp2))
+                {
+                    this.wp_cli = temp2;
+                }
+                else
+                {
+                    this.wp_cli = (string)jobj[_env]["wpcli"];
+                }
+            }
+            else { this.wp_cli = ""; }
+                
+
             
-            
+
+
             this.default_editor_path = (string)jobj[_env]["default_editor_path"];
             this.apache_http_port = (string)jobj[_env]["apache_http_port"];
             this.apache_https_port = (string)jobj[_env]["apache_https_port"];
@@ -336,6 +409,16 @@ namespace ZampLib.Business
         {
             JObject jobj = ZampGUILib.getJson_Env();
             jobj[_env]["ListPathConsole"] = String.Join("|", this.ListPathConsole.ToArray());
+
+            jobj[_env]["pathGit"] = pathGit.StartsWith(System.IO.Path.Combine(pathBase, "Apps"))? pathGit.Remove(0, System.IO.Path.Combine(pathBase, "Apps").Length).Trim('\\'): pathGit;
+            jobj[_env]["pathSass"] = pathSass.StartsWith(System.IO.Path.Combine(pathBase, "Apps")) ? pathSass.Remove(0, System.IO.Path.Combine(pathBase, "Apps").Length).Trim('\\') : pathSass;
+            jobj[_env]["pathNode"] = pathNode.StartsWith(System.IO.Path.Combine(pathBase, "Apps")) ? pathNode.Remove(0, System.IO.Path.Combine(pathBase, "Apps").Length).Trim('\\') : pathNode;
+
+            wp_cli_vers = refresh_wpcli_vers();
+            sass_vers = refresh_sass_vers();
+            git_vers = refresh_git_vers();
+            node_vers = refresh_node_vers();
+
             ZampGUILib.setJson_Env(jobj);
         }
 
@@ -453,7 +536,7 @@ namespace ZampLib.Business
             match = regex.Match(apache_vers);
             if (match.Success)
             {
-                apache_vers = match.Value;
+                apache_vers = match.Value.Replace("Apache/","");
             }
 
 
@@ -462,7 +545,7 @@ namespace ZampLib.Business
             match = regex.Match(php_vers);
             if (match.Success)
             {
-                php_vers = match.Value;
+                php_vers = match.Value.Replace("PHP ","");
             }
 
             mariadb_vers = ZampGUILib.startProc_and_wait_output(MariaDB_bin, "--version", true);
@@ -470,7 +553,7 @@ namespace ZampLib.Business
             match = regex.Match(mariadb_vers);
             if (match.Success)
             {
-                mariadb_vers = "MariaDB " + match.Value;
+                mariadb_vers = match.Value.Replace("Ver","").Trim();
             }
 
 
@@ -479,8 +562,15 @@ namespace ZampLib.Business
             match = regex.Match(composer_vers);
             if (match.Success)
             {
-                composer_vers = match.Value;
+                composer_vers = match.Value.Replace("Composer version", "").Trim();
             }
+
+            
+            git_vers = refresh_git_vers();
+            node_vers = refresh_node_vers();
+            sass_vers = refresh_sass_vers();
+            wp_cli_vers = refresh_wpcli_vers();
+            
 
         }
 
@@ -660,6 +750,81 @@ namespace ZampLib.Business
                     break;
             }
             return path;
+        }
+
+        private string refresh_wpcli_vers()
+        {
+            string str = "";
+            Regex regex;
+            Match match;
+
+            if (System.IO.Directory.Exists(wp_cli))
+            {
+                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(wp_cli, "wp.bat"), " cli info", true, PHP_path_scelto);
+                regex = new Regex(@"WP-CLI version:.\d+\.\d+\.\d+");
+                match = regex.Match(str);
+                if (match.Success)
+                {
+                    str = match.Value.Replace("WP-CLI version", "").Trim().Trim(':');
+                }
+            }
+            return str;
+        }
+        private string refresh_sass_vers()
+        {
+            string str = "";
+            Regex regex;
+            Match match;
+
+            if (System.IO.Directory.Exists(pathSass))
+            {
+                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathSass, "sass.bat"), "--version", true, pathSass);
+                //regex = new Regex(@"Composer version \d+\.\d+\.\d+");
+                //match = regex.Match(composer_vers);
+                //if (match.Success)
+                //{
+                //    composer_vers = match.Value;
+                //}
+            }
+            return str;
+        }
+
+        private string refresh_node_vers()
+        {
+            string str = "";
+            Regex regex;
+            Match match;
+            if (System.IO.Directory.Exists(pathNode))
+            {
+                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathNode, "node.exe"), "--version", true, pathNode);
+                //regex = new Regex(@"Composer version \d+\.\d+\.\d+");
+                //match = regex.Match(composer_vers);
+                //if (match.Success)
+                //{
+                //    composer_vers = match.Value;
+                //}
+            }
+            return str;
+        }
+        private string refresh_git_vers()
+        {
+            string str = "";
+            Regex regex;
+            Match match;
+
+            if (System.IO.Directory.Exists(pathGit))
+            {
+                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathGit, "git.exe"), "--version", true, pathGit);
+                str = str.Replace("git version ", "").Trim();
+                //regex = new Regex(@"Composer version \d+\.\d+\.\d+");
+                //match = regex.Match(composer_vers);
+                //if (match.Success)
+                //{
+                //    composer_vers = match.Value;
+                //}
+            }
+
+            return str;
         }
         #endregion
     }

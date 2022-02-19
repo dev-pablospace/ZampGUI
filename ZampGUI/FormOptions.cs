@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ namespace ZampGUI
             }
 
             txtPathEditor.Text = cv.default_editor_path;
+            txtPathGit.Text = cv.pathGit;
+            txtPathNodeJS.Text = cv.pathNode;
+            txtPathSass.Text = cv.pathSass;
             numericUpDown_http.Value = Convert.ToInt32(cv.apache_http_port);
             numericUpDown_https.Value = Convert.ToInt32(cv.apache_https_port);
             numericUpDown_mariadb.Value = Convert.ToInt32(cv.mariadb_port);
@@ -58,10 +62,14 @@ namespace ZampGUI
             }
             else if(check_change())
             {
-                cv.default_editor_path = txtPathEditor.Text.Trim().ToLower();
+                cv.default_editor_path = txtPathEditor.Text.Trim();
                 cv.apache_http_port = numericUpDown_http.Value.ToString();
                 cv.apache_https_port = numericUpDown_https.Value.ToString();
                 cv.mariadb_port = numericUpDown_mariadb.Value.ToString();
+
+                cv.pathGit = txtPathGit.Text.Trim();
+                cv.pathNode = txtPathNodeJS.Text.Trim();
+                cv.pathSass = txtPathSass.Text.Trim();
 
                 string[] lines = txtPathConsole.Text.Trim().Split(new[] { Environment.NewLine },StringSplitOptions.None);
                 cv.ListPathConsole = new List<string>();
@@ -86,7 +94,13 @@ namespace ZampGUI
 
         private bool check_change()
         {
-            return cv.default_editor_path != txtPathEditor.Text.Trim().ToLower() || changed_port() || this.bChangeListPath;
+            return cv.default_editor_path != txtPathEditor.Text.Trim().ToLower() 
+                || changed_port() 
+                || this.bChangeListPath
+                || cv.pathGit != txtPathGit.Text.Trim()
+                || cv.pathNode != txtPathNodeJS.Text.Trim()
+                || cv.pathSass != txtPathSass.Text.Trim()
+                ;
         }
 
         private bool changed_port()
@@ -125,6 +139,41 @@ namespace ZampGUI
         private void txtPathConsole_TextChanged(object sender, EventArgs e)
         {
             this.bChangeListPath = true;
+        }
+
+        private void btnSelectGit_Click(object sender, EventArgs e)
+        {
+            txtPathGit.Text = selectFolder();   
+        }
+
+        private void btnSelectNode_Click(object sender, EventArgs e)
+        {
+            txtPathNodeJS.Text = selectFolder();
+        }
+
+        private void btnSelectSass_Click(object sender, EventArgs e)
+        {
+            txtPathSass.Text = selectFolder();
+        }
+
+
+        private string selectFolder()
+        {
+            OpenFileDialog folderBrowser = new OpenFileDialog();
+            // Set validate names and check file exists to false otherwise windows will
+            // not let you select "Folder Selection."
+            folderBrowser.ValidateNames = false;
+            folderBrowser.CheckFileExists = false;
+            folderBrowser.CheckPathExists = true;
+            folderBrowser.InitialDirectory = cv.pathBase;
+            // Always default to Folder Selection.
+            folderBrowser.FileName = "Folder Selection.";
+            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                string folderPath = Path.GetDirectoryName(folderBrowser.FileName);
+                return folderPath;
+            }
+            return "";
         }
     }
 }

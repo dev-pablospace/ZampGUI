@@ -101,7 +101,7 @@
             this.txtOut.Name = "txtOut";
             this.txtOut.ReadOnly = true;
             this.txtOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOut.Size = new System.Drawing.Size(834, 302);
+            this.txtOut.Size = new System.Drawing.Size(834, 222);
             this.txtOut.TabIndex = 1;
             // 
             // contextMenuStrip1
@@ -201,7 +201,7 @@
             this.hostFileToolStripMenuItem});
             this.filesConfigToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_alt_pencil_icon;
             this.filesConfigToolStripMenuItem.Name = "filesConfigToolStripMenuItem";
-            this.filesConfigToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.filesConfigToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.filesConfigToolStripMenuItem.Text = "Edit config";
             // 
             // apacheHttpdconfToolStripMenuItem
@@ -257,29 +257,29 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(242, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(221, 6);
             // 
             // backupRestoreToolStripMenuItem
             // 
-            this.backupRestoreToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_switch_horizontal_icon;
+            this.backupRestoreToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_backup;
             this.backupRestoreToolStripMenuItem.Name = "backupRestoreToolStripMenuItem";
-            this.backupRestoreToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.backupRestoreToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.backupRestoreToolStripMenuItem.Text = "Backup - Restore";
             this.backupRestoreToolStripMenuItem.Click += new System.EventHandler(this.backupRestoreToolStripMenuItem_Click);
             // 
             // ChangeVersStripMenuItem
             // 
+            this.ChangeVersStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_switch_horizontal_icon;
             this.ChangeVersStripMenuItem.Name = "ChangeVersStripMenuItem";
-            this.ChangeVersStripMenuItem.Size = new System.Drawing.Size(245, 26);
-            this.ChangeVersStripMenuItem.Text = "Change PHP - MariaDB";
-            this.ChangeVersStripMenuItem.Visible = false;
+            this.ChangeVersStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ChangeVersStripMenuItem.Text = "Change PHP";
             this.ChangeVersStripMenuItem.Click += new System.EventHandler(this.ChangeVersStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_cog_icon;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -389,8 +389,8 @@
             // consoleToolStripMenuItem
             // 
             this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
-            this.consoleToolStripMenuItem.Text = "Open Console";
+            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.consoleToolStripMenuItem.Text = "Console";
             this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -409,20 +409,20 @@
             // 
             this.helpToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_hand_icon;
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(207, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.helpToolStripMenuItem1.Text = "Doc Online";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(204, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(221, 6);
             // 
             // checkForUpdateToolStripMenuItem
             // 
             this.checkForUpdateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_arrow_down_icon_1_;
             this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
             this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
@@ -430,7 +430,7 @@
             // 
             this.aboutToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_menu_icon;
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(207, 26);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -438,7 +438,7 @@
             // 
             this.donateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_coin_dollar_money_icon;
             this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.donateToolStripMenuItem.Text = "Donate";
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
@@ -525,7 +525,7 @@
             // timer_refresh
             // 
             this.timer_refresh.Enabled = true;
-            this.timer_refresh.Interval = 5000;
+            this.timer_refresh.Interval = 10000;
             this.timer_refresh.Tick += new System.EventHandler(this.timer_refresh_Tick);
             // 
             // listViewInfo
@@ -545,7 +545,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(860, 508);
+            this.ClientSize = new System.Drawing.Size(860, 428);
             this.Controls.Add(this.listViewInfo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -554,7 +554,6 @@
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(878, 555);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ZampGUI";

@@ -97,7 +97,7 @@ namespace ZampGUI
 
 
                 cv.get_software_version();
-                refreshStatusForm();
+                refreshStatusForm(true);
 
                 List<string> arrListSite = ZampGUILib.getListSite(cv);
                 crealinkSite(arrListSite);
@@ -174,6 +174,7 @@ namespace ZampGUI
                 cv.updatePort();
                 cv.updateAdditionalPath();
                 cv.updateDefaultEditor(cv.default_editor_path);
+                refreshStatusForm(true);
             }
             frm2.Close();
         }
@@ -278,8 +279,8 @@ namespace ZampGUI
         }
         private void wordpressToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("function not available at the moment");
-            return;
+            //MessageBox.Show("function not available at the moment");
+            //return;
             
             if (!ZampGUILib.checkRunningProc(cv.getPID_mariadb))
             {
@@ -304,11 +305,11 @@ namespace ZampGUI
         }
         private void ChangeVersStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
-            {
-                MessageBox.Show("Please close MariaDB");
-                return;
-            }
+            //if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
+            //{
+            //    MessageBox.Show("Please close MariaDB");
+            //    return;
+            //}
             if (ZampGUILib.checkRunningProc(cv.getPID_apache))
             {
                 MessageBox.Show("Please close Apache");
@@ -319,7 +320,7 @@ namespace ZampGUI
             DialogResult dr = frm2.ShowDialog(this);
             cv = new ConfigVar();
             cv.get_software_version();
-            refreshStatusForm();
+            refreshStatusForm(true);
             frm2.Close();
         }
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -366,6 +367,8 @@ namespace ZampGUI
 
                 //salvo il config nell app.config
                 string home_web = jobj.Value<string>("homepage");
+                string latest_vers = jobj.Value<string>("latest_vers");
+
                 Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
                 config.AppSettings.Settings.Remove("HOME");
                 config.AppSettings.Settings.Add("HOME", home_web);
@@ -381,7 +384,7 @@ namespace ZampGUI
                 }
                 else
                 {
-                    FormUpdateProgram frm2 = new FormUpdateProgram();
+                    FormUpdateProgram frm2 = new FormUpdateProgram(latest_vers);
                     DialogResult dr = frm2.ShowDialog(this);
                     if (dr == DialogResult.OK)
                     {
@@ -457,6 +460,23 @@ namespace ZampGUI
             //MessageBox.Show(drive_letter);
             string ListPathConsole = cv.ListPathConsole.Count == 0 ? "": ";\"" + String.Join("\";\"", cv.ListPathConsole.ToArray()) + "\"";
 
+            if(System.IO.Directory.Exists(cv.pathGit))
+            {
+                ListPathConsole += ";\"" + cv.pathGit + "\"";
+            }
+            if (System.IO.Directory.Exists(cv.pathSass))
+            {
+                ListPathConsole += ";\"" + cv.pathSass + "\"";
+            }
+            if (System.IO.Directory.Exists(cv.pathNode))
+            {
+                ListPathConsole += ";\"" + cv.pathNode + "\"";
+            }
+            if (System.IO.Directory.Exists(cv.wp_cli))
+            {
+                ListPathConsole += ";\"" + cv.wp_cli + "\"";
+            }
+
             //ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
             //        new string[] { apache_dir_bin, cv.pathPHP, mariadb_dir_bin, composer_path, node_path, sass_path, drive_letter, cv.pathBase }
             //);
@@ -487,22 +507,47 @@ namespace ZampGUI
             //        new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
             //);
         }
-        private void refreshStatusForm()
+        private void refreshStatusForm(bool AggiornaPercorsi = false)
         {
-            listViewInfo.Items.Clear();
+            if(AggiornaPercorsi)
+            {
+                //vecchia modalità
+                //lbVersion.Text = "Env: " + cv._env;
+                //lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
+                //lbApache_ver.Text = cv.apache_vers;
+                //lbPHP_ver.Text = cv.php_vers;
+                //lbMariaDB_ver.Text = cv.mariadb_vers;
+                //lbComposer_ver.Text = cv.composer_vers;
 
-            //lbVersion.Text = "Env: " + cv._env;
-            //lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
-            //lbApache_ver.Text = cv.apache_vers;
-            //lbPHP_ver.Text = cv.php_vers;
-            //lbMariaDB_ver.Text = cv.mariadb_vers;
-            //lbComposer_ver.Text = cv.composer_vers;
 
-            listViewInfo.Items.Add(new ListViewItem(new string[] { "Folder", cv.pathBase }));
-            listViewInfo.Items.Add(new ListViewItem(new string[] { "Apache", cv.apache_vers }));
-            listViewInfo.Items.Add(new ListViewItem(new string[] { "MariaDB", cv.mariadb_vers }));
-            listViewInfo.Items.Add(new ListViewItem(new string[] { "PHP", cv.php_vers }));
-            listViewInfo.Items.Add(new ListViewItem(new string[] { "Composer", cv.composer_vers }));
+                listViewInfo.Items.Clear();
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Folder", cv.pathBase }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Apache", cv.apache_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "MariaDB", cv.mariadb_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "PHP", cv.php_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Composer", cv.composer_vers }));
+
+                //if (!string.IsNullOrEmpty(cv.git_vers))
+                {
+                    listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
+                }
+                //if (!string.IsNullOrEmpty(cv.node_vers))
+                {
+                    listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
+                }
+                //if (!string.IsNullOrEmpty(cv.sass_vers))
+                {
+                    listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
+                }
+                //if (!string.IsNullOrEmpty(cv.wp_cli_vers))
+                {
+                    listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
+                }
+            }
+            
+            
+
+
 
             bool bRunProc = ZampGUILib.checkRunningProc(cv.getPID_apache);
             if (bRunProc)

@@ -41,6 +41,7 @@
             this.btnSelectSqlFile = new System.Windows.Forms.Button();
             this.txtPathSQLFile = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.checkBoxAddCreateDB = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkBoxAddCreateDB);
             this.tabPage1.Controls.Add(this.btnBackup);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.comboBoxDbBackup);
@@ -161,6 +163,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // checkBoxAddCreateDB
+            // 
+            this.checkBoxAddCreateDB.AutoSize = true;
+            this.checkBoxAddCreateDB.Location = new System.Drawing.Point(20, 78);
+            this.checkBoxAddCreateDB.Name = "checkBoxAddCreateDB";
+            this.checkBoxAddCreateDB.Size = new System.Drawing.Size(282, 21);
+            this.checkBoxAddCreateDB.TabIndex = 4;
+            this.checkBoxAddCreateDB.Text = "Add \"Create Database\" to sql";
+            this.checkBoxAddCreateDB.UseVisualStyleBackColor = true;
+            // 
             // FormBackupRestore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -196,5 +208,6 @@
         private System.Windows.Forms.Button btnSelectSqlFile;
         private System.Windows.Forms.TextBox txtPathSQLFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.CheckBox checkBoxAddCreateDB;
     }
 }

@@ -12,20 +12,36 @@ namespace ZampGUI
 {
     public partial class FormAbout : Form
     {
+        public string HOME { get; set; }
+
         public FormAbout()
         {
             InitializeComponent();
+            this.HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
             System.Diagnostics.Process.Start(HOME);
+        }
+
+        private void pictureBoxHome_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(HOME);
+        }
+
+        private void pictureBoxEmail_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(HOME + "/contactme.php");
+        }
+
+        private void pictureBoxGithub_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/freematrix?tab=repositories");
+        }
+
+        private void pictureBoxSourceforge_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://sourceforge.net/projects/zampgui/");
         }
     }
 }

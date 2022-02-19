@@ -261,6 +261,11 @@
     <Content Include="img\menu_x_circle_icon.png" />
     <Content Include="img\ZampGUI logo mini.ico" />
     <Content Include="img\ZampGUI logo mini.png" />
+    <None Include="Resources\about_Sourceforge.png" />
+    <None Include="Resources\about_home.png" />
+    <None Include="Resources\about_github.png" />
+    <None Include="Resources\about_email.png" />
+    <None Include="Resources\menu_backup.png" />
     <None Include="Resources\form_copy_icon.png" />
     <None Include="Resources\ethereum.png" />
     <None Include="Resources\cryptocurrency.png" />
