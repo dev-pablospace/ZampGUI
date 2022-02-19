@@ -125,24 +125,27 @@ namespace ZampGUI
 
         private void btnRestore_Click(object sender, EventArgs e)
         {
-            if (comboBoxDbRestore.SelectedItem == null)
+            string str_db = "";
+            string nomebat_restore = "MySql_Restore_nodb.bat";
+
+            if (comboBoxDbRestore.SelectedItem != null)
             {
-                MessageBox.Show("please select a db");
+                str_db = comboBoxDbRestore.SelectedItem.ToString();
+                nomebat_restore = "MySql_Restore.bat";
             }
-            else if (!System.IO.File.Exists(txtPathSQLFile.Text) || !txtPathSQLFile.Text.ToLower().EndsWith(".sql"))
+            
+            if (!System.IO.File.Exists(txtPathSQLFile.Text) || !txtPathSQLFile.Text.ToLower().EndsWith(".sql"))
             {
                 MessageBox.Show("please select a valid sql file");
             }
             else
             {
-                string str_db = comboBoxDbRestore.SelectedItem.ToString();
-
                 //eseguiRestore(comboBoxDbRestore.SelectedItem.ToString(), txtPathSQLFile.Text);
-                List<string> l_res= ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Restore.bat"), 
-                    new string[] { "root", "root", comboBoxDbRestore.SelectedItem.ToString(), txtPathSQLFile.Text, "127.0.0.1", System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), cv.mariadb_port }
+                List<string> l_res= ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", nomebat_restore), 
+                    new string[] { "root", "root", str_db, txtPathSQLFile.Text, "127.0.0.1", System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), cv.mariadb_port }
                 );
 
-                string contents = l_res[0] + Environment.NewLine + Environment.NewLine + "Error: " + l_res[1] + Environment.NewLine + "Exit code: " + l_res[2] + Environment.NewLine + "Restored " + str_db + " with file " + txtPathSQLFile.Text;
+                string contents = l_res[0] + Environment.NewLine + Environment.NewLine + "Error: " + l_res[1] + Environment.NewLine + "Exit code: " + l_res[2] + Environment.NewLine + "Executed " + txtPathSQLFile.Text;
 
                 FormMsg frm_msg = new FormMsg(contents);
                 frm_msg.ShowDialog(this);
