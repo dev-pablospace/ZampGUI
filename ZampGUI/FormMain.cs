@@ -361,7 +361,8 @@ namespace ZampGUI
                 string contents = "";// "{\"ver\": \"1.0.00\",\"homepage\": \"pippo\"}";
                 using (var wc = new System.Net.WebClient())
                 {
-                    contents = wc.DownloadString(HOME + "/assets/ver.txt");
+                    //contents = wc.DownloadString(HOME + "/assets/ver.txt");
+                    contents = wc.DownloadString(HOME + "/?reqinfo=yes");
                 }
                 JObject jobj = JObject.Parse(contents);
 
