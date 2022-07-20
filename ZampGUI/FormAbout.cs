@@ -31,12 +31,12 @@ namespace ZampGUI
 
         private void pictureBoxEmail_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(HOME + "/contactme.php");
+            //System.Diagnostics.Process.Start(HOME + "/contactme.php");
         }
 
         private void pictureBoxGithub_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/freematrix?tab=repositories");
+            System.Diagnostics.Process.Start("https://github.com/pablodevsite?tab=repositories");
         }
 
         private void pictureBoxSourceforge_Click(object sender, EventArgs e)
