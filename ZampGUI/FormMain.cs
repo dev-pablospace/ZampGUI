@@ -118,6 +118,7 @@ namespace ZampGUI
         }
         private void runAllProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            disableControl();
             check_and_kill_other_instance(typeProg.apache);
             check_and_kill_other_instance(typeProg.mariadb);
 
@@ -128,15 +129,20 @@ namespace ZampGUI
             addOutput(ZampGUILib.getStatusProc(cv, typeProg.apache));
             addOutput(ZampGUILib.getStatusProc(cv, typeProg.mariadb));
 
-            
+            enableControl();
             refreshStatusForm();
+            
         }
         private void stopAllProgrammToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            disableControl();
+            do_All_Backup_Db();
             addOutput(ZampGUILib.killproc(cv, typeProg.apache));
             addOutput(ZampGUILib.killproc(cv, typeProg.mariadb));
 
+            enableControl();
             refreshStatusForm();
+            
         }
         private void checkStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -174,6 +180,7 @@ namespace ZampGUI
                 cv.updatePort();
                 cv.updateAdditionalPath();
                 cv.updateDefaultEditor(cv.default_editor_path);
+                cv.otherUpdate();
                 refreshStatusForm(true);
             }
             frm2.Close();
@@ -196,6 +203,7 @@ namespace ZampGUI
         }
         private void btnStartStopApache_Click(object sender, EventArgs e)
         {
+            disableControl();
             check_and_kill_other_instance(typeProg.apache);
             if (ZampGUILib.checkRunningProc(cv.getPID_apache))
             {
@@ -205,10 +213,14 @@ namespace ZampGUI
             {
                 addOutput(ZampGUILib.startProc(cv, typeProg.apache, new string[] { }));
             }
+            
+            enableControl();
             refreshStatusForm();
         }
         private void btnStartStopMariaDB_Click(object sender, EventArgs e)
         {
+            disableControl();
+            do_All_Backup_Db();
             check_and_kill_other_instance(typeProg.mariadb);
             if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
             {
@@ -218,6 +230,8 @@ namespace ZampGUI
             {
                 addOutput(ZampGUILib.startProc(cv, typeProg.mariadb, new string[] { }));
             }
+            
+            enableControl();
             refreshStatusForm();
         }
         private void timer_refresh_Tick(object sender, EventArgs e)
@@ -665,13 +679,54 @@ namespace ZampGUI
 
         }
 
+        private void do_All_Backup_Db()
+        {
+            string friendly_name = cv.get_friendly_name(typeProg.mariadb);
+            string pid = cv.get_correct_pid(typeProg.mariadb);
+            bool mariadbrunning = !string.IsNullOrEmpty(pid);
+            
 
+            if (cv.checkBackUpAllDBOnExit && mariadbrunning)
+            {
+                List<string> all_db = ZampGUILib.getAllDB(cv.mariadb_port);
+                string[] dbskip = { "information_schema", "mysql", "performance_schema", "sys", "phpmyadmin" };
+                foreach (string str_db in all_db)
+                {
+                    if (dbskip.Contains(str_db))
+                    {
+                        continue;
+                    }
 
+                    string nomescript_backup = "MySql_Backup_addcreate.bat";
+                    string nomebackup_file = str_db + "_" + DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_-_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + "_" + DateTime.Now.Millisecond + ".sql";
+                    nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
 
+                    List<string> l_res = ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", nomescript_backup),
+                        new string[] { str_db, "root", "root", nomebackup_file, System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), "127.0.0.1", cv.mariadb_port }
+                    );
+
+                }
+            }
+        }
+
+        private void disableControl()
+        {
+            btnStartStopApache.Enabled = false;
+            btnStartStopMariaDB.Enabled = false;
+            operationToolStripMenuItem.Enabled = false;
+            editToolStripMenuItem.Enabled = false;
+        }
+        private void enableControl()
+        {
+            btnStartStopApache.Enabled = true;
+            btnStartStopMariaDB.Enabled = true;
+            operationToolStripMenuItem.Enabled = true;
+            editToolStripMenuItem.Enabled = true;
+        }
 
 
         #endregion
 
-        
+
     }
 }

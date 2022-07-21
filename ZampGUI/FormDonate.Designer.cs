@@ -152,6 +152,7 @@
             this.Name = "FormDonate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormDonate";
+            this.Load += new System.EventHandler(this.FormDonate_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitcoin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEthereum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureQRBitcoin)).EndInit();

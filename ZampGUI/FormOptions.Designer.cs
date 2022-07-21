@@ -48,6 +48,7 @@
             this.txtPathSass = new System.Windows.Forms.TextBox();
             this.btnSelectNode = new System.Windows.Forms.Button();
             this.txtPathNodeJS = new System.Windows.Forms.TextBox();
+            this.checkBackUpAllDBOnExit = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_http)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_https)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_mariadb)).BeginInit();
@@ -247,12 +248,23 @@
             this.txtPathNodeJS.Size = new System.Drawing.Size(545, 24);
             this.txtPathNodeJS.TabIndex = 21;
             // 
+            // checkBackUpAllDBOnExit
+            // 
+            this.checkBackUpAllDBOnExit.AutoSize = true;
+            this.checkBackUpAllDBOnExit.Location = new System.Drawing.Point(521, 355);
+            this.checkBackUpAllDBOnExit.Name = "checkBackUpAllDBOnExit";
+            this.checkBackUpAllDBOnExit.Size = new System.Drawing.Size(219, 21);
+            this.checkBackUpAllDBOnExit.TabIndex = 24;
+            this.checkBackUpAllDBOnExit.Text = "Backup All DB on Exit";
+            this.checkBackUpAllDBOnExit.UseVisualStyleBackColor = true;
+            // 
             // FormOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(752, 444);
+            this.Controls.Add(this.checkBackUpAllDBOnExit);
             this.Controls.Add(this.btnSelectNode);
             this.Controls.Add(this.txtPathNodeJS);
             this.Controls.Add(this.btnSelectSass);
@@ -306,5 +318,6 @@
         private System.Windows.Forms.TextBox txtPathSass;
         private System.Windows.Forms.Button btnSelectNode;
         private System.Windows.Forms.TextBox txtPathNodeJS;
+        private System.Windows.Forms.CheckBox checkBackUpAllDBOnExit;
     }
 }

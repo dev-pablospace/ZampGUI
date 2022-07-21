@@ -27,6 +27,8 @@ namespace ZampLib.Business
         public string pathNode { get; set; }
         public string wp_cli { get; set; }
 
+        public bool checkBackUpAllDBOnExit { get; set; }
+
         public string PHP_scelta { get; set; }
         public string default_editor_path { get; set; }
         public string apache_http_port { get; set; }
@@ -306,10 +308,12 @@ namespace ZampLib.Business
                 }
             }
             else { this.wp_cli = ""; }
-                
 
-            
 
+            if (jobj[_env]["checkBackUpAllDBOnExit"] == null || (string)jobj[_env]["checkBackUpAllDBOnExit"] == "")
+                this.checkBackUpAllDBOnExit = false;
+            else
+                this.checkBackUpAllDBOnExit = (bool)jobj[_env]["checkBackUpAllDBOnExit"];
 
             this.default_editor_path = (string)jobj[_env]["default_editor_path"];
             this.apache_http_port = (string)jobj[_env]["apache_http_port"];
@@ -385,6 +389,12 @@ namespace ZampLib.Business
             return sout;
         }
 
+        public void otherUpdate()
+        {
+            JObject jobj = ZampGUILib.getJson_Env();
+            jobj[_env]["checkBackUpAllDBOnExit"] = checkBackUpAllDBOnExit;
+            ZampGUILib.setJson_Env(jobj);
+        }
         public void updateDefaultEditor(string default_editor_path)
         {
             JObject jobj = ZampGUILib.getJson_Env();

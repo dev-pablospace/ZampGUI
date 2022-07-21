@@ -16,18 +16,20 @@ namespace ZampGUI
     {
         public string indirizzo_eth { get; set; }
         public string indirizzo_bit { get; set; }
+        public string HOME { get; set; }
 
         public FormDonate(string indirizzo_eth, string indirizzo_bit)
         {
             InitializeComponent();
+            this.HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
             this.indirizzo_eth = indirizzo_eth;
             this.indirizzo_bit = indirizzo_bit;
 
             txtBitcoin.Text = string.IsNullOrEmpty(indirizzo_bit)? "--": indirizzo_bit;
             txtEthereum.Text = string.IsNullOrEmpty(indirizzo_eth) ? "--" : indirizzo_eth;
 
-            this.pictureQRBitcoin.ImageLocation = "https://zampgui.dghost.org/img/BIT.png";
-            this.pictureQReth.ImageLocation = "https://zampgui.dghost.org/img/ETH.png";
+            this.pictureQRBitcoin.ImageLocation = this.HOME + "/img/BIT.png";
+            this.pictureQReth.ImageLocation = this.HOME + "/img/ETH.png";
 
             this.label1.Focus();
         }
@@ -44,6 +46,11 @@ namespace ZampGUI
             Clipboard.SetText(txtEthereum.Text.Trim());
             txtEthereum.Focus();
             txtEthereum.SelectAll();
+        }
+
+        private void FormDonate_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
