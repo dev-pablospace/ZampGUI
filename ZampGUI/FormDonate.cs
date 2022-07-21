@@ -24,6 +24,7 @@ namespace ZampGUI
             this.HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
             this.indirizzo_eth = indirizzo_eth;
             this.indirizzo_bit = indirizzo_bit;
+            this.HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
 
             txtBitcoin.Text = string.IsNullOrEmpty(indirizzo_bit)? "--": indirizzo_bit;
             txtEthereum.Text = string.IsNullOrEmpty(indirizzo_eth) ? "--" : indirizzo_eth;
