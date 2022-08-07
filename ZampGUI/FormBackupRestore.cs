@@ -201,7 +201,7 @@ namespace ZampGUI
 
 
             ProcessStartInfo ProcessInfo = new ProcessStartInfo(mysqlimport, argumentsString);
-            ProcessInfo.CreateNoWindow = false;
+            ProcessInfo.CreateNoWindow = true;
             ProcessInfo.UseShellExecute = false;
             //ProcessInfo.WorkingDirectory = Application.StartupPath + "\\txtmanipulator";
             // *** Redirect the output ***

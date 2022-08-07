@@ -139,7 +139,7 @@
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSave.Location = new System.Drawing.Point(246, 407);
+            this.btnSave.Location = new System.Drawing.Point(270, 407);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(116, 23);
             this.btnSave.TabIndex = 9;
@@ -151,7 +151,7 @@
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(368, 407);
+            this.btnCancel.Location = new System.Drawing.Point(392, 407);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 23);
             this.btnCancel.TabIndex = 10;
@@ -167,7 +167,7 @@
             // 
             this.btnSelectEdit.Location = new System.Drawing.Point(577, 14);
             this.btnSelectEdit.Name = "btnSelectEdit";
-            this.btnSelectEdit.Size = new System.Drawing.Size(164, 24);
+            this.btnSelectEdit.Size = new System.Drawing.Size(212, 24);
             this.btnSelectEdit.TabIndex = 11;
             this.btnSelectEdit.Text = "Editor Path";
             this.btnSelectEdit.UseVisualStyleBackColor = true;
@@ -182,7 +182,7 @@
             this.txtPathConsole.Multiline = true;
             this.txtPathConsole.Name = "txtPathConsole";
             this.txtPathConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPathConsole.Size = new System.Drawing.Size(728, 116);
+            this.txtPathConsole.Size = new System.Drawing.Size(777, 116);
             this.txtPathConsole.TabIndex = 12;
             this.txtPathConsole.TextChanged += new System.EventHandler(this.txtPathConsole_TextChanged);
             // 
@@ -201,9 +201,9 @@
             // 
             this.btnSelectGit.Location = new System.Drawing.Point(577, 44);
             this.btnSelectGit.Name = "btnSelectGit";
-            this.btnSelectGit.Size = new System.Drawing.Size(164, 24);
+            this.btnSelectGit.Size = new System.Drawing.Size(212, 24);
             this.btnSelectGit.TabIndex = 16;
-            this.btnSelectGit.Text = "Git Path";
+            this.btnSelectGit.Text = "Git Path Bin Folder";
             this.btnSelectGit.UseVisualStyleBackColor = true;
             this.btnSelectGit.Click += new System.EventHandler(this.btnSelectGit_Click);
             // 
@@ -218,9 +218,9 @@
             // 
             this.btnSelectSass.Location = new System.Drawing.Point(580, 104);
             this.btnSelectSass.Name = "btnSelectSass";
-            this.btnSelectSass.Size = new System.Drawing.Size(164, 24);
+            this.btnSelectSass.Size = new System.Drawing.Size(209, 24);
             this.btnSelectSass.TabIndex = 19;
-            this.btnSelectSass.Text = "Dart Sass Path";
+            this.btnSelectSass.Text = "Dart Sass bin Path";
             this.btnSelectSass.UseVisualStyleBackColor = true;
             this.btnSelectSass.Click += new System.EventHandler(this.btnSelectSass_Click);
             // 
@@ -235,9 +235,9 @@
             // 
             this.btnSelectNode.Location = new System.Drawing.Point(580, 74);
             this.btnSelectNode.Name = "btnSelectNode";
-            this.btnSelectNode.Size = new System.Drawing.Size(161, 24);
+            this.btnSelectNode.Size = new System.Drawing.Size(209, 24);
             this.btnSelectNode.TabIndex = 22;
-            this.btnSelectNode.Text = "NodeJS Path";
+            this.btnSelectNode.Text = "NodeJS bin Path";
             this.btnSelectNode.UseVisualStyleBackColor = true;
             this.btnSelectNode.Click += new System.EventHandler(this.btnSelectNode_Click);
             // 
@@ -263,7 +263,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(752, 444);
+            this.ClientSize = new System.Drawing.Size(801, 444);
             this.Controls.Add(this.checkBackUpAllDBOnExit);
             this.Controls.Add(this.btnSelectNode);
             this.Controls.Add(this.txtPathNodeJS);
