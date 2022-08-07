@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBackupRestore));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBoxAddCreateDB = new System.Windows.Forms.CheckBox();
             this.btnBackup = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxDbBackup = new System.Windows.Forms.ComboBox();
@@ -41,24 +42,34 @@
             this.btnSelectSqlFile = new System.Windows.Forms.Button();
             this.txtPathSQLFile = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.checkBoxAddCreateDB = new System.Windows.Forms.CheckBox();
+            this.SQLScript = new System.Windows.Forms.TabPage();
+            this.textBoxSql = new System.Windows.Forms.TextBox();
+            this.btnRunScript = new System.Windows.Forms.Button();
+            this.radioButtonSchemaOnly = new System.Windows.Forms.RadioButton();
+            this.radioButtonDataOnly = new System.Windows.Forms.RadioButton();
+            this.radioButtonSchemaAndData = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.SQLScript.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.SQLScript);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(765, 198);
+            this.tabControl1.Size = new System.Drawing.Size(765, 259);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.radioButtonSchemaAndData);
+            this.tabPage1.Controls.Add(this.radioButtonDataOnly);
+            this.tabPage1.Controls.Add(this.radioButtonSchemaOnly);
             this.tabPage1.Controls.Add(this.checkBoxAddCreateDB);
             this.tabPage1.Controls.Add(this.btnBackup);
             this.tabPage1.Controls.Add(this.label1);
@@ -66,16 +77,26 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(757, 168);
+            this.tabPage1.Size = new System.Drawing.Size(757, 229);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Backup";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // checkBoxAddCreateDB
+            // 
+            this.checkBoxAddCreateDB.AutoSize = true;
+            this.checkBoxAddCreateDB.Location = new System.Drawing.Point(20, 78);
+            this.checkBoxAddCreateDB.Name = "checkBoxAddCreateDB";
+            this.checkBoxAddCreateDB.Size = new System.Drawing.Size(282, 21);
+            this.checkBoxAddCreateDB.TabIndex = 4;
+            this.checkBoxAddCreateDB.Text = "Add \"Create Database\" to sql";
+            this.checkBoxAddCreateDB.UseVisualStyleBackColor = true;
+            // 
             // btnBackup
             // 
-            this.btnBackup.Location = new System.Drawing.Point(626, 76);
+            this.btnBackup.Location = new System.Drawing.Point(626, 78);
             this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(125, 23);
+            this.btnBackup.Size = new System.Drawing.Size(125, 57);
             this.btnBackup.TabIndex = 2;
             this.btnBackup.Text = "Run Backup";
             this.btnBackup.UseVisualStyleBackColor = true;
@@ -109,7 +130,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(757, 168);
+            this.tabPage2.Size = new System.Drawing.Size(757, 229);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Restore";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -163,21 +184,74 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // checkBoxAddCreateDB
+            // SQLScript
             // 
-            this.checkBoxAddCreateDB.AutoSize = true;
-            this.checkBoxAddCreateDB.Location = new System.Drawing.Point(20, 78);
-            this.checkBoxAddCreateDB.Name = "checkBoxAddCreateDB";
-            this.checkBoxAddCreateDB.Size = new System.Drawing.Size(282, 21);
-            this.checkBoxAddCreateDB.TabIndex = 4;
-            this.checkBoxAddCreateDB.Text = "Add \"Create Database\" to sql";
-            this.checkBoxAddCreateDB.UseVisualStyleBackColor = true;
+            this.SQLScript.Controls.Add(this.btnRunScript);
+            this.SQLScript.Controls.Add(this.textBoxSql);
+            this.SQLScript.Location = new System.Drawing.Point(4, 26);
+            this.SQLScript.Name = "SQLScript";
+            this.SQLScript.Size = new System.Drawing.Size(757, 229);
+            this.SQLScript.TabIndex = 2;
+            this.SQLScript.Text = "SQL Script";
+            this.SQLScript.UseVisualStyleBackColor = true;
+            // 
+            // textBoxSql
+            // 
+            this.textBoxSql.Location = new System.Drawing.Point(14, 14);
+            this.textBoxSql.Multiline = true;
+            this.textBoxSql.Name = "textBoxSql";
+            this.textBoxSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxSql.Size = new System.Drawing.Size(727, 183);
+            this.textBoxSql.TabIndex = 0;
+            // 
+            // btnRunScript
+            // 
+            this.btnRunScript.Location = new System.Drawing.Point(14, 203);
+            this.btnRunScript.Name = "btnRunScript";
+            this.btnRunScript.Size = new System.Drawing.Size(119, 23);
+            this.btnRunScript.TabIndex = 1;
+            this.btnRunScript.Text = "Run Script";
+            this.btnRunScript.UseVisualStyleBackColor = true;
+            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
+            // 
+            // radioButtonSchemaOnly
+            // 
+            this.radioButtonSchemaOnly.AutoSize = true;
+            this.radioButtonSchemaOnly.Location = new System.Drawing.Point(20, 129);
+            this.radioButtonSchemaOnly.Name = "radioButtonSchemaOnly";
+            this.radioButtonSchemaOnly.Size = new System.Drawing.Size(191, 21);
+            this.radioButtonSchemaOnly.TabIndex = 7;
+            this.radioButtonSchemaOnly.TabStop = true;
+            this.radioButtonSchemaOnly.Text = "Export Schema Only";
+            this.radioButtonSchemaOnly.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDataOnly
+            // 
+            this.radioButtonDataOnly.AutoSize = true;
+            this.radioButtonDataOnly.Location = new System.Drawing.Point(20, 156);
+            this.radioButtonDataOnly.Name = "radioButtonDataOnly";
+            this.radioButtonDataOnly.Size = new System.Drawing.Size(173, 21);
+            this.radioButtonDataOnly.TabIndex = 8;
+            this.radioButtonDataOnly.TabStop = true;
+            this.radioButtonDataOnly.Text = "Export data Only";
+            this.radioButtonDataOnly.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonSchemaAndData
+            // 
+            this.radioButtonSchemaAndData.AutoSize = true;
+            this.radioButtonSchemaAndData.Location = new System.Drawing.Point(20, 183);
+            this.radioButtonSchemaAndData.Name = "radioButtonSchemaAndData";
+            this.radioButtonSchemaAndData.Size = new System.Drawing.Size(227, 21);
+            this.radioButtonSchemaAndData.TabIndex = 9;
+            this.radioButtonSchemaAndData.TabStop = true;
+            this.radioButtonSchemaAndData.Text = "Export schema and data";
+            this.radioButtonSchemaAndData.UseVisualStyleBackColor = true;
             // 
             // FormBackupRestore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 223);
+            this.ClientSize = new System.Drawing.Size(790, 283);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -190,6 +264,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.SQLScript.ResumeLayout(false);
+            this.SQLScript.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -209,5 +285,11 @@
         private System.Windows.Forms.TextBox txtPathSQLFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox checkBoxAddCreateDB;
+        private System.Windows.Forms.TabPage SQLScript;
+        private System.Windows.Forms.Button btnRunScript;
+        private System.Windows.Forms.TextBox textBoxSql;
+        private System.Windows.Forms.RadioButton radioButtonDataOnly;
+        private System.Windows.Forms.RadioButton radioButtonSchemaOnly;
+        private System.Windows.Forms.RadioButton radioButtonSchemaAndData;
     }
 }

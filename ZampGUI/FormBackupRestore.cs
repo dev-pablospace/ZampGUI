@@ -22,13 +22,21 @@ namespace ZampGUI
         public string sql_file_restore = "";
         public string sql_file_backup = "";
         public List<string> all_db;
+        public string path_last_script = "";
 
         public FormBackupRestore(ConfigVar cv)
         {
             InitializeComponent();
             this.cv = cv;
+            path_last_script = System.IO.Path.Combine(cv.pathBase, "last_script.txt");
             comboBoxDbRestore.SelectedIndex = (comboBoxDbRestore.Items.Count > 0) ? 0 : -1;
             comboBoxDbBackup.SelectedIndex = (comboBoxDbBackup.Items.Count > 0) ? 0 : -1;
+            radioButtonSchemaAndData.Checked = true;
+
+            if (System.IO.File.Exists(path_last_script))
+            {
+                textBoxSql.Text = System.IO.File.ReadAllText(path_last_script);
+            }
         }
 
         private void FormBackupRestore_Load(object sender, EventArgs e)
@@ -72,18 +80,35 @@ namespace ZampGUI
             }
             else
             {
-                string nomescript_backup = "MySql_Backup.bat";
+                string options = "";
+                string script_template = System.IO.Path.Combine(cv.pathBase, "scripts", "MySql_Backup_2.bat");
+                string script_to_run = System.IO.Path.Combine(cv.pathBase, "scripts", "script_to_run.bat"); ;
                 string str_db = comboBoxDbBackup.SelectedItem.ToString();
                 string nomebackup_file = str_db + "_" + DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_-_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + "_" + DateTime.Now.Millisecond + ".sql";
                 nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
 
                 if(checkBoxAddCreateDB.Checked)
                 {
-                    nomescript_backup = "MySql_Backup_addcreate.bat";
+                    //nomescript_backup = "MySql_Backup_addcreate.bat";
+                    options += " --databases ";
                 }
-                
+                if (radioButtonSchemaOnly.Checked)
+                {
+                    options += " --no-data ";
+                }
+                if (radioButtonDataOnly.Checked)
+                {
+                    options += " --no-create-info ";
+                }
+
+                //scrivo le opzioni creando un uoco script - che sarà poi quello che eseguirò
+                string text = File.ReadAllText(script_template);
+                text = text.Replace("{{options}}", options);
+                File.WriteAllText(script_to_run, text);
+
+
                 //eseguibackup(str_db, nomebackup_file);
-                List<string> l_res = ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", nomescript_backup),
+                List<string> l_res = ZampGUILib.ExecuteBatchFile(script_to_run,
                     new string[] { str_db, "root", "root", nomebackup_file, System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin"), "127.0.0.1", cv.mariadb_port }
                 );
 
@@ -156,7 +181,53 @@ namespace ZampGUI
             }
         }
 
+        private void btnRunScript_Click(object sender, EventArgs e)
+        {
+            string script = textBoxSql.Text.Trim();
+            if (string.IsNullOrEmpty(script))
+            {
+                MessageBox.Show("No script to execute");
+                return;
+            }
+            
+            System.IO.File.WriteAllText(path_last_script, script);
 
+
+
+            string mysqlimport = System.IO.Path.Combine(cv.MariaDB_path_scelto, "bin", "mysql.exe");
+            //mysql --user=root --password=root < "Q:/SVL/zampgui/ZampGUI_1.1.03_php8.1.8/last_script.txt"
+            string argumentsString = "--user=root --password=root -e \"\\. " + path_last_script + "\"";
+
+
+
+            ProcessStartInfo ProcessInfo = new ProcessStartInfo(mysqlimport, argumentsString);
+            ProcessInfo.CreateNoWindow = false;
+            ProcessInfo.UseShellExecute = false;
+            //ProcessInfo.WorkingDirectory = Application.StartupPath + "\\txtmanipulator";
+            // *** Redirect the output ***
+            ProcessInfo.RedirectStandardError = true;
+            ProcessInfo.RedirectStandardOutput = true;
+
+            Process process = Process.Start(ProcessInfo);
+            process.WaitForExit();
+
+            // *** Read the streams ***
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+
+            int ExitCode = process.ExitCode;
+
+            process.Close();
+
+            string contents = (string.IsNullOrEmpty(output) ? "" : output + Environment.NewLine + Environment.NewLine)
+                + (string.IsNullOrEmpty(error)? "": "Error: " + error + Environment.NewLine)
+                + "Exit code: " + ExitCode.ToString() + Environment.NewLine;
+                //+ "Backup done : " + nomebackup_file;
+
+            FormMsg frm_msg = new FormMsg(contents);
+            frm_msg.ShowDialog(this);
+            frm_msg.Dispose();
+        }
 
 
 
@@ -222,8 +293,9 @@ namespace ZampGUI
         }
 
 
+
         #endregion
 
-       
+        
     }
 }

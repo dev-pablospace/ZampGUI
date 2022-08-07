@@ -50,7 +50,7 @@ namespace ZampGUI
             }
 
             cv.updatePath(root_folder);
-            cv = new ConfigVar();
+            //cv = new ConfigVar();
 
         }
         #endregion
@@ -95,7 +95,7 @@ namespace ZampGUI
                     MessageBox.Show(msg_port_in_use, "!!!!!", MessageBoxButtons.OK);
                 }
 
-
+                //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 cv.get_software_version();
                 refreshStatusForm(true);
 
@@ -541,23 +541,15 @@ namespace ZampGUI
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "MariaDB", cv.mariadb_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "PHP", cv.php_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Composer", cv.composer_vers }));
-
-                //if (!string.IsNullOrEmpty(cv.git_vers))
-                {
-                    listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
-                }
-                //if (!string.IsNullOrEmpty(cv.node_vers))
-                {
-                    listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
-                }
-                //if (!string.IsNullOrEmpty(cv.sass_vers))
-                {
-                    listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
-                }
-                //if (!string.IsNullOrEmpty(cv.wp_cli_vers))
-                {
-                    listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
-                }
+     
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
+                
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
+                
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
+                
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
+                
             }
             
             

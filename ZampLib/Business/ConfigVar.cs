@@ -230,18 +230,21 @@ namespace ZampLib.Business
             _env = ZampGUILib.getval_from_appsetting("env");
             JObject jobj = ZampGUILib.getJson_Env();
             this.pathBase = (string)jobj[_env]["pathBase"];
-            this.pathApache = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathApache"]);
-
+            this.pathApache = addPath(new string[] { this.pathBase, "Apps" }, (string)jobj[_env]["pathApache"]);
+            //this.pathApache = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathApache"]);
+            //addPath(new string[] {""}, "")
 
             foreach (Newtonsoft.Json.Linq.JProperty kv in jobj[_env]["pathMariaDB"])
             {
-                this.pathMariaDB.Add(kv.Name, System.IO.Path.Combine(this.pathBase, "Apps", kv.Value.ToString()));
+                //this.pathMariaDB.Add(kv.Name, System.IO.Path.Combine(this.pathBase, "Apps", kv.Value.ToString()));
+                this.pathMariaDB.Add(kv.Name, addPath(new string[] { this.pathBase, "Apps" }, kv.Value.ToString()));
             }
             this.MariaDB_scelta = (string)jobj[_env]["MariaDB_scelta"];
 
             foreach (Newtonsoft.Json.Linq.JProperty kv in jobj[_env]["pathPHP"])
             {
-                this.pathPHP.Add(kv.Name, System.IO.Path.Combine(this.pathBase, "Apps", kv.Value.ToString()));
+                //this.pathPHP.Add(kv.Name, System.IO.Path.Combine(this.pathBase, "Apps", kv.Value.ToString()));
+                this.pathPHP.Add(kv.Name, addPath(new string[] { this.pathBase, "Apps" }, kv.Value.ToString()));
             }
             this.PHP_scelta = (string)jobj[_env]["PHP_scelta"];
 
@@ -249,15 +252,10 @@ namespace ZampLib.Business
             //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
             if(!string.IsNullOrEmpty((string)jobj[_env]["pathGit"]))
             {
-                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathGit"]);
-                if (System.IO.Directory.Exists(temp2))
-                {
-                    this.pathGit = temp2;
-                }
-                else
-                {
-                    this.pathGit = (string)jobj[_env]["pathGit"];
-                }
+                this.pathGit = addPath(new string[] { this.pathBase, "Apps" }, (string)jobj[_env]["pathGit"]);
+                //string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathGit"]);
+                //if (System.IO.Directory.Exists(temp2)) {this.pathGit = temp2;}
+                //else {this.pathGit = (string)jobj[_env]["pathGit"];}
             }
             else { this.pathGit = ""; }
 
@@ -265,15 +263,10 @@ namespace ZampLib.Business
             //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
             if (!string.IsNullOrEmpty((string)jobj[_env]["pathSass"]))
             {
-                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathSass"]);
-                if (System.IO.Directory.Exists(temp2))
-                {
-                    this.pathSass = temp2;
-                }
-                else
-                {
-                    this.pathSass = (string)jobj[_env]["pathSass"];
-                }
+                this.pathSass = addPath(new string[] { this.pathBase, "Apps" }, (string)jobj[_env]["pathSass"]);
+                //string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathSass"]);
+                //if (System.IO.Directory.Exists(temp2)){this.pathSass = temp2;}
+                //else{this.pathSass = (string)jobj[_env]["pathSass"];}
             }
             else { this.pathSass = ""; }
 
@@ -281,15 +274,10 @@ namespace ZampLib.Business
             //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
             if (!string.IsNullOrEmpty((string)jobj[_env]["pathNode"]))
             {
-                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathNode"]);
-                if (System.IO.Directory.Exists(temp2))
-                {
-                    this.pathNode = temp2;
-                }
-                else
-                {
-                    this.pathNode = (string)jobj[_env]["pathNode"];
-                }
+                this.pathNode = addPath(new string[] { this.pathBase, "Apps" }, (string)jobj[_env]["pathNode"]);
+                //string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["pathNode"]);
+                //if (System.IO.Directory.Exists(temp2)){this.pathNode = temp2;}
+                //else{this.pathNode = (string)jobj[_env]["pathNode"];}
             }
             else { this.pathNode = ""; }
 
@@ -297,15 +285,10 @@ namespace ZampLib.Business
             //se nel file config c'è solo il nome allora vuol dire che la directory è definita dentro zampgui/apps
             if (!string.IsNullOrEmpty((string)jobj[_env]["wpcli"]))
             {
-                string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["wpcli"]);
-                if (System.IO.Directory.Exists(temp2))
-                {
-                    this.wp_cli = temp2;
-                }
-                else
-                {
-                    this.wp_cli = (string)jobj[_env]["wpcli"];
-                }
+                this.wp_cli = addPath(new string[] { this.pathBase, "Apps" }, (string)jobj[_env]["wpcli"]);
+                //string temp2 = System.IO.Path.Combine(this.pathBase, "Apps", (string)jobj[_env]["wpcli"]);
+                //if (System.IO.Directory.Exists(temp2)){this.wp_cli = temp2;}
+                //else{this.wp_cli = (string)jobj[_env]["wpcli"];}
             }
             else { this.wp_cli = ""; }
 
@@ -835,6 +818,24 @@ namespace ZampLib.Business
             }
 
             return str;
+        }
+
+        private string addPath(string[] _base, string _path)
+        {
+            if(System.IO.Path.IsPathRooted(_path) && System.IO.Directory.Exists(_path))
+            {
+                return _path;
+            }
+            else 
+            {
+                string combine = _base[0];
+                for (int k = 1; k < _base.Length; k++)
+                {
+                    combine = System.IO.Path.Combine(combine, _base[k]);
+                }
+
+                return System.IO.Path.Combine(combine, _path);
+            }
         }
         #endregion
     }

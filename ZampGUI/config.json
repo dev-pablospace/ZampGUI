@@ -48,23 +48,21 @@
     "ListPathConsole": ""
   },
   "acer_nitro": {
-    "pathBase": "Q:\\SVL\\zampgui\\ZampGUI_1.1.00_php8.1.3_temp",
+    "pathBase": "Q:\\SVL\\zampgui\\ZampGUI_1.1.03_php8.1.8",
     "pathMariaDB": {
-      "mariadb-10.7.3": "mariadb-10.7.3"
+      "mariadb-10.6.8": "mariadb-10.6.8"
     },
-    "MariaDB_scelta": "mariadb-10.7.3",
+    "MariaDB_scelta": "mariadb-10.6.8",
     "pathApache": "Apache24",
     "pathPHP": {
-      "php-8.1.3": "php-8.1.3",
-      "php-8.0.16": "php-8.0.16",
-      "php-7.4.27": "php-7.4.27"
+      "php-8.1.8": "php-8.1.8"
     },
-    "PHP_scelta": "php-8.1.3",
-    "pathGit": "PortableGit\\cmd",
-    "pathSass": "dart-sass",
-    "pathNode": "node-v16.14.0",
-    "wpcli": "wp-cli",
-
+    "PHP_scelta": "php-8.1.8",
+    "pathGit": "",
+    "pathSass": "",
+    "pathNode": "",
+    "wpcli": "",
+    "checkBackUpAllDBOnExit": "",
     "default_editor_path": "notepad.exe",
     "apache_http_port": "80",
     "apache_https_port": "443",
