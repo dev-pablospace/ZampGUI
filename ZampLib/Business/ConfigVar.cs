@@ -22,6 +22,8 @@ namespace ZampLib.Business
         public string pathApache { get; set; }
         //public string pathPHP { get; set; }
         public Dictionary<string, string> pathPHP { get; set; } = new Dictionary<string, string>();
+
+        public List<RigaSite> listaSites = new List<RigaSite>();
         public string pathGit { get; set; }
         public string pathSass { get; set; }
         public string pathNode { get; set; }
@@ -312,9 +314,28 @@ namespace ZampLib.Business
             {
                 this.ListPathConsole = temp.Split('|').ToList();
             }
+
+            caricasites();
             
         }
 
+        public void caricasites()
+        {
+            listaSites = new List<RigaSite>();
+            JObject jobj = ZampGUILib.getJson_Env();
+            JToken sites = jobj[_env]["sites"];
+            if (sites == null)
+            {
+                listaSites.Add(new RigaSite());
+            }
+            else
+            {
+                foreach (Newtonsoft.Json.Linq.JProperty kv in sites)
+                {
+                    listaSites.Add(new RigaSite() { Name = kv.Name, Url = kv.Value.ToString() });
+                }
+            }
+        }
         public string validateSetting()
         {
             string sout = "";

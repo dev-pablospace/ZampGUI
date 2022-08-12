@@ -99,8 +99,8 @@ namespace ZampGUI
                 cv.get_software_version();
                 refreshStatusForm(true);
 
-                List<string> arrListSite = ZampGUILib.getListSite(cv);
-                crealinkSite(arrListSite);
+                //List<string> arrListSite = ZampGUILib.getListSite(cv);
+                crealinkSite(cv.listaSites);
 
             }
             catch (ConfigurationErrorsException er)
@@ -463,14 +463,9 @@ namespace ZampGUI
         private void manageSitesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormManageSites frm = new FormManageSites(cv);
-            if (frm.ShowDialog(this) == DialogResult.OK)
-            {
-                //cv = frm2.cv;
-                //cv.updatePort();
-                //cv.updateDefaultEditor(cv.default_editor_path);
-            }
-
-            frm.Dispose();
+            frm.ShowDialog();
+            cv.caricasites();
+            crealinkSite(cv.listaSites);
         }
         #endregion
 
@@ -679,8 +674,27 @@ namespace ZampGUI
                 }); ;
                 this.sitesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolstr });
             }
+        }
+        private void crealinkSite(List<RigaSite> arrListSite)
+        {
+            this.sitesToolStripMenuItem.DropDownItems.Clear();
 
+            for (int i = 0; i < arrListSite.Count; i++)
+            {
+                if (string.IsNullOrEmpty(arrListSite[i].Url) || string.IsNullOrEmpty(arrListSite[i].Name))
+                    continue;
 
+                string slink = arrListSite[i].Url.Trim();
+
+                System.Windows.Forms.ToolStripMenuItem toolstr = new System.Windows.Forms.ToolStripMenuItem();
+                toolstr.Name = "toolstripitem_sites" + i;
+                toolstr.Text = arrListSite[i].Name.Trim();
+                toolstr.Click += new EventHandler(delegate (object s, EventArgs ev)
+                {
+                    System.Diagnostics.Process.Start(slink);
+                }); ;
+                this.sitesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolstr });
+            }
         }
 
         private void do_All_Backup_Db()
