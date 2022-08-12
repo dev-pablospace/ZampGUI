@@ -333,7 +333,7 @@ namespace ZampGUI
             FormChangeVers frm2 = new FormChangeVers(cv);
             DialogResult dr = frm2.ShowDialog(this);
             cv = new ConfigVar();
-            cv.get_software_version();
+            cv.get_software_version(true);
             refreshStatusForm(true);
             frm2.Close();
         }
@@ -459,6 +459,18 @@ namespace ZampGUI
             }
 
 
+        }
+        private void manageSitesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormManageSites frm = new FormManageSites(cv);
+            if (frm.ShowDialog(this) == DialogResult.OK)
+            {
+                //cv = frm2.cv;
+                //cv.updatePort();
+                //cv.updateDefaultEditor(cv.default_editor_path);
+            }
+
+            frm.Dispose();
         }
         #endregion
 
@@ -717,8 +729,9 @@ namespace ZampGUI
         }
 
 
+
         #endregion
 
-
+        
     }
 }

@@ -83,6 +83,7 @@
             this.pictureBoxApache = new System.Windows.Forms.PictureBox();
             this.timer_refresh = new System.Windows.Forms.Timer(this.components);
             this.listViewInfo = new System.Windows.Forms.ListView();
+            this.manageSitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).BeginInit();
@@ -290,7 +291,8 @@
             this.mariaDBToolStripMenuItem,
             this.toolStripSeparator7,
             this.sitesToolStripMenuItem,
-            this.reloadSitesFromVhostToolStripMenuItem});
+            this.reloadSitesFromVhostToolStripMenuItem,
+            this.manageSitesToolStripMenuItem});
             this.browserToolStripMenuItem.Name = "browserToolStripMenuItem";
             this.browserToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.browserToolStripMenuItem.Text = "Link";
@@ -351,6 +353,7 @@
             this.reloadSitesFromVhostToolStripMenuItem.Name = "reloadSitesFromVhostToolStripMenuItem";
             this.reloadSitesFromVhostToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
             this.reloadSitesFromVhostToolStripMenuItem.Text = "Reload Sites from vhosts";
+            this.reloadSitesFromVhostToolStripMenuItem.Visible = false;
             this.reloadSitesFromVhostToolStripMenuItem.Click += new System.EventHandler(this.reloadSitesFromVhostToolStripMenuItem_Click);
             // 
             // extraToolStripMenuItem
@@ -540,6 +543,13 @@
             this.listViewInfo.TabIndex = 15;
             this.listViewInfo.UseCompatibleStateImageBehavior = false;
             // 
+            // manageSitesToolStripMenuItem
+            // 
+            this.manageSitesToolStripMenuItem.Name = "manageSitesToolStripMenuItem";
+            this.manageSitesToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
+            this.manageSitesToolStripMenuItem.Text = "Manage sites";
+            this.manageSitesToolStripMenuItem.Click += new System.EventHandler(this.manageSitesToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -623,6 +633,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
         private System.Windows.Forms.ListView listViewInfo;
+        private System.Windows.Forms.ToolStripMenuItem manageSitesToolStripMenuItem;
     }
 }
 

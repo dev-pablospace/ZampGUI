@@ -518,52 +518,81 @@ namespace ZampLib.Business
             pathBase = abs_main_path;
             */
         }
-        public void get_software_version()
+        public void get_software_version(bool bForceReadingFromProcess = false)
         {
             Regex regex;
             Match match;
 
-
-            apache_vers = ZampGUILib.startProc_and_wait_output(Apache_bin, "-v", true);
-            regex = new Regex(@"Apache.\d+\.\d+\.\d+");
-            match = regex.Match(apache_vers);
-            if (match.Success)
-            {
-                apache_vers = match.Value.Replace("Apache/","");
-            }
-
-
-            php_vers = ZampGUILib.startProc_and_wait_output(PHP_bin, "-v", true);
-            regex = new Regex(@"PHP \d+\.\d+.\d+");
-            match = regex.Match(php_vers);
-            if (match.Success)
-            {
-                php_vers = match.Value.Replace("PHP ","");
-            }
-
-            mariadb_vers = ZampGUILib.startProc_and_wait_output(MariaDB_bin, "--version", true);
-            regex = new Regex(@"Ver \d+\.\d+\.\d+");
-            match = regex.Match(mariadb_vers);
-            if (match.Success)
-            {
-                mariadb_vers = match.Value.Replace("Ver","").Trim();
-            }
-
-
-            composer_vers = ZampGUILib.startProc_and_wait_output(Composer_bin, "--version", true, PHP_path_scelto);
-            regex = new Regex(@"Composer version \d+\.\d+\.\d+");
-            match = regex.Match(composer_vers);
-            if (match.Success)
-            {
-                composer_vers = match.Value.Replace("Composer version", "").Trim();
-            }
-
+            JObject jobj = ZampGUILib.getJson_Env();
+            JToken vers_sf = jobj[_env]["vers_sf"];
             
-            git_vers = refresh_git_vers();
-            node_vers = refresh_node_vers();
-            sass_vers = refresh_sass_vers();
-            wp_cli_vers = refresh_wpcli_vers();
-            
+
+            if (vers_sf == null || bForceReadingFromProcess)
+            {
+                apache_vers = ZampGUILib.startProc_and_wait_output(Apache_bin, "-v", true);
+                regex = new Regex(@"Apache.\d+\.\d+\.\d+");
+                match = regex.Match(apache_vers);
+                if (match.Success)
+                {
+                    apache_vers = match.Value.Replace("Apache/", "");
+                }
+
+
+                php_vers = ZampGUILib.startProc_and_wait_output(PHP_bin, "-v", true);
+                regex = new Regex(@"PHP \d+\.\d+.\d+");
+                match = regex.Match(php_vers);
+                if (match.Success)
+                {
+                    php_vers = match.Value.Replace("PHP ", "");
+                }
+
+                mariadb_vers = ZampGUILib.startProc_and_wait_output(MariaDB_bin, "--version", true);
+                regex = new Regex(@"Ver \d+\.\d+\.\d+");
+                match = regex.Match(mariadb_vers);
+                if (match.Success)
+                {
+                    mariadb_vers = match.Value.Replace("Ver", "").Trim();
+                }
+
+
+                composer_vers = ZampGUILib.startProc_and_wait_output(Composer_bin, "--version", true, PHP_path_scelto);
+                regex = new Regex(@"Composer version \d+\.\d+\.\d+");
+                match = regex.Match(composer_vers);
+                if (match.Success)
+                {
+                    composer_vers = match.Value.Replace("Composer version", "").Trim();
+                }
+
+
+                git_vers = refresh_git_vers();
+                node_vers = refresh_node_vers();
+                sass_vers = refresh_sass_vers();
+                wp_cli_vers = refresh_wpcli_vers();
+
+                jobj[_env]["vers_sf"] = new JObject(
+                               new JProperty("apache_vers", apache_vers)
+                               , new JProperty("php_vers", php_vers)
+                               , new JProperty("mariadb_vers", mariadb_vers)
+                               , new JProperty("composer_vers", composer_vers)
+                               , new JProperty("git_vers", git_vers)
+                               , new JProperty("node_vers", node_vers)
+                               , new JProperty("sass_vers", sass_vers)
+                               , new JProperty("wp_cli_vers", wp_cli_vers)
+                               );
+                ZampGUILib.setJson_Env(jobj);
+            }
+            else
+            {
+                apache_vers = (string)jobj[_env]["vers_sf"]["apache_vers"];
+                php_vers = (string)jobj[_env]["vers_sf"]["php_vers"];
+                mariadb_vers = (string)jobj[_env]["vers_sf"]["mariadb_vers"];
+                composer_vers = (string)jobj[_env]["vers_sf"]["composer_vers"];
+                git_vers = (string)jobj[_env]["vers_sf"]["git_vers"];
+                node_vers = (string)jobj[_env]["vers_sf"]["node_vers"];
+                sass_vers = (string)jobj[_env]["vers_sf"]["sass_vers"];
+                wp_cli_vers = (string)jobj[_env]["vers_sf"]["wp_cli_vers"];
+            }
+
 
         }
 
