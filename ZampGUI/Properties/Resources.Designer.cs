@@ -133,6 +133,16 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap donate_paypal_btn {
+            get {
+                object obj = ResourceManager.GetObject("donate_paypal_btn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ethereum {
             get {
                 object obj = ResourceManager.GetObject("ethereum", resourceCulture);

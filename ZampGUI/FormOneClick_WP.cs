@@ -122,7 +122,7 @@ namespace ZampGUI
             Process proStart = new Process();
             proStart.StartInfo = pro;
 
-            string addToPath = "\"" + cv.Apache_bin + "\";\"" + cv.PHP_path_scelto + "\";\"" + cv.MariaDB_bin + "\";\"" + cv.wp_cli + "\";\"" + System.IO.Path.Combine(cv.pathBase, "scripts") + "\"";
+            string addToPath = "\"" + cv.Apache_exe + "\";\"" + cv.PHP_path + "\";\"" + cv.MariaDB_exe + "\";\"" + cv.pathWPcli + "\";\"" + System.IO.Path.Combine(cv.pathBase, "scripts") + "\"";
             string PATH = Environment.GetEnvironmentVariable("PATH");
             pro.EnvironmentVariables["PATH"] = addToPath + ";" + PATH;
             proStart.Start();

@@ -36,11 +36,13 @@ namespace ZampGUI
             this.pictureBoxEmail = new System.Windows.Forms.PictureBox();
             this.pictureBoxGithub = new System.Windows.Forms.PictureBox();
             this.pictureBoxSourceforge = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDonatePaypal = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGithub)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSourceforge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonatePaypal)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -48,7 +50,7 @@ namespace ZampGUI
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(78, 23);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(364, 277);
+            this.pictureBox1.Size = new System.Drawing.Size(364, 209);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -56,9 +58,9 @@ namespace ZampGUI
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(20, 554);
+            this.label1.Location = new System.Drawing.Point(20, 552);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(487, 34);
+            this.label1.Size = new System.Drawing.Size(471, 34);
             this.label1.TabIndex = 2;
             this.label1.Text = "ZampGUI \r\nGUI interface for running Web Server and Database";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -67,9 +69,9 @@ namespace ZampGUI
             // 
             this.pictureBoxHome.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxHome.Image = global::ZampGUI.Properties.Resources.about_home;
-            this.pictureBoxHome.Location = new System.Drawing.Point(78, 321);
+            this.pictureBoxHome.Location = new System.Drawing.Point(78, 238);
             this.pictureBoxHome.Name = "pictureBoxHome";
-            this.pictureBoxHome.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxHome.Size = new System.Drawing.Size(100, 77);
             this.pictureBoxHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxHome.TabIndex = 3;
             this.pictureBoxHome.TabStop = false;
@@ -79,9 +81,9 @@ namespace ZampGUI
             // 
             this.pictureBoxEmail.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxEmail.Image = global::ZampGUI.Properties.Resources.about_email;
-            this.pictureBoxEmail.Location = new System.Drawing.Point(211, 321);
+            this.pictureBoxEmail.Location = new System.Drawing.Point(211, 238);
             this.pictureBoxEmail.Name = "pictureBoxEmail";
-            this.pictureBoxEmail.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxEmail.Size = new System.Drawing.Size(100, 77);
             this.pictureBoxEmail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxEmail.TabIndex = 4;
             this.pictureBoxEmail.TabStop = false;
@@ -91,9 +93,9 @@ namespace ZampGUI
             // 
             this.pictureBoxGithub.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxGithub.Image = global::ZampGUI.Properties.Resources.about_github;
-            this.pictureBoxGithub.Location = new System.Drawing.Point(342, 321);
+            this.pictureBoxGithub.Location = new System.Drawing.Point(342, 238);
             this.pictureBoxGithub.Name = "pictureBoxGithub";
-            this.pictureBoxGithub.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxGithub.Size = new System.Drawing.Size(100, 77);
             this.pictureBoxGithub.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxGithub.TabIndex = 5;
             this.pictureBoxGithub.TabStop = false;
@@ -103,7 +105,7 @@ namespace ZampGUI
             // 
             this.pictureBoxSourceforge.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxSourceforge.Image = global::ZampGUI.Properties.Resources.about_Sourceforge;
-            this.pictureBoxSourceforge.Location = new System.Drawing.Point(78, 449);
+            this.pictureBoxSourceforge.Location = new System.Drawing.Point(78, 321);
             this.pictureBoxSourceforge.Name = "pictureBoxSourceforge";
             this.pictureBoxSourceforge.Size = new System.Drawing.Size(364, 61);
             this.pictureBoxSourceforge.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -111,11 +113,24 @@ namespace ZampGUI
             this.pictureBoxSourceforge.TabStop = false;
             this.pictureBoxSourceforge.Click += new System.EventHandler(this.pictureBoxSourceforge_Click);
             // 
+            // pictureBoxDonatePaypal
+            // 
+            this.pictureBoxDonatePaypal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxDonatePaypal.Image = global::ZampGUI.Properties.Resources.donate_paypal_btn;
+            this.pictureBoxDonatePaypal.Location = new System.Drawing.Point(78, 388);
+            this.pictureBoxDonatePaypal.Name = "pictureBoxDonatePaypal";
+            this.pictureBoxDonatePaypal.Size = new System.Drawing.Size(364, 137);
+            this.pictureBoxDonatePaypal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDonatePaypal.TabIndex = 7;
+            this.pictureBoxDonatePaypal.TabStop = false;
+            this.pictureBoxDonatePaypal.Click += new System.EventHandler(this.pictureBoxDonatePaypal_Click);
+            // 
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 608);
+            this.ClientSize = new System.Drawing.Size(511, 606);
+            this.Controls.Add(this.pictureBoxDonatePaypal);
             this.Controls.Add(this.pictureBoxSourceforge);
             this.Controls.Add(this.pictureBoxGithub);
             this.Controls.Add(this.pictureBoxEmail);
@@ -124,8 +139,8 @@ namespace ZampGUI
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(545, 655);
-            this.MinimumSize = new System.Drawing.Size(545, 655);
+            this.MaximumSize = new System.Drawing.Size(529, 653);
+            this.MinimumSize = new System.Drawing.Size(529, 653);
             this.Name = "FormAbout";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -135,6 +150,7 @@ namespace ZampGUI
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGithub)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSourceforge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonatePaypal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -147,5 +163,6 @@ namespace ZampGUI
         private System.Windows.Forms.PictureBox pictureBoxEmail;
         private System.Windows.Forms.PictureBox pictureBoxGithub;
         private System.Windows.Forms.PictureBox pictureBoxSourceforge;
+        private System.Windows.Forms.PictureBox pictureBoxDonatePaypal;
     }
 }

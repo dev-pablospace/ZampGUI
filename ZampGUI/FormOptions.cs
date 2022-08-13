@@ -63,7 +63,7 @@ namespace ZampGUI
             }
             else if(check_change())
             {
-                cv.default_editor_path = txtPathEditor.Text.Trim();
+                cv.default_editor = txtPathEditor.Text.Trim();
                 cv.apache_http_port = numericUpDown_http.Value.ToString();
                 cv.apache_https_port = numericUpDown_https.Value.ToString();
                 cv.mariadb_port = numericUpDown_mariadb.Value.ToString();
@@ -97,7 +97,7 @@ namespace ZampGUI
 
         private bool check_change()
         {
-            return cv.default_editor_path != txtPathEditor.Text.Trim().ToLower() 
+            return cv.default_editor != txtPathEditor.Text.Trim().ToLower() 
                 || changed_port() 
                 || this.bChangeListPath
                 || cv.pathGit != txtPathGit.Text.Trim()

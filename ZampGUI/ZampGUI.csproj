@@ -206,15 +206,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="AppAll.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="App.config" />
+    <None Include="AppProduction.config" />
+    <None Include="AppAll.config" />
+    <None Include="config.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -270,6 +265,7 @@
     <Content Include="img\menu_x_circle_icon.png" />
     <Content Include="img\ZampGUI logo mini.ico" />
     <Content Include="img\ZampGUI logo mini.png" />
+    <None Include="Resources\donate_paypal_btn.jpg" />
     <None Include="Resources\about_Sourceforge.png" />
     <None Include="Resources\about_home.png" />
     <None Include="Resources\about_github.png" />

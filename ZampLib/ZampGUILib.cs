@@ -400,19 +400,22 @@ namespace ZampLib
             return processlist.FirstOrDefault(pr => pr.Id == Convert.ToInt32(id));
         }
 
-        public static JObject getJson_Env ()
+        public static string getJsonPath()
         {
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string path_json_config = Path.Combine(assemblyFolder, "config.json");
+            return path_json_config;
+        }
 
+        public static JObject getJson_Env()
+        {
+            string path_json_config = getJsonPath();
             JObject o1 = JObject.Parse(File.ReadAllText(path_json_config));
             return o1;
         }
         public static void setJson_Env(JObject jsonObj)
         {
-            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string path_json_config = Path.Combine(assemblyFolder, "config.json");
-
+            string path_json_config = getJsonPath();
             string newJsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj,
                                Newtonsoft.Json.Formatting.Indented);
             if(System.IO.File.Exists(path_json_config))
@@ -422,31 +425,12 @@ namespace ZampLib
             File.WriteAllText(path_json_config, newJsonResult);
         }
 
-        //public static string getJson_value(JObject yourJArray, string key)
-        //{
-        //    foreach (KeyValuePair<string, JToken> keyValuePair in yourJArray)
-        //    {
-        //        if (key == keyValuePair.Key)
-        //        {
-        //            return keyValuePair.Value.ToString();
-        //        }
-        //    }
-        //    return "";
-        //}
-
         public static string replace_ignorecase(string text, string oldtext, string newtext)
         {
             return Regex.Replace(text, oldtext, newtext, RegexOptions.Multiline | RegexOptions.IgnoreCase);
             //text.Replace(oldtext, newtext);
         }
-        /// <summary&RT;
-        /// Author : Himasagar Kutikuppala
-        ///A utility method that runs the batch file with supplied arguments.
-        /// </summary&RT;
-        /// <param name="batchFileName"&RT;Name of the batch file that should be run</param&RT;
-        /// <param name="argumentsToBatchFile"&RT;Arguments to the batch file</param&RT;
-        /// <returns&RT;Status of running the batch file</returns&RT;
-
+        
 
         public static List<string> ExecuteBatchFile(string batchFileName, string[] argumentsToBatchFile)
         {
@@ -533,12 +517,26 @@ namespace ZampLib
             foreach(string s in arrdir)
             {
                 string dir_name = Path.GetFileName(s);
-                if(s.Contains(search))
+                if(dir_name.Contains(search))
                 {
-                    return s;
+                    return dir_name;
                 }
             }
             throw new Exception(search + " folder not found");
+        }
+        public static string[] get_dirs(string abs_main_path, string search)
+        {
+            List<string> temp = new List<string>();
+            string[] arrdir = Directory.GetDirectories(Path.Combine(abs_main_path, "Apps"));
+            foreach (string s in arrdir)
+            {
+                string dir_name = Path.GetFileName(s);
+                if (dir_name.Contains(search))
+                {
+                    temp.Add(dir_name);
+                }
+            }
+            return temp.ToArray();
         }
         public static string get_first_file(string dir, string search)
         {
@@ -566,7 +564,7 @@ namespace ZampLib
         public static List<string> getListSite(ConfigVar cv)
         {
             List<string> _list = new List<string>();
-            string arrtest = ZampGUILib.startProc_and_wait_output(cv.Apache_bin, "-S", true);
+            string arrtest = ZampGUILib.startProc_and_wait_output(cv.Apache_exe, "-S", true);
             string pattern = @"\d*\snamevhost\s(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?";
             Regex rgx = new Regex(pattern);
             string sentence = arrtest;
@@ -627,7 +625,27 @@ namespace ZampLib
             }
             return sout;
         }
-
+        public static string getApplicationFolder()
+        {
+            string assemblyFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string root_folder = System.IO.Directory.GetParent(assemblyFolder).Parent.FullName;
+            return root_folder;
+        }
+        public static string getRootFolder(System.Windows.Forms.Form f = null)
+        {
+            string root_folder = getApplicationFolder();
+            string YN_DEBUG = getval_from_appsetting("YN_DEBUG");
+            string temp_folder = getval_from_appsetting("temp_folder");
+            if (YN_DEBUG.Equals("Y"))
+            {
+                if (!System.IO.Directory.Exists(temp_folder))
+                {
+                    ZampGUILib.printMsg_and_exit(temp_folder + " does not exists", true, f);
+                }
+                root_folder = ZampGUILib.getval_from_appsetting("temp_folder");
+            }
+            return root_folder;
+        }
         #region old
 
         private string startProc_old(string nameproc, string pathProg)

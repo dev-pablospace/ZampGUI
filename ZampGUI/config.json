@@ -1,74 +1,92 @@
 {
   "rel": {
     "pathBase": "C:\\Users\\user1\\Desktop\\varie\\rolling_zamp\\ZampGUI_C_NET",
-    "pathMariaDB": {
-      "mariadb-10.6.8": "mariadb-10.6.8"
-    },
-    "MariaDB_scelta": "mariadb-10.6.8",
-    "pathApache": "Apache24",
-    "pathPHP": {
-      "php-8.1.8": "php-8.1.8"
-    },
-    "PHP_scelta": "php-8.1.8",
+    "Apache_current": "Apache24",
+    "MariaDB_list": [ "mariadb-10.6.8" ],
+    "MariaDB_current": "mariadb-10.6.8",
+    "PHP_list": [ "php-8.1.8" ],
+    "PHP_current": "php-8.1.8",
     "pathGit": "",
     "pathSass": "",
     "pathNode": "",
-    "wpcli": "",
+    "pathWPcli": "",
     "checkBackUpAllDBOnExit": "",
-    "default_editor_path": "notepad.exe",
+    "default_editor": "",
     "apache_http_port": "80",
     "apache_https_port": "443",
     "mariadb_port": "3306",
     "pid_currentproc_apache": "",
     "pid_currentproc_mariadb": "",
-    "ListPathConsole": ""
+    "ListPathConsole": [],
+    "vers_sf": {
+      "apache_vers": "",
+      "php_vers": "",
+      "mariadb_vers": "",
+      "composer_vers": "",
+      "git_vers": "",
+      "node_vers": "",
+      "sass_vers": "",
+      "wp_cli_vers": ""
+    }
   },
   "pc_cameretta": {
     "pathBase": "H:\\SVL\\zampgui\\ZampGUI_1.1.02_php8.1.6",
-    "pathMariaDB": {
-      "mariadb-10.6.8": "mariadb-10.6.8"
-    },
-    "MariaDB_scelta": "mariadb-10.6.8",
-    "pathApache": "Apache24",
-    "pathPHP": {
-      "php-8.1.6": "php-8.1.6"
-    },
-    "PHP_scelta": "php-8.1.6",
+    "Apache_current": "Apache24",
+    "MariaDB_list": [ "mariadb-10.6.8" ],
+    "MariaDB_current": "mariadb-10.6.8",
+    "PHP_list": [ "php-8.1.8" ],
+    "PHP_current": "php-8.1.8",
     "pathGit": "",
     "pathSass": "",
     "pathNode": "",
-    "wpcli": "",
+    "pathWPcli": "",
     "checkBackUpAllDBOnExit": "",
-    "default_editor_path": "notepad.exe",
+    "default_editor": "",
     "apache_http_port": "80",
     "apache_https_port": "443",
     "mariadb_port": "3306",
     "pid_currentproc_apache": "",
     "pid_currentproc_mariadb": "",
-    "ListPathConsole": ""
+    "ListPathConsole": [],
+    "vers_sf": {
+      "apache_vers": "",
+      "php_vers": "",
+      "mariadb_vers": "",
+      "composer_vers": "",
+      "git_vers": "",
+      "node_vers": "",
+      "sass_vers": "",
+      "wp_cli_vers": ""
+    }
   },
   "acer_nitro": {
     "pathBase": "Q:\\SVL\\zampgui\\ZampGUI_1.1.03_php8.1.8",
-    "pathMariaDB": {
-      "mariadb-10.6.8": "mariadb-10.6.8"
-    },
-    "MariaDB_scelta": "mariadb-10.6.8",
-    "pathApache": "Apache24",
-    "pathPHP": {
-      "php-8.1.8": "php-8.1.8"
-    },
-    "PHP_scelta": "php-8.1.8",
+    "Apache_current": "Apache24",
+    "MariaDB_list": [ "mariadb-10.6.8" ],
+    "MariaDB_current": "mariadb-10.6.8",
+    "PHP_list": [ "php-8.1.8" ],
+    "PHP_current": "php-8.1.8",
     "pathGit": "",
     "pathSass": "",
     "pathNode": "",
-    "wpcli": "",
+    "pathWPcli": "",
     "checkBackUpAllDBOnExit": "",
-    "default_editor_path": "notepad.exe",
+    "default_editor": "",
     "apache_http_port": "80",
     "apache_https_port": "443",
     "mariadb_port": "3306",
     "pid_currentproc_apache": "",
     "pid_currentproc_mariadb": "",
-    "ListPathConsole": ""
+    "ListPathConsole": [],
+    "vers_sf": {
+      "apache_vers": "",
+      "php_vers": "",
+      "mariadb_vers": "",
+      "composer_vers": "",
+      "git_vers": "",
+      "node_vers": "",
+      "sass_vers": "",
+      "wp_cli_vers": ""
+    }
   }
 }

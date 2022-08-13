@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBackupRestore));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.radioButtonSchemaAndData = new System.Windows.Forms.RadioButton();
+            this.radioButtonDataOnly = new System.Windows.Forms.RadioButton();
+            this.radioButtonSchemaOnly = new System.Windows.Forms.RadioButton();
             this.checkBoxAddCreateDB = new System.Windows.Forms.CheckBox();
             this.btnBackup = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,13 +44,10 @@
             this.btnRestore = new System.Windows.Forms.Button();
             this.btnSelectSqlFile = new System.Windows.Forms.Button();
             this.txtPathSQLFile = new System.Windows.Forms.TextBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SQLScript = new System.Windows.Forms.TabPage();
-            this.textBoxSql = new System.Windows.Forms.TextBox();
             this.btnRunScript = new System.Windows.Forms.Button();
-            this.radioButtonSchemaOnly = new System.Windows.Forms.RadioButton();
-            this.radioButtonDataOnly = new System.Windows.Forms.RadioButton();
-            this.radioButtonSchemaAndData = new System.Windows.Forms.RadioButton();
+            this.textBoxSql = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -81,6 +81,39 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Backup";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonSchemaAndData
+            // 
+            this.radioButtonSchemaAndData.AutoSize = true;
+            this.radioButtonSchemaAndData.Location = new System.Drawing.Point(20, 183);
+            this.radioButtonSchemaAndData.Name = "radioButtonSchemaAndData";
+            this.radioButtonSchemaAndData.Size = new System.Drawing.Size(227, 21);
+            this.radioButtonSchemaAndData.TabIndex = 9;
+            this.radioButtonSchemaAndData.TabStop = true;
+            this.radioButtonSchemaAndData.Text = "Export schema and data";
+            this.radioButtonSchemaAndData.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDataOnly
+            // 
+            this.radioButtonDataOnly.AutoSize = true;
+            this.radioButtonDataOnly.Location = new System.Drawing.Point(20, 156);
+            this.radioButtonDataOnly.Name = "radioButtonDataOnly";
+            this.radioButtonDataOnly.Size = new System.Drawing.Size(173, 21);
+            this.radioButtonDataOnly.TabIndex = 8;
+            this.radioButtonDataOnly.TabStop = true;
+            this.radioButtonDataOnly.Text = "Export data Only";
+            this.radioButtonDataOnly.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonSchemaOnly
+            // 
+            this.radioButtonSchemaOnly.AutoSize = true;
+            this.radioButtonSchemaOnly.Location = new System.Drawing.Point(20, 129);
+            this.radioButtonSchemaOnly.Name = "radioButtonSchemaOnly";
+            this.radioButtonSchemaOnly.Size = new System.Drawing.Size(191, 21);
+            this.radioButtonSchemaOnly.TabIndex = 7;
+            this.radioButtonSchemaOnly.TabStop = true;
+            this.radioButtonSchemaOnly.Text = "Export Schema Only";
+            this.radioButtonSchemaOnly.UseVisualStyleBackColor = true;
             // 
             // checkBoxAddCreateDB
             // 
@@ -180,10 +213,6 @@
             this.txtPathSQLFile.Size = new System.Drawing.Size(588, 24);
             this.txtPathSQLFile.TabIndex = 1;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // SQLScript
             // 
             this.SQLScript.Controls.Add(this.btnRunScript);
@@ -195,15 +224,6 @@
             this.SQLScript.Text = "SQL Script";
             this.SQLScript.UseVisualStyleBackColor = true;
             // 
-            // textBoxSql
-            // 
-            this.textBoxSql.Location = new System.Drawing.Point(14, 14);
-            this.textBoxSql.Multiline = true;
-            this.textBoxSql.Name = "textBoxSql";
-            this.textBoxSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSql.Size = new System.Drawing.Size(727, 183);
-            this.textBoxSql.TabIndex = 0;
-            // 
             // btnRunScript
             // 
             this.btnRunScript.Location = new System.Drawing.Point(14, 203);
@@ -214,38 +234,19 @@
             this.btnRunScript.UseVisualStyleBackColor = true;
             this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
             // 
-            // radioButtonSchemaOnly
+            // textBoxSql
             // 
-            this.radioButtonSchemaOnly.AutoSize = true;
-            this.radioButtonSchemaOnly.Location = new System.Drawing.Point(20, 129);
-            this.radioButtonSchemaOnly.Name = "radioButtonSchemaOnly";
-            this.radioButtonSchemaOnly.Size = new System.Drawing.Size(191, 21);
-            this.radioButtonSchemaOnly.TabIndex = 7;
-            this.radioButtonSchemaOnly.TabStop = true;
-            this.radioButtonSchemaOnly.Text = "Export Schema Only";
-            this.radioButtonSchemaOnly.UseVisualStyleBackColor = true;
+            this.textBoxSql.Location = new System.Drawing.Point(14, 14);
+            this.textBoxSql.MaxLength = 0;
+            this.textBoxSql.Multiline = true;
+            this.textBoxSql.Name = "textBoxSql";
+            this.textBoxSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxSql.Size = new System.Drawing.Size(727, 183);
+            this.textBoxSql.TabIndex = 0;
             // 
-            // radioButtonDataOnly
+            // openFileDialog1
             // 
-            this.radioButtonDataOnly.AutoSize = true;
-            this.radioButtonDataOnly.Location = new System.Drawing.Point(20, 156);
-            this.radioButtonDataOnly.Name = "radioButtonDataOnly";
-            this.radioButtonDataOnly.Size = new System.Drawing.Size(173, 21);
-            this.radioButtonDataOnly.TabIndex = 8;
-            this.radioButtonDataOnly.TabStop = true;
-            this.radioButtonDataOnly.Text = "Export data Only";
-            this.radioButtonDataOnly.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonSchemaAndData
-            // 
-            this.radioButtonSchemaAndData.AutoSize = true;
-            this.radioButtonSchemaAndData.Location = new System.Drawing.Point(20, 183);
-            this.radioButtonSchemaAndData.Name = "radioButtonSchemaAndData";
-            this.radioButtonSchemaAndData.Size = new System.Drawing.Size(227, 21);
-            this.radioButtonSchemaAndData.TabIndex = 9;
-            this.radioButtonSchemaAndData.TabStop = true;
-            this.radioButtonSchemaAndData.Text = "Export schema and data";
-            this.radioButtonSchemaAndData.UseVisualStyleBackColor = true;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // FormBackupRestore
             // 

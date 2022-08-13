@@ -39,45 +39,41 @@ namespace ZampGUI
             }
 
             dataGridView1.DataSource = lista;
-            //listViewManageSites.View = View.Details;
-            //ListViewItem item1 = new ListViewItem("Something");
-            //item1.SubItems.Add("SubItem1a");
-            //item1.SubItems.Add("SubItem1b");
-            //item1.SubItems.Add("SubItem1c");
-
-            //ListViewItem item2 = new ListViewItem("Something2");
-            //item2.SubItems.Add("SubItem2a");
-            //item2.SubItems.Add("SubItem2b");
-            //item2.SubItems.Add("SubItem2c");
-
-            //ListViewItem item3 = new ListViewItem("Something3");
-            //item3.SubItems.Add("SubItem3a");
-            //item3.SubItems.Add("SubItem3b");
-            //item3.SubItems.Add("SubItem3c");
-
-            //listViewManageSites.Items.AddRange(new ListViewItem[] { item1});
-
-            //string[] saLvwItem = new string[3];
-            //saLvwItem[0] = "Status Message";
-            //saLvwItem[1] = "ciaociao";
-            //saLvwItem[2] = DateTime.Now.ToString("dddd dd/MM/yyyy - HH:mm:ss");
-
-            //ListViewItem lvi = new ListViewItem(saLvwItem);
-
-            //listViewManageSites.Items.Add(lvi);
-            //listViewManageSites.Items.Add("Column1Text").SubItems.AddRange(row1);
+            
         }
 
         private void buttonDeleteRow_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+            
+            Int32 selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
             {
-                RigaSite r = (RigaSite)item.DataBoundItem;
-                lista.Remove(r);
+                for (int i = 0; i < selectedRowCount; i++)
+                {
+                    var item = dataGridView1.SelectedRows[i];
+                    RigaSite r = (RigaSite)item.DataBoundItem;
+                    lista.Remove(r);
+                }
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = lista;
-                //dataGridView1.Rows.RemoveAt(item.Index);
             }
+            else
+            {
+                IEnumerable<DataGridViewRow> selectedRows = dataGridView1.SelectedCells.Cast<DataGridViewCell>()
+                                           .Select(cell => cell.OwningRow)
+                                           .Distinct();
+                if(selectedRows.Count() > 0)
+                {
+                    foreach (DataGridViewRow item in selectedRows)
+                    {
+                        RigaSite r = (RigaSite)item.DataBoundItem;
+                        lista.Remove(r);
+                    }
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = lista;
+                }
+            }
+
         }
 
         private void buttonNewRow_Click(object sender, EventArgs e)
@@ -96,9 +92,9 @@ namespace ZampGUI
                 arr.Add(new JProperty(item.Name, item.Url));
             }
 
-            JObject jobj = ZampGUILib.getJson_Env();
-            jobj[cv._env]["sites"] = new JObject(arr);
-            ZampGUILib.setJson_Env(jobj);
+            cv.json = cv.json ?? ZampGUILib.getJson_Env();
+            cv.json[cv._env]["sites"] = new JObject(arr);
+            ZampGUILib.setJson_Env(cv.json);
             this.Close();
         }
     }

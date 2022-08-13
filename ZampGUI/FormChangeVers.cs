@@ -30,20 +30,20 @@ namespace ZampGUI
 
             int index_sel_mariadb = 0;
             k = 0;
-            foreach(var c in this.cv.pathMariaDB)
+            foreach(var c in this.cv.MariaDB_list)
             {
-                comboBoxDB_Vers.Items.Add(c.Key);
-                if (c.Key == cv.MariaDB_scelta)
+                comboBoxDB_Vers.Items.Add(c);
+                if (c == cv.MariaDB_current)
                     index_sel_mariadb = k;
                 k++;
             }
 
             int index_sel_php = 0;
             k = 0;
-            foreach (var c in this.cv.pathPHP)
+            foreach (var c in this.cv.PHP_list)
             {
-                comboBoxPHP_Vers.Items.Add(c.Key);
-                if (c.Key == cv.PHP_scelta)
+                comboBoxPHP_Vers.Items.Add(c);
+                if (c == cv.PHP_current)
                     index_sel_php = k;
                 k++;
             }
@@ -68,7 +68,7 @@ namespace ZampGUI
 
             ZampGUILib.setJson_Env(jobj);
 
-            cv = new ConfigVar();
+            //cv = new ConfigVar();
             this.Close();
         }
 
