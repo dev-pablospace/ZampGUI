@@ -27,14 +27,20 @@ namespace ZampGUI
         {
             InitializeComponent();
 
-            listViewInfo.View = View.Details;
-            listViewInfo.GridLines = true;
-            listViewInfo.FullRowSelect = true;
+            //listViewInfo.View = View.Details;
+            //listViewInfo.GridLines = true;
+            //listViewInfo.FullRowSelect = true;
 
             //Add column header
-            listViewInfo.Columns.Add("Name", 80);
-            listViewInfo.Columns.Add("Value");
-            listViewInfo.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            //listViewInfo.Columns.Add("Name", 80);
+            //listViewInfo.Columns.Add("Value");
+            //listViewInfo.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            //listViewInfo.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            //listViewInfo.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listViewInfo.Columns[1].Width = listViewInfo.Width - listViewInfo.Columns[0].Width - 20;
+
+            //change title
+            this.Text = "ZampGUI v" + ZampGUILib.getval_from_appsetting("ver");
         }
         #endregion
 
@@ -594,12 +600,12 @@ namespace ZampGUI
             if (bRunProc)
             {
                 pictureBoxApache.Image = Properties.Resources.form_select_icon;
-                btnStartStopApache.Text = "Stop";
+                btnStartStopApache.Text = "Stop Apache";
             }
             else
             {
                 pictureBoxApache.Image = Properties.Resources.form_stop_icon;
-                btnStartStopApache.Text = "Start";
+                btnStartStopApache.Text = "Start Apache";
                 if(!string.IsNullOrEmpty(cv.getPID_apache))
                 {
                     cv.updatePID(typeProg.apache, typeStartorKill.start, null);
@@ -613,12 +619,12 @@ namespace ZampGUI
             if (bRunProc)
             {
                 pictureBoxMariaDB.Image = Properties.Resources.form_select_icon;
-                btnStartStopMariaDB.Text = "Stop";
+                btnStartStopMariaDB.Text = "Stop MariaDB";
             }
             else
             {
                 pictureBoxMariaDB.Image = Properties.Resources.form_stop_icon;
-                btnStartStopMariaDB.Text = "Start";
+                btnStartStopMariaDB.Text = "Start MariaDB";
                 if (!string.IsNullOrEmpty(cv.getPID_mariadb))
                 {
                     cv.updatePID(typeProg.mariadb, typeStartorKill.start, null);

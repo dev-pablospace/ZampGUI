@@ -86,14 +86,14 @@
             this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStartStopApache = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnStartStopMariaDB = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxMariaDB = new System.Windows.Forms.PictureBox();
             this.pictureBoxApache = new System.Windows.Forms.PictureBox();
             this.timer_refresh = new System.Windows.Forms.Timer(this.components);
             this.listViewInfo = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).BeginInit();
@@ -345,14 +345,14 @@
             this.phpinfoToolStripMenuItem});
             this.apacheHomeToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_globe_icon;
             this.apacheHomeToolStripMenuItem.Name = "apacheHomeToolStripMenuItem";
-            this.apacheHomeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.apacheHomeToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.apacheHomeToolStripMenuItem.Text = "Apache";
             // 
             // phpinfoToolStripMenuItem
             // 
             this.phpinfoToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_php;
             this.phpinfoToolStripMenuItem.Name = "phpinfoToolStripMenuItem";
-            this.phpinfoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.phpinfoToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.phpinfoToolStripMenuItem.Text = "phpinfo";
             this.phpinfoToolStripMenuItem.Click += new System.EventHandler(this.phpinfoToolStripMenuItem_Click);
             // 
@@ -363,14 +363,14 @@
             this.adminerToolStripMenuItem});
             this.mariaDBToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_database_icon;
             this.mariaDBToolStripMenuItem.Name = "mariaDBToolStripMenuItem";
-            this.mariaDBToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.mariaDBToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.mariaDBToolStripMenuItem.Text = "MariaDB ";
             // 
             // phpMyAdminToolStripMenuItem
             // 
             this.phpMyAdminToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_db;
             this.phpMyAdminToolStripMenuItem.Name = "phpMyAdminToolStripMenuItem";
-            this.phpMyAdminToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.phpMyAdminToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.phpMyAdminToolStripMenuItem.Text = "phpMyAdmin";
             this.phpMyAdminToolStripMenuItem.Click += new System.EventHandler(this.phpMyAdminToolStripMenuItem_Click);
             // 
@@ -378,27 +378,27 @@
             // 
             this.adminerToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_db;
             this.adminerToolStripMenuItem.Name = "adminerToolStripMenuItem";
-            this.adminerToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminerToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.adminerToolStripMenuItem.Text = "adminer";
             this.adminerToolStripMenuItem.Click += new System.EventHandler(this.adminerToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(176, 6);
             // 
             // sitesToolStripMenuItem
             // 
             this.sitesToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_website;
             this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
-            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.sitesToolStripMenuItem.Text = "Sites";
             // 
             // manageSitesToolStripMenuItem
             // 
             this.manageSitesToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_website;
             this.manageSitesToolStripMenuItem.Name = "manageSitesToolStripMenuItem";
-            this.manageSitesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.manageSitesToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.manageSitesToolStripMenuItem.Text = "Manage sites";
             this.manageSitesToolStripMenuItem.Click += new System.EventHandler(this.manageSitesToolStripMenuItem_Click);
             // 
@@ -560,11 +560,11 @@
             // 
             // btnStartStopApache
             // 
-            this.btnStartStopApache.Location = new System.Drawing.Point(125, 17);
+            this.btnStartStopApache.Location = new System.Drawing.Point(51, 23);
             this.btnStartStopApache.Name = "btnStartStopApache";
-            this.btnStartStopApache.Size = new System.Drawing.Size(100, 23);
+            this.btnStartStopApache.Size = new System.Drawing.Size(173, 30);
             this.btnStartStopApache.TabIndex = 4;
-            this.btnStartStopApache.Text = "Start";
+            this.btnStartStopApache.Text = "Apache";
             this.btnStartStopApache.UseVisualStyleBackColor = true;
             this.btnStartStopApache.Click += new System.EventHandler(this.btnStartStopApache_Click);
             // 
@@ -577,31 +577,13 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Output";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 17);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Apache";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(53, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 17);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "MariaDB";
-            // 
             // btnStartStopMariaDB
             // 
-            this.btnStartStopMariaDB.Location = new System.Drawing.Point(127, 54);
+            this.btnStartStopMariaDB.Location = new System.Drawing.Point(51, 75);
             this.btnStartStopMariaDB.Name = "btnStartStopMariaDB";
-            this.btnStartStopMariaDB.Size = new System.Drawing.Size(98, 23);
+            this.btnStartStopMariaDB.Size = new System.Drawing.Size(173, 30);
             this.btnStartStopMariaDB.TabIndex = 8;
-            this.btnStartStopMariaDB.Text = "Start";
+            this.btnStartStopMariaDB.Text = "MariaDB";
             this.btnStartStopMariaDB.UseVisualStyleBackColor = true;
             this.btnStartStopMariaDB.Click += new System.EventHandler(this.btnStartStopMariaDB_Click);
             // 
@@ -609,20 +591,18 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.pictureBoxMariaDB);
-            this.panel1.Controls.Add(this.btnStartStopMariaDB);
-            this.panel1.Controls.Add(this.pictureBoxApache);
             this.panel1.Controls.Add(this.btnStartStopApache);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(606, 41);
+            this.panel1.Controls.Add(this.btnStartStopMariaDB);
+            this.panel1.Controls.Add(this.pictureBoxMariaDB);
+            this.panel1.Controls.Add(this.pictureBoxApache);
+            this.panel1.Location = new System.Drawing.Point(610, 41);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 124);
+            this.panel1.Size = new System.Drawing.Size(227, 124);
             this.panel1.TabIndex = 11;
             // 
             // pictureBoxMariaDB
             // 
-            this.pictureBoxMariaDB.Location = new System.Drawing.Point(19, 49);
+            this.pictureBoxMariaDB.Location = new System.Drawing.Point(15, 75);
             this.pictureBoxMariaDB.Name = "pictureBoxMariaDB";
             this.pictureBoxMariaDB.Size = new System.Drawing.Size(30, 30);
             this.pictureBoxMariaDB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -631,7 +611,7 @@
             // 
             // pictureBoxApache
             // 
-            this.pictureBoxApache.Location = new System.Drawing.Point(19, 13);
+            this.pictureBoxApache.Location = new System.Drawing.Point(15, 23);
             this.pictureBoxApache.Name = "pictureBoxApache";
             this.pictureBoxApache.Size = new System.Drawing.Size(30, 30);
             this.pictureBoxApache.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -649,12 +629,29 @@
             this.listViewInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listViewInfo.FullRowSelect = true;
+            this.listViewInfo.GridLines = true;
+            this.listViewInfo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewInfo.HideSelection = false;
             this.listViewInfo.Location = new System.Drawing.Point(15, 41);
+            this.listViewInfo.MultiSelect = false;
             this.listViewInfo.Name = "listViewInfo";
-            this.listViewInfo.Size = new System.Drawing.Size(585, 124);
+            this.listViewInfo.Size = new System.Drawing.Size(589, 124);
             this.listViewInfo.TabIndex = 15;
             this.listViewInfo.UseCompatibleStateImageBehavior = false;
+            this.listViewInfo.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 80;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
             // 
             // FormMain
             // 
@@ -678,7 +675,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxApache)).EndInit();
             this.ResumeLayout(false);
@@ -707,8 +703,6 @@
         private System.Windows.Forms.ToolStripMenuItem backupRestoreToolStripMenuItem;
         private System.Windows.Forms.Button btnStartStopApache;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnStartStopMariaDB;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBoxApache;
@@ -751,6 +745,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem exportConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 
