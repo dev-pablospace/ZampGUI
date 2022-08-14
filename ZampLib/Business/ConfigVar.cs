@@ -422,7 +422,7 @@ namespace ZampLib.Business
             {
                 rel = (JObject)jsonObject[_env];
             }
-
+            
             if (rel["pathBase"] == null)
             {
                 rel.Add("pathBase", rootFolder);
