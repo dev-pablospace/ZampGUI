@@ -12,8 +12,10 @@ namespace ZampLib.Business
         #region const
         public string procMariaDB = "mysqld";
         public string procApache = "httpd";
-        public JObject json;
-        public string _env;
+        public JObject json; //object to map json file 
+        public string _env; //from App.config
+        public string temp_folder;//from App.config
+        public string YN_DEBUG;//from App.config
         public System.Windows.Forms.Form mainForm;
         #endregion
 
@@ -73,6 +75,14 @@ namespace ZampLib.Business
                 return System.IO.Path.Combine(pathBase, "Apps");
             }
         }
+        public string ConfigJson_path
+        {
+            get
+            {
+                //lo prendo da qui perchè se potrei essere in debug
+                return ZampGUILib.getJsonPath();
+            }
+        }
         public string MariaDB_path
         {
             get
@@ -91,7 +101,21 @@ namespace ZampLib.Business
         {
             get
             {
-                return System.IO.Path.Combine(App_Path, Apache_current, "bin", procApache + ".exe");
+                return System.IO.Path.Combine(Apache_path, "bin", procApache + ".exe");
+            }
+        }
+        public string Apache_path
+        {
+            get
+            {
+                return System.IO.Path.Combine(App_Path, Apache_current);
+            }
+        }
+        public string Apache_htdocs_path
+        {
+            get
+            {
+                return System.IO.Path.Combine(Apache_path, "htdocs");
             }
         }
         public string PHP_path
@@ -106,6 +130,13 @@ namespace ZampLib.Business
             get
             {
                 return System.IO.Path.Combine(PHP_path, "php.exe");
+            }
+        }
+        public string BackupDB_path
+        {
+            get
+            {
+                return System.IO.Path.Combine(pathBase, "db_backup");
             }
         }
         public string Composer_exe
@@ -243,6 +274,8 @@ namespace ZampLib.Business
         {
             this.mainForm = mainForm;
             this._env = ZampGUILib.getval_from_appsetting("env");
+            this.temp_folder = ZampGUILib.getval_from_appsetting("temp_folder");
+            this.YN_DEBUG = ZampGUILib.getval_from_appsetting("YN_DEBUG");
             createJsonFileIfNotExists();
             this.json = ZampGUILib.getJson_Env();
             this.pathBase = (string)json[_env]["pathBase"];
@@ -315,6 +348,55 @@ namespace ZampLib.Business
 
             caricasites();
             
+        }
+        public bool importJson(JObject jimported)
+        {
+            bool bOk = true;
+            this.json = this.json ?? ZampGUILib.getJson_Env();
+
+            IList<string> keys = jimported.Properties().Select(p => p.Name).ToList(); //extract key
+            JObject jimp_env = (JObject)jimported[keys[0]];
+
+            json[_env]["pathGit"] = jimp_env["pathGit"];
+            pathGit = (string)jimp_env["pathGit"];
+
+            json[_env]["pathSass"] = jimp_env["pathSass"];
+            pathSass = (string)jimp_env["pathSass"];
+
+            json[_env]["pathNode"] = jimp_env["pathNode"];
+            pathNode = (string)jimp_env["pathNode"];
+
+            json[_env]["pathWPcli"] = jimp_env["pathWPcli"];
+            pathWPcli = (string)jimp_env["pathWPcli"];
+
+            json[_env]["checkBackUpAllDBOnExit"] = jimp_env["checkBackUpAllDBOnExit"];
+            if (jimp_env["checkBackUpAllDBOnExit"] == null || (string)jimp_env["checkBackUpAllDBOnExit"] == "")
+                checkBackUpAllDBOnExit = false;
+            else
+                checkBackUpAllDBOnExit = (bool)jimp_env["checkBackUpAllDBOnExit"];
+
+
+            json[_env]["default_editor"] = jimp_env["default_editor"];
+            default_editor = (string)jimp_env["default_editor"];
+
+
+            json[_env]["ListPathConsole"] = jimp_env["ListPathConsole"];
+            ListPathConsole = new List<string>();
+            foreach (string s in jimp_env["ListPathConsole"])
+            {
+                this.ListPathConsole.Add(s);
+            }
+
+
+            json[_env]["vers_sf"] = new JObject();
+            
+
+            json[_env]["sites"] = jimp_env["sites"];
+            caricasites();
+
+            ZampGUILib.setJson_Env(json);
+            update_software_version(true);
+            return bOk;
         }
         public void createJsonFileIfNotExists()
         {
@@ -493,7 +575,12 @@ namespace ZampLib.Business
                     vers_sf.Add("wp_cli_vers", "");
                 }
             }
-            
+
+            if (rel["sites"] == null)
+            {
+                rel.Add("sites", new JObject());
+            }
+
             ZampGUILib.setJson_Env(jsonObject);
         }
         public string checkPortInUse()

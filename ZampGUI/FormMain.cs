@@ -74,9 +74,6 @@ namespace ZampGUI
             }
         }
 
-
-
-
         #region file
         private void checkStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -192,8 +189,58 @@ namespace ZampGUI
             }
             frm2.Close();
         }
-        #endregion
+        private void exportConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = @"C:\";      
+            saveFileDialog1.Title = "Save Config.json";
+            //saveFileDialog1.CheckFileExists = true;
+            //saveFileDialog1.CheckPathExists = true;
+            saveFileDialog1.DefaultExt = "json";
+            //saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "Json files (*.json)|";
+            //saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName != "")
+            {
+                if(System.IO.File.Exists(saveFileDialog1.FileName))
+                {
+                    System.IO.File.Delete(saveFileDialog1.FileName);
+                }
+                System.IO.File.Copy(cv.ConfigJson_path, saveFileDialog1.FileName);
+                MessageBox.Show("File saved as \"" + saveFileDialog1.FileName + "\"");
+            }
+        }
 
+        private void importConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                //openFileDialog.Filter = "Json files (*.json)|*.txt|All files (*.*)|*.*";
+                openFileDialog.Filter = "Json files (*.json)|";
+                //openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    JObject jimported = JObject.Parse(System.IO.File.ReadAllText(openFileDialog.FileName));
+
+                    if (cv.importJson(jimported))
+                    {
+                        MessageBox.Show("File imported");
+                        crealinkSite(cv.listaSites);
+                    }
+                    else
+                    {
+                        MessageBox.Show("File non imported");
+                    }
+                }
+            }
+            
+        }
+        #endregion
 
         #region Link
         private void phpinfoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -228,7 +275,6 @@ namespace ZampGUI
             crealinkSite(cv.listaSites);
         }
         #endregion
-
 
         #region Extra
         private void showHostEntryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,8 +314,35 @@ namespace ZampGUI
 
             frm_wp.Dispose();
         }
-        #endregion
+        private void pHPFoldeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = cv.PHP_path;
+            Process.Start(path);
+        }
 
+        private void mySQLFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = cv.MariaDB_path;
+            Process.Start(path);
+        }
+
+        private void apacheFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = cv.Apache_path;
+            Process.Start(path);
+        }
+        private void backupDBFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = cv.BackupDB_path;
+            Process.Start(path);
+        }
+
+        private void HttdocsRootFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = cv.Apache_htdocs_path;
+            Process.Start(path);
+        }
+        #endregion
 
         #region Console
         private void consoleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -277,7 +350,6 @@ namespace ZampGUI
             openConsole();
         }
         #endregion
-
 
         #region Help
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -514,7 +586,7 @@ namespace ZampGUI
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
-                listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
+                //listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
             }
             
 
@@ -668,6 +740,10 @@ namespace ZampGUI
             operationToolStripMenuItem.Enabled = true;
             editToolStripMenuItem.Enabled = true;
         }
+
+
         #endregion
+
+        
     }
 }

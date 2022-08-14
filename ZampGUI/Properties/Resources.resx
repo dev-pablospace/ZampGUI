@@ -142,6 +142,9 @@
   <data name="about_github" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\about_github.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="menu_link" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_link.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="menu_coin_dollar_money_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu_coin_dollar_money_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -187,17 +190,35 @@
   <data name="form_select_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\form_select_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="menu_php" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_php.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="menu_play_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu_play_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="menu_website" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_website.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bullet_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet._green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_switch_horizontal_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_switch_horizontal_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menu_menu_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu_menu_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menu_backup" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu_backup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_mysql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_mysql.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mariadb_icona" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mariadb_icona.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cryptocurrency" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cryptocurrency.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,13 +238,28 @@
   <data name="noun_Cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\noun_Cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mariadb_icona" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mariadb_icona.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="menu_screen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_screen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="menu_switch_horizontal_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\menu_switch_horizontal_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="menu_json" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_json.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="donate_paypal_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\donate_paypal_btn.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_json(2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_json(2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_json(1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_json(1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_json3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_json3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_db" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_db.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -642,7 +642,7 @@ namespace ZampLib
                 {
                     ZampGUILib.printMsg_and_exit(temp_folder + " does not exists", true, f);
                 }
-                root_folder = ZampGUILib.getval_from_appsetting("temp_folder");
+                root_folder = temp_folder;
             }
             return root_folder;
         }

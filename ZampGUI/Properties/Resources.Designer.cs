@@ -303,6 +303,36 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu_db {
+            get {
+                object obj = ResourceManager.GetObject("menu_db", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_file {
+            get {
+                object obj = ResourceManager.GetObject("menu_file", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_folder {
+            get {
+                object obj = ResourceManager.GetObject("menu_folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menu_globe_icon {
             get {
                 object obj = ResourceManager.GetObject("menu_globe_icon", resourceCulture);
@@ -316,6 +346,56 @@ namespace ZampGUI.Properties {
         internal static System.Drawing.Bitmap menu_hand_icon {
             get {
                 object obj = ResourceManager.GetObject("menu_hand_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_json {
+            get {
+                object obj = ResourceManager.GetObject("menu_json", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_json_1_ {
+            get {
+                object obj = ResourceManager.GetObject("menu_json(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_json_2_ {
+            get {
+                object obj = ResourceManager.GetObject("menu_json(2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_json3 {
+            get {
+                object obj = ResourceManager.GetObject("menu_json3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_link {
+            get {
+                object obj = ResourceManager.GetObject("menu_link", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -343,6 +423,26 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu_mysql {
+            get {
+                object obj = ResourceManager.GetObject("menu_mysql", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_php {
+            get {
+                object obj = ResourceManager.GetObject("menu_php", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menu_play_icon {
             get {
                 object obj = ResourceManager.GetObject("menu_play_icon", resourceCulture);
@@ -363,6 +463,16 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu_screen {
+            get {
+                object obj = ResourceManager.GetObject("menu_screen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menu_switch_horizontal_icon {
             get {
                 object obj = ResourceManager.GetObject("menu_switch_horizontal_icon", resourceCulture);
@@ -376,6 +486,16 @@ namespace ZampGUI.Properties {
         internal static System.Drawing.Bitmap menu_terminal_icon {
             get {
                 object obj = ResourceManager.GetObject("menu_terminal_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_website {
+            get {
+                object obj = ResourceManager.GetObject("menu_website", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
