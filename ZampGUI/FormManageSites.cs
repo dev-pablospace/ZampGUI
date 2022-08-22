@@ -54,8 +54,6 @@ namespace ZampGUI
                     RigaSite r = (RigaSite)item.DataBoundItem;
                     lista.Remove(r);
                 }
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = lista;
             }
             else
             {
@@ -69,10 +67,16 @@ namespace ZampGUI
                         RigaSite r = (RigaSite)item.DataBoundItem;
                         lista.Remove(r);
                     }
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = lista;
                 }
             }
+
+            if(lista.Count() == 0)
+            {
+                lista.Add(new RigaSite() { Url = "", Name = "" });
+            }
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = lista;
 
         }
 
@@ -89,7 +93,10 @@ namespace ZampGUI
             List<JProperty> arr = new List<JProperty>();
             foreach(var item in lista)
             {
-                arr.Add(new JProperty(item.Name, item.Url));
+                if(!string.IsNullOrEmpty(item.Name) && !string.IsNullOrEmpty(item.Url))
+                {
+                    arr.Add(new JProperty(item.Name, item.Url));
+                }
             }
 
             cv.json = cv.json ?? ZampGUILib.getJson_Env();
