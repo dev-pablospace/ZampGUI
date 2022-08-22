@@ -26,9 +26,9 @@ namespace ZampGUI
 
             JObject jobj = ZampGUILib.getJson_Env();
             JToken sites = jobj[cv._env]["sites"];
-            if (sites == null)
+            if (sites == null || sites.Count() == 0)
             {
-                lista.Add(new RigaSite());
+                lista.Add(new RigaSite() { Url = "", Name = "" });
             }
             else
             {
