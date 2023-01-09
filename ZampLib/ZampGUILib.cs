@@ -380,7 +380,13 @@ namespace ZampLib
                 return sout;
             }
 
-            Process proc = Process.GetProcessById(Convert.ToInt32(pid));
+            Process proc = null;
+            try
+            {
+                proc = Process.GetProcessById(Convert.ToInt32(pid));
+            }
+            catch (Exception ex) { }
+
             if (proc != null)
             {
                 sout += "killing proc " + friendly_name + " with id " + proc.Id + Environment.NewLine;
