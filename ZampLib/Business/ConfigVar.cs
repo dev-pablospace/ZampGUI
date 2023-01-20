@@ -32,6 +32,7 @@ namespace ZampLib.Business
         public string pathWPcli { get; set; }
 
         public bool checkBackUpAllDBOnExit { get; set; }
+        public bool checkUpdateZampgui { get; set; }
         public string default_editor { get; set; }
         public string apache_http_port { get; set; }
         public string apache_https_port { get; set; }
@@ -307,6 +308,11 @@ namespace ZampLib.Business
             else
                 this.checkBackUpAllDBOnExit = (bool)json[_env]["checkBackUpAllDBOnExit"];
 
+            if (json[_env]["checkUpdateZampgui"] == null || (string)json[_env]["checkUpdateZampgui"] == "")
+                this.checkUpdateZampgui = false;
+            else
+                this.checkUpdateZampgui = (bool)json[_env]["checkUpdateZampgui"];
+
             this.default_editor = (string)json[_env]["default_editor"];
             this.apache_http_port = (string)json[_env]["apache_http_port"];
             this.apache_https_port = (string)json[_env]["apache_https_port"];
@@ -375,6 +381,12 @@ namespace ZampLib.Business
             else
                 checkBackUpAllDBOnExit = (bool)jimp_env["checkBackUpAllDBOnExit"];
 
+            json[_env]["checkUpdateZampgui"] = jimp_env["checkUpdateZampgui"];
+            if (jimp_env["checkUpdateZampgui"] == null || (string)jimp_env["checkUpdateZampgui"] == "")
+                checkUpdateZampgui = false;
+            else
+                checkUpdateZampgui = (bool)jimp_env["checkUpdateZampgui"];
+
 
             json[_env]["default_editor"] = jimp_env["default_editor"];
             default_editor = (string)jimp_env["default_editor"];
@@ -405,7 +417,8 @@ namespace ZampLib.Business
             string rootFolder = ZampGUILib.getRootFolder(mainForm);
             if(System.IO.File.Exists(path_json_config))
             {
-                jsonObject = JObject.Parse(File.ReadAllText(path_json_config));
+                string temp = File.ReadAllText(path_json_config);
+                jsonObject = JObject.Parse(temp);
             }
             else
             {
@@ -489,7 +502,12 @@ namespace ZampLib.Business
             {
                 rel.Add("checkBackUpAllDBOnExit", "");
             }
-            
+
+            if (rel["checkUpdateZampgui"] == null)
+            {
+                rel.Add("checkUpdateZampgui", "");
+            }
+
             if (rel["default_editor"] == null)
             {
                 rel.Add("default_editor", "");
@@ -659,6 +677,7 @@ namespace ZampLib.Business
         {
             this.json = this.json ?? ZampGUILib.getJson_Env();
             json[_env]["checkBackUpAllDBOnExit"] = checkBackUpAllDBOnExit;
+            json[_env]["checkUpdateZampgui"] = checkUpdateZampgui;
             ZampGUILib.setJson_Env(json);
         }
         public void updateDefaultEditor(string editor_path)

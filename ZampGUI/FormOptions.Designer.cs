@@ -49,6 +49,7 @@
             this.btnSelectNode = new System.Windows.Forms.Button();
             this.txtPathNodeJS = new System.Windows.Forms.TextBox();
             this.checkBackUpAllDBOnExit = new System.Windows.Forms.CheckBox();
+            this.checkUpdateZampgui = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_http)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_https)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_mariadb)).BeginInit();
@@ -251,12 +252,24 @@
             // checkBackUpAllDBOnExit
             // 
             this.checkBackUpAllDBOnExit.AutoSize = true;
-            this.checkBackUpAllDBOnExit.Location = new System.Drawing.Point(521, 355);
+            this.checkBackUpAllDBOnExit.Location = new System.Drawing.Point(503, 333);
             this.checkBackUpAllDBOnExit.Name = "checkBackUpAllDBOnExit";
             this.checkBackUpAllDBOnExit.Size = new System.Drawing.Size(219, 21);
             this.checkBackUpAllDBOnExit.TabIndex = 24;
             this.checkBackUpAllDBOnExit.Text = "Backup All DB on Exit";
             this.checkBackUpAllDBOnExit.UseVisualStyleBackColor = true;
+            // 
+            // checkUpdateZampgui
+            // 
+            this.checkUpdateZampgui.AutoSize = true;
+            this.checkUpdateZampgui.Checked = true;
+            this.checkUpdateZampgui.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkUpdateZampgui.Location = new System.Drawing.Point(503, 360);
+            this.checkUpdateZampgui.Name = "checkUpdateZampgui";
+            this.checkUpdateZampgui.Size = new System.Drawing.Size(282, 21);
+            this.checkUpdateZampgui.TabIndex = 25;
+            this.checkUpdateZampgui.Text = "Check New Version at startup";
+            this.checkUpdateZampgui.UseVisualStyleBackColor = true;
             // 
             // FormOptions
             // 
@@ -264,6 +277,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(801, 444);
+            this.Controls.Add(this.checkUpdateZampgui);
             this.Controls.Add(this.checkBackUpAllDBOnExit);
             this.Controls.Add(this.btnSelectNode);
             this.Controls.Add(this.txtPathNodeJS);
@@ -319,5 +333,6 @@
         private System.Windows.Forms.Button btnSelectNode;
         private System.Windows.Forms.TextBox txtPathNodeJS;
         private System.Windows.Forms.CheckBox checkBackUpAllDBOnExit;
+        private System.Windows.Forms.CheckBox checkUpdateZampgui;
     }
 }

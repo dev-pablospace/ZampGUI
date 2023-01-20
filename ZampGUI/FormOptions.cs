@@ -38,6 +38,7 @@ namespace ZampGUI
             txtPathNodeJS.Text = cv.pathNode;
             txtPathSass.Text = cv.pathSass;
             checkBackUpAllDBOnExit.Checked = cv.checkBackUpAllDBOnExit;
+            checkUpdateZampgui.Checked = cv.checkUpdateZampgui;
             numericUpDown_http.Value = Convert.ToInt32(cv.apache_http_port);
             numericUpDown_https.Value = Convert.ToInt32(cv.apache_https_port);
             numericUpDown_mariadb.Value = Convert.ToInt32(cv.mariadb_port);
@@ -73,6 +74,7 @@ namespace ZampGUI
                 cv.pathSass = txtPathSass.Text.Trim();
 
                 cv.checkBackUpAllDBOnExit = checkBackUpAllDBOnExit.Checked;
+                cv.checkUpdateZampgui = checkUpdateZampgui.Checked;
 
                 string[] lines = txtPathConsole.Text.Trim().Split(new[] { Environment.NewLine },StringSplitOptions.None);
                 cv.ListPathConsole = new List<string>();
@@ -104,6 +106,7 @@ namespace ZampGUI
                 || cv.pathNode != txtPathNodeJS.Text.Trim()
                 || cv.pathSass != txtPathSass.Text.Trim()
                 || cv.checkBackUpAllDBOnExit != checkBackUpAllDBOnExit.Checked
+                || cv.checkUpdateZampgui != checkUpdateZampgui.Checked
                 ;
         }
 

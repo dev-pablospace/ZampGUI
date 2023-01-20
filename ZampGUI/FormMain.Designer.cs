@@ -94,10 +94,13 @@
             this.listViewInfo = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelMainForm = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxApache)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtOut
@@ -112,7 +115,7 @@
             this.txtOut.Name = "txtOut";
             this.txtOut.ReadOnly = true;
             this.txtOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOut.Size = new System.Drawing.Size(834, 222);
+            this.txtOut.Size = new System.Drawing.Size(834, 215);
             this.txtOut.TabIndex = 1;
             // 
             // contextMenuStrip1
@@ -653,12 +656,30 @@
             // 
             this.columnHeader2.Text = "Value";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelMainForm});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 402);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(860, 26);
+            this.statusStrip1.TabIndex = 16;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabelMainForm
+            // 
+            this.toolStripStatusLabelMainForm.Name = "toolStripStatusLabelMainForm";
+            this.toolStripStatusLabelMainForm.Size = new System.Drawing.Size(21, 20);
+            this.toolStripStatusLabelMainForm.Text = "....";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(860, 428);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listViewInfo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -677,6 +698,8 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMariaDB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxApache)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -747,6 +770,8 @@
         private System.Windows.Forms.ToolStripMenuItem importConfigurationToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelMainForm;
     }
 }
 

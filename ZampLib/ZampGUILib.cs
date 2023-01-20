@@ -416,7 +416,8 @@ namespace ZampLib
         public static JObject getJson_Env()
         {
             string path_json_config = getJsonPath();
-            JObject o1 = JObject.Parse(File.ReadAllText(path_json_config));
+            string temp = File.ReadAllText(path_json_config);
+            JObject o1 = JObject.Parse(temp);
             return o1;
         }
         public static void setJson_Env(JObject jsonObj)

@@ -38,6 +38,7 @@ namespace ZampGUI
             //listViewInfo.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             //listViewInfo.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             listViewInfo.Columns[1].Width = listViewInfo.Width - listViewInfo.Columns[0].Width - 20;
+            toolStripStatusLabelMainForm.Text = "";
 
             //change title
             this.Text = "ZampGUI v" + ZampGUILib.getval_from_appsetting("ver");
@@ -72,6 +73,10 @@ namespace ZampGUI
                 refreshStatusForm(true);
                 crealinkSite(cv.listaSites);
 
+                if(cv.checkUpdateZampgui)
+                {
+                    checkUpdate_statusBar();
+                }
             }
             catch (Exception er)
             {
@@ -117,6 +122,43 @@ namespace ZampGUI
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ZampGUILib.printMsg_and_exit("", true);
+        }
+        private void btnStartStopApache_Click(object sender, EventArgs e)
+        {
+            disableControl();
+            check_and_kill_other_instance(typeProg.apache);
+            if (ZampGUILib.checkRunningProc(cv.getPID_apache))
+            {
+                addOutput(ZampGUILib.killproc(cv, typeProg.apache));
+            }
+            else
+            {
+                addOutput(ZampGUILib.startProc(cv, typeProg.apache, new string[] { }));
+            }
+
+            enableControl();
+            refreshStatusForm();
+        }
+        private void btnStartStopMariaDB_Click(object sender, EventArgs e)
+        {
+            disableControl();
+            do_All_Backup_Db();
+            check_and_kill_other_instance(typeProg.mariadb);
+            if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
+            {
+                addOutput(ZampGUILib.killproc(cv, typeProg.mariadb));
+            }
+            else
+            {
+                addOutput(ZampGUILib.startProc(cv, typeProg.mariadb, new string[] { }));
+            }
+
+            enableControl();
+            refreshStatusForm();
+        }
+        private void timer_refresh_Tick(object sender, EventArgs e)
+        {
+            refreshStatusForm();
         }
 
         #endregion
@@ -462,52 +504,23 @@ namespace ZampGUI
         }
 
         #endregion
-        
-        
-        
-        private void btnStartStopApache_Click(object sender, EventArgs e)
-        {
-            disableControl();
-            check_and_kill_other_instance(typeProg.apache);
-            if (ZampGUILib.checkRunningProc(cv.getPID_apache))
-            {
-                addOutput(ZampGUILib.killproc(cv, typeProg.apache));
-            }
-            else
-            {
-                addOutput(ZampGUILib.startProc(cv, typeProg.apache, new string[] { }));
-            }
-            
-            enableControl();
-            refreshStatusForm();
-        }
-        private void btnStartStopMariaDB_Click(object sender, EventArgs e)
-        {
-            disableControl();
-            do_All_Backup_Db();
-            check_and_kill_other_instance(typeProg.mariadb);
-            if (ZampGUILib.checkRunningProc(cv.getPID_mariadb))
-            {
-                addOutput(ZampGUILib.killproc(cv, typeProg.mariadb));
-            }
-            else
-            {
-                addOutput(ZampGUILib.startProc(cv, typeProg.mariadb, new string[] { }));
-            }
-            
-            enableControl();
-            refreshStatusForm();
-        }
-        private void timer_refresh_Tick(object sender, EventArgs e)
-        {
-            refreshStatusForm();
-        }
-       
-        
-        
-        
 
-        
+        private void toolStripStatusLabelMainForm_Click(object sender, EventArgs e)
+        {
+            ToolStripLabel toolStripLabel1 = (ToolStripLabel)sender;
+
+            // Start Internet Explorer and navigate to the URL in the
+            // tag property.
+            if(!string.IsNullOrEmpty(toolStripLabel1.Tag.ToString()))
+            {
+                System.Diagnostics.Process.Start(toolStripLabel1.Tag.ToString());
+
+                // Set the LinkVisited property to true to change the color.
+                toolStripLabel1.LinkVisited = true;
+            }
+            
+        }
+
         #endregion
 
         #region private method
@@ -745,6 +758,41 @@ namespace ZampGUI
             btnStartStopMariaDB.Enabled = true;
             operationToolStripMenuItem.Enabled = true;
             editToolStripMenuItem.Enabled = true;
+        }
+        private void checkUpdate_statusBar()
+        {
+            
+
+            try
+            {
+                //recupero i config dal app.config
+                string HOME = ZampGUILib.getval_from_appsetting("HOME");
+                string ver = ZampGUILib.getval_from_appsetting("ver");
+
+                JObject jobj = cv.getReqInfo_from_WebSite(HOME);
+
+                string latest_vers = jobj.Value<string>("latest_vers");
+
+                //mi occupo di fare il check sulla versione
+                string ver_web = jobj.Value<string>("ver");
+
+                if (ver.Equals(ver_web))
+                {
+                    toolStripStatusLabelMainForm.Text = "No Update available"; //"You have the latest version of ZampGUI"
+                    //toolStripStatusLabelMainForm.Tag = "";
+                }
+                else
+                {
+                    toolStripStatusLabelMainForm.IsLink= true;
+                    toolStripStatusLabelMainForm.Click += new System.EventHandler(this.toolStripStatusLabelMainForm_Click);
+                    toolStripStatusLabelMainForm.Text = "New version " + ver_web + " available ";
+                    toolStripStatusLabelMainForm.Tag = latest_vers;
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Service not available at the moment");
+            }
         }
 
 
