@@ -39,6 +39,7 @@ namespace ZampLib.Business
         public string mariadb_port { get; set; }
         public string pid_currentproc_apache { get; set; }
         public string pid_currentproc_mariadb { get; set; }
+        public string uuid_str { get; set; }
         public List<string> ListPathConsole { get; set; } //percorsi aggiuntivi che devo aggiungere alla %PATH% QUANDO apro la console
         public List<RigaSite> listaSites = new List<RigaSite>();
         #endregion
@@ -320,6 +321,20 @@ namespace ZampLib.Business
             this.pid_currentproc_apache = (string)json[_env]["pid_currentproc_apache"];
             this.pid_currentproc_mariadb = (string)json[_env]["pid_currentproc_mariadb"];
 
+
+            if (json[_env]["uuid_str"] == null || (string)json[_env]["uuid_str"] == "")
+            {
+                Guid myuuid = Guid.NewGuid();
+                string myuuidAsString = myuuid.ToString();
+                this.uuid_str = myuuidAsString;
+            }
+            else
+            {
+                this.uuid_str = (string)json[_env]["uuid_str"];
+            }
+            
+
+
             this.ListPathConsole = new List<string>();
             foreach (string s in json[_env]["ListPathConsole"])
             {
@@ -391,6 +406,8 @@ namespace ZampLib.Business
             json[_env]["default_editor"] = jimp_env["default_editor"];
             default_editor = (string)jimp_env["default_editor"];
 
+            json[_env]["uuid_str"] = jimp_env["uuid_str"];
+            uuid_str = (string)jimp_env["uuid_str"];
 
             json[_env]["ListPathConsole"] = jimp_env["ListPathConsole"];
             ListPathConsole = new List<string>();
@@ -536,6 +553,11 @@ namespace ZampLib.Business
             if (rel["pid_currentproc_mariadb"] == null)
             {
                 rel.Add("pid_currentproc_mariadb", "");
+            }
+
+            if (rel["uuid_str"] == null)
+            {
+                rel.Add("uuid_str", "");
             }
 
             if (rel["ListPathConsole"] == null)
@@ -804,6 +826,15 @@ namespace ZampLib.Business
             }
             ZampGUILib.setJson_Env(json);
         }
+        public void updateUUID()
+        {
+            this.json = this.json ?? ZampGUILib.getJson_Env();
+            if ((string)json[_env]["uuid_str"] != this.uuid_str)
+            {
+                json[_env]["uuid_str"] = this.uuid_str;
+                ZampGUILib.setJson_Env(json);
+            }
+        }
         public void updatePath(string abs_main_path)
         {
             if(abs_main_path != pathBase)
@@ -1003,12 +1034,12 @@ namespace ZampLib.Business
             }
 
         }
-        public JObject getReqInfo_from_WebSite(string url_pablospace)
+        public JObject getReqInfo_from_WebSite(string url_pablospace, string ver)
         {
             string contents = "";
             using (var wc = new System.Net.WebClient())
             {
-                contents = wc.DownloadString(url_pablospace.Trim('/') + "?reqinfo");
+                contents = wc.DownloadString(url_pablospace.Trim('/') + "?reqinfo=" + uuid_str + "&ver=" + ver);
             }
             if(string.IsNullOrEmpty(contents))
             {

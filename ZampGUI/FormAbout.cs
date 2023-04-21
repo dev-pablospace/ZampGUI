@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZampLib;
 using ZampLib.Business;
 
 namespace ZampGUI
@@ -25,7 +26,8 @@ namespace ZampGUI
             InitializeComponent();
             this.cv = cv;
             this.HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
-            JObject jobj = cv.getReqInfo_from_WebSite(HOME);
+            string ver = ZampLib.ZampGUILib.getval_from_appsetting("ver");
+            JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
 
             paypal_donate_url = jobj.Value<string>("paypal_donate_url");
             sourceforge_zampgui_url = jobj.Value<string>("sourceforge_zampgui_url");

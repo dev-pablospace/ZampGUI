@@ -54,6 +54,7 @@ namespace ZampGUI
                 cv = new ConfigVar(this);
                 string root_folder = ZampGUILib.getRootFolder(this);
                 cv.updatePath(root_folder);
+                cv.updateUUID();
 
 
                 string svalidate = cv.validateSetting();
@@ -406,7 +407,8 @@ namespace ZampGUI
             {
                 //recupero i config dal app.config
                 string HOME = ZampGUILib.getval_from_appsetting("HOME");
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME);
+                string ver = ZampGUILib.getval_from_appsetting("ver");
+                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
 
 
                 //mi occupo di fare il check sulla versione
@@ -427,7 +429,7 @@ namespace ZampGUI
                 string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
 
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME);
+                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
 
                 //salvo il config nell app.config
                 //string home_web = jobj.Value<string>("homepage");
@@ -480,7 +482,8 @@ namespace ZampGUI
             {
                 //recupero i config dal app.config
                 string HOME = ZampGUILib.getval_from_appsetting("HOME");
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME);
+                string ver = ZampGUILib.getval_from_appsetting("ver");
+                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
 
 
                 //mi occupo di fare il check sulla versione
@@ -769,7 +772,7 @@ namespace ZampGUI
                 string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
 
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME);
+                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
 
                 string latest_vers = jobj.Value<string>("latest_vers");
 
