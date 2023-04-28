@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
@@ -1037,9 +1039,17 @@ namespace ZampLib.Business
         public JObject getReqInfo_from_WebSite(string url_pablospace, string ver)
         {
             string contents = "";
+            string url = url_pablospace.ToLower().Trim('/');
+            NameValueCollection values = new NameValueCollection();
+            values.Add("reqinfo", uuid_str);
+            values.Add("ver", ver);
+
             using (var wc = new System.Net.WebClient())
             {
-                contents = wc.DownloadString(url_pablospace.Trim('/') + "?reqinfo=" + uuid_str + "&ver=" + ver);
+                wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                byte[] result = wc.UploadValues(url, "POST", values);
+                contents = System.Text.Encoding.UTF8.GetString(result);
+                //contents = wc.DownloadString(url_pablospace.ToLower().Trim('/') + "?reqinfo=" + uuid_str + "&ver=" + ver);
             }
             if(string.IsNullOrEmpty(contents))
             {

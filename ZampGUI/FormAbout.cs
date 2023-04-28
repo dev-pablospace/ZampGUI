@@ -57,10 +57,5 @@ namespace ZampGUI
         {
             System.Diagnostics.Process.Start(sourceforge_zampgui_url);
         }
-
-        private void pictureBoxDonatePaypal_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(paypal_donate_url);
-        }
     }
 }
