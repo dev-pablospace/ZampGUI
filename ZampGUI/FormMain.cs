@@ -413,7 +413,7 @@ namespace ZampGUI
                 //mi occupo di fare il check sulla versione
                 string homepage = jobj.Value<string>("homepage");
                 string supporto_pagina = jobj.Value<string>("supporto_pagina");
-                System.Diagnostics.Process.Start(homepage + "/" + supporto_pagina);
+                System.Diagnostics.Process.Start(supporto_pagina);
             }
             catch (Exception ex)
             {
