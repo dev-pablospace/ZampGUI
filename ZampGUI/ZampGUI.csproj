@@ -268,6 +268,8 @@
     <Content Include="img\menu_x_circle_icon.png" />
     <Content Include="img\ZampGUI logo mini.ico" />
     <Content Include="img\ZampGUI logo mini.png" />
+    <None Include="Resources\social.png" />
+    <None Include="Resources\dolphin.png" />
     <None Include="Resources\menu_db.png" />
     <None Include="Resources\menu_mysql.png" />
     <None Include="Resources\menu_php.png" />

@@ -133,6 +133,16 @@ namespace ZampGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dolphin {
+            get {
+                object obj = ResourceManager.GetObject("dolphin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap donate_paypal_btn {
             get {
                 object obj = ResourceManager.GetObject("donate_paypal_btn", resourceCulture);
@@ -536,6 +546,16 @@ namespace ZampGUI.Properties {
         internal static System.Drawing.Bitmap php_icona {
             get {
                 object obj = ResourceManager.GetObject("php_icona", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap social {
+            get {
+                object obj = ResourceManager.GetObject("social", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

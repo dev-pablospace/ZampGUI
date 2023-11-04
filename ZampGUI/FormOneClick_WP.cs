@@ -178,8 +178,10 @@ namespace ZampGUI
             //}
         }
 
-        #endregion
 
+
+
+        #endregion
 
         #region metodi privati
         //private void bEnable_btn_install()
@@ -406,8 +408,6 @@ namespace ZampGUI
         //}
         #endregion
 
-
-
         #region evventi download zip
         //private void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         //{
@@ -499,5 +499,9 @@ namespace ZampGUI
         //}
         #endregion
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
