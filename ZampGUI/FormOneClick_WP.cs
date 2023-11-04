@@ -141,21 +141,29 @@ namespace ZampGUI
         private void Completed(object sender, AsyncCompletedEventArgs e)
         {
             webClient = null;
+            string nome_sito = txt_nomesito.Text.ToLower().Trim();
+
             txtOut.Text += "Download completed!" + Environment.NewLine + "Uncompress zip files" + Environment.NewLine;
             System.IO.Compression.ZipFile.ExtractToDirectory(wp_latest_zip, cv.Apache_htdocs_path);
-            Directory.Move(Path.Combine(cv.Apache_htdocs_path, "wordpress"), Path.Combine(cv.Apache_htdocs_path, txt_nomesito.Text.ToLower().Trim()));
+            Directory.Move(Path.Combine(cv.Apache_htdocs_path, "wordpress"), Path.Combine(cv.Apache_htdocs_path, nome_sito));
 
             string connStr = "server=127.0.0.1;user=root;password=root;port=" + cv.mariadb_port;
             using (var conn = new MySqlConnection(connStr))
             using (var cmd = conn.CreateCommand())
             {
                 conn.Open();
-                cmd.CommandText = "CREATE DATABASE " + txt_nomesito.Text.ToLower().Trim() + " DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
+                cmd.CommandText = "CREATE DATABASE " + nome_sito + " DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
                 cmd.ExecuteNonQuery();
             }
 
-            txtOut.Text += "Operation Complete" + Environment.NewLine + "Please visit: http://localhost/" + txt_nomesito.Text.ToLower().Trim();
-
+            txtOut.Text += "Operation Complete" + Environment.NewLine + "Please visit: http://localhost/" + nome_sito + " - use the following data during installation" + Environment.NewLine;
+            txtOut.Text += "-----------------" + Environment.NewLine;
+            txtOut.Text += "database name: " + nome_sito + Environment.NewLine;
+            txtOut.Text += "username: root" + Environment.NewLine;
+            txtOut.Text += "password: root" + Environment.NewLine;
+            txtOut.Text += "database host: localhost" + Environment.NewLine;
+            txtOut.Text += "Table prefix: wp_   (if you want you can change it) " + Environment.NewLine;
+            
             //var connString = "Server=127.0.0.1;User ID=root;Password=root;Database=mysql;port=" + port;
             //using (var conn = new MySqlConnection(connString))
             //{
