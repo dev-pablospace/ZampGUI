@@ -14,6 +14,7 @@ using System.IO.Compression;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
 
 namespace ZampGUI
 {
@@ -21,10 +22,17 @@ namespace ZampGUI
     {
         #region vars
         public ConfigVar cv;
-        public string temp_folder;
-        public string wp_latest_zip;
+        public string wp_latest_zip 
+        {
+            get
+            {
+                return Path.Combine(cv.Apache_htdocs_path, "latest.zip");
+            }
+        }
+        
 
         BackgroundWorker backgroundWorker2;
+        private WebClient webClient = null;
         #endregion
 
         #region constructor
@@ -32,8 +40,6 @@ namespace ZampGUI
         {
             InitializeComponent();
             this.cv = cv;
-
-            temp_folder = Path.Combine(cv.pathBase, "temp");
 
             //using (WebClient wc = new WebClient())
             //{
@@ -53,79 +59,76 @@ namespace ZampGUI
         #region eventi form
         private void btnInstall_Click(object sender, EventArgs e)
         {
-            string nome_sito = txt_url.Text.Trim();
-            string dbname = txt_dbname.Text.Trim();
-            string dbuser = txt_dbuser.Text.Trim();
-            string dbpass = txt_dbpassword.Text.Trim();
+            txtOut.Text = "";
+            string nome_sito = txt_nomesito.Text.ToLower().Trim();
 
-            string sitetitle = txt_sitetitle.Text.Trim();
-            string siteuser = txt_siteuser.Text.Trim();
-            string sitepassword = txt_sitepassword.Text.Trim();
-            string siteemail = txt_siteemail.Text.Trim();
-
-
-            string wpfolder = Path.Combine(cv.pathBase, "sites", "wp", nome_sito);
-
-            if (string.IsNullOrEmpty(nome_sito)
-               || string.IsNullOrEmpty(dbname)
-               || string.IsNullOrEmpty(dbuser)
-               || string.IsNullOrEmpty(dbpass)
-               || string.IsNullOrEmpty(sitetitle)
-               || string.IsNullOrEmpty(siteuser)
-               || string.IsNullOrEmpty(sitepassword)
-               || string.IsNullOrEmpty(siteemail))
+            if (string.IsNullOrEmpty(nome_sito))
             {
-                MessageBox.Show("Please complete every field in the form");
+                MessageBox.Show("Please insert web site name");
                 return;
             }
 
-
-
-            if (Directory.Exists(wpfolder))
+            if (nome_sito == "wordpress")
             {
-                //MessageBox.Show("error: sites/wp folder contains \"" + nome_sito + "\" directory");
-                //return;
+                MessageBox.Show("'wordpress' name is reserved, Please use a different name");
+                return;
             }
-            else
+
+            if(!Regex.IsMatch(nome_sito, "^[a-zA-Z]+$"))
             {
-                Directory.CreateDirectory(wpfolder);
-            }
-            if (dbname.Length < 2)
-            {
-                MessageBox.Show("db name too short");
+                MessageBox.Show("Please use only  A-Za-z (Alpha) characters");
                 return;
             }
 
             List<string> all_db = ZampGUILib.getAllDB(cv.mariadb_port);
             foreach (string s in all_db)
             {
-                if (s.Equals(dbname))
+                if (s.Equals(nome_sito))
                 {
-                    //MessageBox.Show("database \"" + s + "\" already exists");
-                    //return;
+                    MessageBox.Show("database \"" + s + "\" already exists - please insert a different name");
+                    return;
                 }
+            }
+
+            if(System.IO.Directory.Exists(Path.Combine(cv.Apache_htdocs_path, "latest.zip")))
+            {
+                MessageBox.Show("folder \"" + nome_sito + "\" already exists inside Apache/htdocs - please insert a different name");
+                return;
             }
 
 
             btnInstall.Enabled = false;
-            //txt_dbname.Enabled = false;
-            //txt_url.Enabled = false;
-            //comboBox_protocol.Enabled = false;
 
-            ProcessStartInfo pro = new ProcessStartInfo();
-            pro.FileName = System.IO.Path.Combine(cv.pathBase, "scripts", "wpcli_create.bat");
-            pro.UseShellExecute = false;
-            pro.WorkingDirectory = wpfolder;
+            if (webClient != null)
+                return;
 
-            string args = "\"" + dbname + "\" \"" + dbuser + "\" \"" + dbpass + "\" \"" + nome_sito + "\" \"" + sitetitle + "\" \"" + siteuser + "\" \"" + sitepassword + "\" \"" + siteemail + "\"";
-            pro.Arguments =  args;
-            Process proStart = new Process();
-            proStart.StartInfo = pro;
 
-            string addToPath = "\"" + cv.Apache_exe + "\";\"" + cv.PHP_path + "\";\"" + cv.MariaDB_exe + "\";\"" + cv.pathWPcli + "\";\"" + System.IO.Path.Combine(cv.pathBase, "scripts") + "\"";
-            string PATH = Environment.GetEnvironmentVariable("PATH");
-            pro.EnvironmentVariables["PATH"] = addToPath + ";" + PATH;
-            proStart.Start();
+            if (System.IO.File.Exists(wp_latest_zip))
+                System.IO.File.Delete(wp_latest_zip);
+
+
+            txtOut.Text += "Downloading Wordpress zip" + Environment.NewLine;
+
+            webClient = new WebClient();
+            webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+            webClient.DownloadFileAsync(new Uri("https://wordpress.org/latest.zip"), Path.Combine(cv.Apache_htdocs_path, "latest.zip"));
+
+            
+
+            //ProcessStartInfo pro = new ProcessStartInfo();
+            //pro.FileName = System.IO.Path.Combine(cv.pathBase, "scripts", "wpcli_create.bat");
+            //pro.UseShellExecute = false;
+            //pro.WorkingDirectory = wpfolder;
+
+            //string args = "\"" + dbname + "\" \"" + dbuser + "\" \"" + dbpass + "\" \"" + nome_sito + "\" \"" + sitetitle + "\" \"" + siteuser + "\" \"" + sitepassword + "\" \"" + siteemail + "\"";
+            //pro.Arguments =  args;
+            //Process proStart = new Process();
+            //proStart.StartInfo = pro;
+
+            //string addToPath = "\"" + cv.Apache_exe + "\";\"" + cv.PHP_path + "\";\"" + cv.MariaDB_exe + "\";\"" + cv.pathWPcli + "\";\"" + System.IO.Path.Combine(cv.pathBase, "scripts") + "\"";
+            //string PATH = Environment.GetEnvironmentVariable("PATH");
+            //pro.EnvironmentVariables["PATH"] = addToPath + ";" + PATH;
+            //proStart.Start();
 
 
 
@@ -135,6 +138,45 @@ namespace ZampGUI
 
         }
 
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            webClient = null;
+            txtOut.Text += "Download completed!" + Environment.NewLine + "Uncompress zip files" + Environment.NewLine;
+            System.IO.Compression.ZipFile.ExtractToDirectory(wp_latest_zip, cv.Apache_htdocs_path);
+            Directory.Move(Path.Combine(cv.Apache_htdocs_path, "wordpress"), Path.Combine(cv.Apache_htdocs_path, txt_nomesito.Text.ToLower().Trim()));
+
+            string connStr = "server=127.0.0.1;user=root;password=root;port=" + cv.mariadb_port;
+            using (var conn = new MySqlConnection(connStr))
+            using (var cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = "CREATE DATABASE " + txt_nomesito.Text.ToLower().Trim() + " DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
+                cmd.ExecuteNonQuery();
+            }
+
+            txtOut.Text += "Operation Complete" + Environment.NewLine + "Please visit: http://localhost/" + txt_nomesito.Text.ToLower().Trim();
+
+            //var connString = "Server=127.0.0.1;User ID=root;Password=root;Database=mysql;port=" + port;
+            //using (var conn = new MySqlConnection(connString))
+            //{
+            //    conn.Open();
+
+            //    // Insert some data
+            //    using (var cmd = new MySqlCommand())
+            //    {
+            //        cmd.Connection = conn;
+            //        cmd.CommandText = "INSERT INTO data (some_field) VALUES (@p)";
+            //        cmd.Parameters.AddWithValue("p", "Hello world");
+            //        cmd.ExecuteNonQuery();
+            //    }
+
+            //    // Retrieve all rows
+            //    using (var cmd = new MySqlCommand("SHOW DATABASES;", conn))
+            //    using (var reader = cmd.ExecuteReader())
+            //        while (reader.Read())
+            //            tempList.Add(reader.GetString(0));
+            //}
+        }
 
         #endregion
 

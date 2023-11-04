@@ -16,8 +16,7 @@ namespace ZampGUI
     public partial class FormAbout : Form
     {
         public ConfigVar cv;
-        public string HOME { get; set; }
-        public string paypal_donate_url { get; set; }
+        public string homepage { get; set; }
         public string sourceforge_zampgui_url { get; set; }
         public string github_url { get; set; }
 
@@ -25,22 +24,21 @@ namespace ZampGUI
         {
             InitializeComponent();
             this.cv = cv;
-            this.HOME = ZampLib.ZampGUILib.getval_from_appsetting("HOME");
             string ver = ZampLib.ZampGUILib.getval_from_appsetting("ver");
-            JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
+            JObject jobj = cv.getReqInfo_from_WebSite(ver);
 
-            paypal_donate_url = jobj.Value<string>("paypal_donate_url");
             sourceforge_zampgui_url = jobj.Value<string>("sourceforge_zampgui_url");
             github_url = jobj.Value<string>("github_url");
+            homepage = jobj.Value<string>("homepage");
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(HOME);
+            System.Diagnostics.Process.Start(homepage);
         }
 
         private void pictureBoxHome_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(HOME);
+            System.Diagnostics.Process.Start(homepage);
         }
 
         private void pictureBoxEmail_Click(object sender, EventArgs e)
@@ -56,6 +54,11 @@ namespace ZampGUI
         private void pictureBoxSourceforge_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(sourceforge_zampgui_url);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

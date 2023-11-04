@@ -406,14 +406,14 @@ namespace ZampGUI
             try
             {
                 //recupero i config dal app.config
-                string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
+                JObject jobj = cv.getReqInfo_from_WebSite(ver);
 
 
                 //mi occupo di fare il check sulla versione
+                string homepage = jobj.Value<string>("homepage");
                 string supporto_pagina = jobj.Value<string>("supporto_pagina");
-                System.Diagnostics.Process.Start(HOME + "/" + supporto_pagina);
+                System.Diagnostics.Process.Start(homepage + "/" + supporto_pagina);
             }
             catch (Exception ex)
             {
@@ -426,18 +426,15 @@ namespace ZampGUI
             try
             {
                 //recupero i config dal app.config
-                string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
 
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
+                JObject jobj = cv.getReqInfo_from_WebSite(ver);
 
                 //salvo il config nell app.config
                 //string home_web = jobj.Value<string>("homepage");
-                string latest_vers = jobj.Value<string>("latest_vers");
+                string url_latest_vers = jobj.Value<string>("url_latest_vers");
 
                 //Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
-                //config.AppSettings.Settings.Remove("HOME");
-                //config.AppSettings.Settings.Add("HOME", home_web);
                 //config.Save(ConfigurationSaveMode.Minimal);
 
 
@@ -450,7 +447,7 @@ namespace ZampGUI
                 }
                 else
                 {
-                    FormUpdateProgram frm2 = new FormUpdateProgram(latest_vers);
+                    FormUpdateProgram frm2 = new FormUpdateProgram(url_latest_vers);
                     DialogResult dr = frm2.ShowDialog(this);
                     if (dr == DialogResult.OK)
                     {
@@ -481,9 +478,8 @@ namespace ZampGUI
             try
             {
                 //recupero i config dal app.config
-                string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
+                JObject jobj = cv.getReqInfo_from_WebSite(ver);
 
 
                 //mi occupo di fare il check sulla versione
@@ -769,12 +765,11 @@ namespace ZampGUI
             try
             {
                 //recupero i config dal app.config
-                string HOME = ZampGUILib.getval_from_appsetting("HOME");
                 string ver = ZampGUILib.getval_from_appsetting("ver");
 
-                JObject jobj = cv.getReqInfo_from_WebSite(HOME, ver);
+                JObject jobj = cv.getReqInfo_from_WebSite(ver);
 
-                string latest_vers = jobj.Value<string>("latest_vers");
+                string url_latest_vers = jobj.Value<string>("url_latest_vers");
 
                 //mi occupo di fare il check sulla versione
                 string ver_web = jobj.Value<string>("ver");
@@ -789,7 +784,7 @@ namespace ZampGUI
                     toolStripStatusLabelMainForm.IsLink= true;
                     toolStripStatusLabelMainForm.Click += new System.EventHandler(this.toolStripStatusLabelMainForm_Click);
                     toolStripStatusLabelMainForm.Text = "New version " + ver_web + " available ";
-                    toolStripStatusLabelMainForm.Tag = latest_vers;
+                    toolStripStatusLabelMainForm.Tag = url_latest_vers;
                 }
             }
             catch (Exception ex)

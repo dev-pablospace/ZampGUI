@@ -1036,10 +1036,11 @@ namespace ZampLib.Business
             }
 
         }
-        public JObject getReqInfo_from_WebSite(string url_pablospace, string ver)
+        public JObject getReqInfo_from_WebSite(string ver)
         {
             string contents = "";
-            string url = url_pablospace.ToLower().Trim('/');
+            string jsupdate = ZampLib.ZampGUILib.getval_from_appsetting("JSUPDATE");
+            jsupdate = jsupdate.ToLower().Trim('/');
             NameValueCollection values = new NameValueCollection();
             values.Add("reqinfo", uuid_str);
             values.Add("ver", ver);
@@ -1047,7 +1048,7 @@ namespace ZampLib.Business
             using (var wc = new System.Net.WebClient())
             {
                 wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                byte[] result = wc.UploadValues(url, "POST", values);
+                byte[] result = wc.UploadValues(jsupdate, "POST", values);
                 contents = System.Text.Encoding.UTF8.GetString(result);
                 //contents = wc.DownloadString(url_pablospace.ToLower().Trim('/') + "?reqinfo=" + uuid_str + "&ver=" + ver);
             }
