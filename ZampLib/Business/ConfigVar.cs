@@ -32,6 +32,8 @@ namespace ZampLib.Business
         public string pathSass { get; set; }
         public string pathNode { get; set; }
         public string pathWPcli { get; set; }
+        public string pathBackupSQLFolder { get; set; }
+
 
         public bool checkBackUpAllDBOnExit { get; set; }
         public bool checkUpdateZampgui { get; set; }
@@ -271,6 +273,13 @@ namespace ZampLib.Business
                 return "http://127.0.0.1:" + apache_http_port + "/info.php";
             }
         }
+        public string bash_exe_path
+        {
+            get
+            {
+                return System.IO.Path.Combine(App_Path, "PortableGit", "bin", "bash.exe");
+            }
+        }
         #endregion
 
 
@@ -304,6 +313,8 @@ namespace ZampLib.Business
             this.pathSass = (string)json[_env]["pathSass"];
             this.pathNode = (string)json[_env]["pathNode"];
             this.pathWPcli = (string)json[_env]["PathWPcli"];
+            this.pathBackupSQLFolder = (string)json[_env]["pathBackupSQLFolder"];
+
 
 
             if (json[_env]["checkBackUpAllDBOnExit"] == null || (string)json[_env]["checkBackUpAllDBOnExit"] == "")
@@ -391,6 +402,10 @@ namespace ZampLib.Business
 
             json[_env]["pathWPcli"] = jimp_env["pathWPcli"];
             pathWPcli = (string)jimp_env["pathWPcli"];
+
+            json[_env]["pathBackupSQLFolder"] = jimp_env["pathBackupSQLFolder"];
+            pathBackupSQLFolder = (string)jimp_env["pathBackupSQLFolder"];
+            
 
             json[_env]["checkBackUpAllDBOnExit"] = jimp_env["checkBackUpAllDBOnExit"];
             if (jimp_env["checkBackUpAllDBOnExit"] == null || (string)jimp_env["checkBackUpAllDBOnExit"] == "")
@@ -516,7 +531,15 @@ namespace ZampLib.Business
             {
                 rel.Add("pathWPcli", "");
             }
+
+            if (rel["pathBackupSQLFolder"] == null)
+            {
+                rel.Add("pathBackupSQLFolder", "");
+            }
+
             
+
+
             if (rel["checkBackUpAllDBOnExit"] == null)
             {
                 rel.Add("checkBackUpAllDBOnExit", "");
@@ -731,6 +754,8 @@ namespace ZampLib.Business
             json[_env]["pathGit"] = pathGit;//pathGit.StartsWith(System.IO.Path.Combine(pathBase, "Apps"))? pathGit.Remove(0, System.IO.Path.Combine(pathBase, "Apps").Length).Trim('\\'): pathGit;
             json[_env]["pathSass"] = pathSass;//pathSass.StartsWith(System.IO.Path.Combine(pathBase, "Apps")) ? pathSass.Remove(0, System.IO.Path.Combine(pathBase, "Apps").Length).Trim('\\') : pathSass;
             json[_env]["pathNode"] = pathNode; // pathNode.StartsWith(System.IO.Path.Combine(pathBase, "Apps")) ? pathNode.Remove(0, System.IO.Path.Combine(pathBase, "Apps").Length).Trim('\\') : pathNode;
+            json[_env]["pathBackupSQLFolder"] = pathBackupSQLFolder;
+            
 
             wp_cli_vers = refresh_wpcli_vers();
             json[_env]["vers_sf"]["wp_cli_vers"] = wp_cli_vers;
@@ -1183,6 +1208,8 @@ namespace ZampLib.Business
 
             return str;
         }
+
+
         private string refresh_apache_vers()
         {
             Regex regex;

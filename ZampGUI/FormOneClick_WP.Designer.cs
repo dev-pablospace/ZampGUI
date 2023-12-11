@@ -37,6 +37,8 @@
             this.btnInstall = new System.Windows.Forms.Button();
             this.txt_nomesito = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ddlWordpressVersion = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +62,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
+            this.label1.Size = new System.Drawing.Size(49, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Output";
             // 
@@ -80,6 +82,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.ddlWordpressVersion);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnInstall);
             this.groupBox1.Controls.Add(this.txt_nomesito);
@@ -96,7 +100,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(12, 35);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(161, 17);
+            this.label9.Size = new System.Drawing.Size(126, 15);
             this.label9.TabIndex = 13;
             this.label9.Text = "http://localhost/";
             // 
@@ -104,9 +108,9 @@
             // 
             this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInstall.Location = new System.Drawing.Point(15, 74);
+            this.btnInstall.Location = new System.Drawing.Point(12, 106);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(634, 43);
+            this.btnInstall.Size = new System.Drawing.Size(634, 34);
             this.btnInstall.TabIndex = 7;
             this.btnInstall.Text = "Install Wordpress";
             this.btnInstall.UseVisualStyleBackColor = true;
@@ -116,9 +120,9 @@
             // 
             this.txt_nomesito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_nomesito.Location = new System.Drawing.Point(183, 32);
+            this.txt_nomesito.Location = new System.Drawing.Point(153, 32);
             this.txt_nomesito.Name = "txt_nomesito";
-            this.txt_nomesito.Size = new System.Drawing.Size(263, 24);
+            this.txt_nomesito.Size = new System.Drawing.Size(293, 21);
             this.txt_nomesito.TabIndex = 3;
             // 
             // label3
@@ -127,17 +131,36 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(452, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(197, 17);
+            this.label3.Size = new System.Drawing.Size(154, 15);
             this.label3.TabIndex = 0;
             this.label3.Text = "(name of the website)";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(126, 15);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Wordpress Version";
+            // 
+            // ddlWordpressVersion
+            // 
+            this.ddlWordpressVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlWordpressVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlWordpressVersion.FormattingEnabled = true;
+            this.ddlWordpressVersion.Location = new System.Drawing.Point(153, 68);
+            this.ddlWordpressVersion.Name = "ddlWordpressVersion";
+            this.ddlWordpressVersion.Size = new System.Drawing.Size(293, 23);
+            this.ddlWordpressVersion.TabIndex = 15;
             // 
             // FormOneClick_WP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(697, 464);
+            this.ClientSize = new System.Drawing.Size(699, 472);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,5 +186,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnInstall;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox ddlWordpressVersion;
+        private System.Windows.Forms.Label label2;
     }
 }

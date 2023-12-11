@@ -601,9 +601,9 @@ namespace ZampGUI
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "MariaDB", cv.mariadb_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "PHP", cv.php_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Composer", cv.composer_vers }));     
-                listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
-                listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
-                listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
+                //listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
+                //listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
+                //listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
                 //listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
             }
             
@@ -735,7 +735,16 @@ namespace ZampGUI
 
                     string nomescript_backup = "MySql_Backup_addcreate.bat";
                     string nomebackup_file = str_db + "_" + DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_-_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + "_" + DateTime.Now.Millisecond + ".sql";
-                    nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
+                    
+                    if(System.IO.Directory.Exists(cv.pathBackupSQLFolder))
+                    {
+                        nomebackup_file = System.IO.Path.Combine(cv.pathBackupSQLFolder, nomebackup_file);
+                    }
+                    else
+                    {
+                        nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
+                    }
+                    
 
                     List<string> l_res = ZampGUILib.ExecuteBatchFile(System.IO.Path.Combine(cv.pathBase, "scripts", nomescript_backup),
                         new string[] { str_db, "root", "root", nomebackup_file, System.IO.Path.Combine(cv.MariaDB_path, "bin"), "127.0.0.1", cv.mariadb_port }

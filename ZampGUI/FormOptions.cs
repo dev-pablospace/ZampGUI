@@ -34,9 +34,10 @@ namespace ZampGUI
             }
 
             txtPathEditor.Text = cv.default_editor_path;
-            txtPathGit.Text = cv.pathGit;
-            txtPathNodeJS.Text = cv.pathNode;
-            txtPathSass.Text = cv.pathSass;
+            //txtPathGit.Text = cv.pathGit;
+            //txtPathNodeJS.Text = cv.pathNode;
+            //txtPathSass.Text = cv.pathSass;
+            txtBackupSQLFolder.Text = cv.pathBackupSQLFolder;
             checkBackUpAllDBOnExit.Checked = cv.checkBackUpAllDBOnExit;
             checkUpdateZampgui.Checked = cv.checkUpdateZampgui;
             numericUpDown_http.Value = Convert.ToInt32(cv.apache_http_port);
@@ -69,9 +70,12 @@ namespace ZampGUI
                 cv.apache_https_port = numericUpDown_https.Value.ToString();
                 cv.mariadb_port = numericUpDown_mariadb.Value.ToString();
 
-                cv.pathGit = txtPathGit.Text.Trim();
-                cv.pathNode = txtPathNodeJS.Text.Trim();
-                cv.pathSass = txtPathSass.Text.Trim();
+                //cv.pathGit = txtPathGit.Text.Trim();
+                //cv.pathNode = txtPathNodeJS.Text.Trim();
+                //cv.pathSass = txtPathSass.Text.Trim();
+                //cv.pathSass = txtPathSass.Text.Trim();
+                cv.pathBackupSQLFolder = txtBackupSQLFolder.Text.Trim();
+                
 
                 cv.checkBackUpAllDBOnExit = checkBackUpAllDBOnExit.Checked;
                 cv.checkUpdateZampgui = checkUpdateZampgui.Checked;
@@ -102,9 +106,10 @@ namespace ZampGUI
             return cv.default_editor != txtPathEditor.Text.Trim().ToLower() 
                 || changed_port() 
                 || this.bChangeListPath
-                || cv.pathGit != txtPathGit.Text.Trim()
-                || cv.pathNode != txtPathNodeJS.Text.Trim()
-                || cv.pathSass != txtPathSass.Text.Trim()
+                || cv.pathBackupSQLFolder != txtBackupSQLFolder.Text.Trim()
+                //|| cv.pathGit != txtBackupSQLFolder.Text.Trim()
+                //|| cv.pathNode != txtPathNodeJS.Text.Trim()
+                //|| cv.pathSass != txtPathSass.Text.Trim()
                 || cv.checkBackUpAllDBOnExit != checkBackUpAllDBOnExit.Checked
                 || cv.checkUpdateZampgui != checkUpdateZampgui.Checked
                 ;
@@ -148,21 +153,6 @@ namespace ZampGUI
             this.bChangeListPath = true;
         }
 
-        private void btnSelectGit_Click(object sender, EventArgs e)
-        {
-            txtPathGit.Text = selectFolder();   
-        }
-
-        private void btnSelectNode_Click(object sender, EventArgs e)
-        {
-            txtPathNodeJS.Text = selectFolder();
-        }
-
-        private void btnSelectSass_Click(object sender, EventArgs e)
-        {
-            txtPathSass.Text = selectFolder();
-        }
-
 
         private string selectFolder()
         {
@@ -181,6 +171,11 @@ namespace ZampGUI
                 return folderPath;
             }
             return "";
+        }
+
+        private void btnChooseBackupFolder_Click(object sender, EventArgs e)
+        {
+            txtBackupSQLFolder.Text = selectFolder();
         }
     }
 }

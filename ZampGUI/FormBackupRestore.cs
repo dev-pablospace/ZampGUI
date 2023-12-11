@@ -85,7 +85,16 @@ namespace ZampGUI
                 string script_to_run = System.IO.Path.Combine(cv.pathBase, "scripts", "script_to_run.bat"); ;
                 string str_db = comboBoxDbBackup.SelectedItem.ToString();
                 string nomebackup_file = str_db + "_" + DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_-_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + "_" + DateTime.Now.Millisecond + ".sql";
-                nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
+
+                if (System.IO.Directory.Exists(cv.pathBackupSQLFolder))
+                {
+                    nomebackup_file = System.IO.Path.Combine(cv.pathBackupSQLFolder, nomebackup_file);
+                }
+                else
+                {
+                    nomebackup_file = System.IO.Path.Combine(cv.pathBase, "db_backup", nomebackup_file);
+                }
+                
 
                 if(checkBoxAddCreateDB.Checked)
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
+using System.Runtime.InteropServices;
+using System.Net.Http;
 
 namespace ZampGUI
 {
@@ -22,17 +25,22 @@ namespace ZampGUI
     {
         #region vars
         public ConfigVar cv;
-        public string wp_latest_zip 
+        BackgroundWorker backgroundWorker2;
+        private WebClient webClient = null;
+        //public string wp_latest_zip
+        //{
+        //    get
+        //    {
+        //        return Path.Combine(cv.Apache_htdocs_path, "latest.zip");
+        //    }
+        //}
+        public string wp_choosen
         {
             get
             {
-                return Path.Combine(cv.Apache_htdocs_path, "latest.zip");
+                return System.IO.Path.Combine(cv.App_Path, "web", "wordpress_zip", ddlWordpressVersion.SelectedItem.ToString());
             }
         }
-        
-
-        BackgroundWorker backgroundWorker2;
-        private WebClient webClient = null;
         #endregion
 
         #region constructor
@@ -41,6 +49,14 @@ namespace ZampGUI
             InitializeComponent();
             this.cv = cv;
 
+
+            string wp_zip = System.IO.Path.Combine(cv.App_Path, "web", "wordpress_zip");
+            List<string> lista_wp = System.IO.Directory.GetFiles(wp_zip).ToList();
+            foreach (string file in lista_wp) 
+            {
+                ddlWordpressVersion.Items.Add(Path.GetFileName(file));
+            }
+            ddlWordpressVersion.SelectedIndex = 0;
             //using (WebClient wc = new WebClient())
             //{
             //    var str = wc.DownloadString("https://api.wordpress.org/core/version-check/1.7/");
@@ -64,7 +80,13 @@ namespace ZampGUI
 
             if (string.IsNullOrEmpty(nome_sito))
             {
-                MessageBox.Show("Please insert web site name");
+                MessageBox.Show("Please insert a name for your website");
+                return;
+            }
+
+            if(string.IsNullOrEmpty(ddlWordpressVersion.SelectedItem.ToString()))
+            {
+                MessageBox.Show("Please select a wordpress version");
                 return;
             }
 
@@ -74,9 +96,15 @@ namespace ZampGUI
                 return;
             }
 
-            if(!Regex.IsMatch(nome_sito, "^[a-zA-Z]+$"))
+            if (nome_sito.Length < 4 || nome_sito.Length > 24)
             {
-                MessageBox.Show("Please use only  A-Za-z (Alpha) characters");
+                MessageBox.Show("Please enter a name between 4 and 24 characters");
+                return;
+            }
+
+            if (!Regex.IsMatch(nome_sito, @"^[a-zA-Z]+(\d)*[a-zA-Z]*$"))
+            {
+                MessageBox.Show("Please enter a name that starts with a letter followed by a letter or number");
                 return;
             }
 
@@ -90,7 +118,7 @@ namespace ZampGUI
                 }
             }
 
-            if(System.IO.Directory.Exists(Path.Combine(cv.Apache_htdocs_path, "latest.zip")))
+            if (System.IO.Directory.Exists(Path.Combine(cv.Apache_htdocs_path, nome_sito)))
             {
                 MessageBox.Show("folder \"" + nome_sito + "\" already exists inside Apache/htdocs - please insert a different name");
                 return;
@@ -98,53 +126,35 @@ namespace ZampGUI
 
 
             btnInstall.Enabled = false;
-
-            if (webClient != null)
-                return;
+            Completed(null, null);
 
 
-            if (System.IO.File.Exists(wp_latest_zip))
-                System.IO.File.Delete(wp_latest_zip);
+            //if (webClient != null)
+            //    return;
 
 
-            txtOut.Text += "Downloading Wordpress zip" + Environment.NewLine;
-
-            webClient = new WebClient();
-            webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-            webClient.DownloadFileAsync(new Uri("https://wordpress.org/latest.zip"), Path.Combine(cv.Apache_htdocs_path, "latest.zip"));
-
-            
-
-            //ProcessStartInfo pro = new ProcessStartInfo();
-            //pro.FileName = System.IO.Path.Combine(cv.pathBase, "scripts", "wpcli_create.bat");
-            //pro.UseShellExecute = false;
-            //pro.WorkingDirectory = wpfolder;
-
-            //string args = "\"" + dbname + "\" \"" + dbuser + "\" \"" + dbpass + "\" \"" + nome_sito + "\" \"" + sitetitle + "\" \"" + siteuser + "\" \"" + sitepassword + "\" \"" + siteemail + "\"";
-            //pro.Arguments =  args;
-            //Process proStart = new Process();
-            //proStart.StartInfo = pro;
-
-            //string addToPath = "\"" + cv.Apache_exe + "\";\"" + cv.PHP_path + "\";\"" + cv.MariaDB_exe + "\";\"" + cv.pathWPcli + "\";\"" + System.IO.Path.Combine(cv.pathBase, "scripts") + "\"";
-            //string PATH = Environment.GetEnvironmentVariable("PATH");
-            //pro.EnvironmentVariables["PATH"] = addToPath + ";" + PATH;
-            //proStart.Start();
-
-
-
-            //ZampGUILib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
-            //        new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
-            //);
-
+            //if (!System.IO.File.Exists(wp_latest_zip))
+            //{
+            //    //System.IO.File.Delete(wp_latest_zip);
+            //    addtext("Downloading Wordpress zip");
+            //    webClient = new WebClient();
+            //    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+            //    webClient.DownloadFileAsync(new Uri("https://wordpress.org/latest.zip"), Path.Combine(cv.Apache_htdocs_path, "latest.zip"));
+            //}
+            //else
+            //{
+            //    Completed(null, null);
+            //}
         }
 
         private void Completed(object sender, AsyncCompletedEventArgs e)
         {
-            webClient = null;
+            //webClient = null;
             string nome_sito = txt_nomesito.Text.ToLower().Trim();
 
-            txtOut.Text += "Download completed!" + Environment.NewLine + "Uncompress zip files" + Environment.NewLine;
-            System.IO.Compression.ZipFile.ExtractToDirectory(wp_latest_zip, cv.Apache_htdocs_path);
+            //txtOut.Text += "Download completed!" + Environment.NewLine + "Uncompress zip files" + Environment.NewLine;
+            addtext("Uncompress \"" + wp_choosen + "\" zip files");
+            System.IO.Compression.ZipFile.ExtractToDirectory(wp_choosen, cv.Apache_htdocs_path);
             Directory.Move(Path.Combine(cv.Apache_htdocs_path, "wordpress"), Path.Combine(cv.Apache_htdocs_path, nome_sito));
 
             string connStr = "server=127.0.0.1;user=root;password=root;port=" + cv.mariadb_port;
@@ -156,13 +166,23 @@ namespace ZampGUI
                 cmd.ExecuteNonQuery();
             }
 
-            txtOut.Text += "Operation Complete" + Environment.NewLine + "Please visit: http://localhost/" + nome_sito + " - use the following data during installation" + Environment.NewLine;
-            txtOut.Text += "-----------------" + Environment.NewLine;
-            txtOut.Text += "database name: " + nome_sito + Environment.NewLine;
-            txtOut.Text += "username: root" + Environment.NewLine;
-            txtOut.Text += "password: root" + Environment.NewLine;
-            txtOut.Text += "database host: localhost" + Environment.NewLine;
-            txtOut.Text += "Table prefix: wp_   (if you want you can change it) " + Environment.NewLine;
+            addtext("Please visit: http://localhost/" + nome_sito + " - use the following parameters during installation");
+            addtext("---------------------------");
+            addtext("database name: " + nome_sito);
+            //addtext("username: root");
+            //addtext("password: root");
+            //addtext("database host: localhost");
+            //addtext("Table prefix: wp_   (if you want you can change it)");
+
+            create_wp_config(
+                System.IO.Path.Combine(cv.Apache_htdocs_path, nome_sito, "wp-config-sample.php")
+                , System.IO.Path.Combine(cv.Apache_htdocs_path, nome_sito, "wp-config.php")
+                , nome_sito);
+
+            System.Diagnostics.Process.Start("http://localhost/" + nome_sito);
+            this.Focus();
+            btnInstall.Enabled = true;
+            txt_nomesito.Focus();
             
             //var connString = "Server=127.0.0.1;User ID=root;Password=root;Database=mysql;port=" + port;
             //using (var conn = new MySqlConnection(connString))
@@ -186,12 +206,101 @@ namespace ZampGUI
             //}
         }
 
-
-
-
         #endregion
 
         #region metodi privati
+        private void create_wp_config(string wp_config_sample_path, string wp_config_path, string nome_sito)
+        {
+            String s = System.IO.File.ReadAllText(wp_config_sample_path);
+
+            //s.Replace("database_name_here", nome_sito);
+            //s.Replace("username_here", "root");
+            //s.Replace("password_here", "root");
+
+            s = Regex.Replace(s, @"database_name_here", nome_sito, RegexOptions.Multiline);
+            s = Regex.Replace(s, @"username_here", "root", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"password_here", "root", RegexOptions.Multiline);
+
+            //var url = "https://api.wordpress.org/secret-key/1.1/salt/";
+            //var httpClient = new HttpClient();
+            //var html = httpClient.GetStringAsync(url);
+            //string res = html.Result;
+
+
+            /*
+            define('AUTH_KEY',         '7n_peU2KqUtUCYhVH4cVc7y1of2IFarZRBatwTG781iKJDq2kRtZQU34ONMFsXFX');
+            define('SECURE_AUTH_KEY',  'scDh3DwQjjPhAkUblTJV662GZEa8sz_kW15bpuJFv2a518Z0Ia7EewvfIxhvcSkF');
+            define('LOGGED_IN_KEY',    'MijRqE54mxRAXkfamUXfJW8Q5KlYukFlZzHMz2jkaWYB1MiYPUKf5zHEWJkaxdwS');
+            define('NONCE_KEY',        'iPAVZ0NqQLjHkGkmM8ivnN14eF0tzuSkpIlXQ6exVFxhyOlGlXu1yA4GPBQqd14z');
+            define('AUTH_SALT',        'oKcN9KyJ2OpJCUH4cQLjnZRRHfAanklvqrO07vRwYRW81DnGh3DrmHVTZdbU7OT7');
+            define('SECURE_AUTH_SALT', 'CmCX9NpY1BIq1C1Jiu5EuKmXH9P_56y1lRtHr4ux4LU_4YI1rbyNYI2O4rArCXJ_');
+            define('LOGGED_IN_SALT',   'SRIgginwSOqM0VgoU0_tf7MaMM2dguqzExJbfUIaAyAw0EXcIRlH1GCyopkJo3WS');
+            define('NONCE_SALT',       'Z59GZwUbH0SecBMVkec5VBtRi9KaEnYSa6wvDP8fpq095PnK2NgHh52_lpb6qgoa');
+            */
+
+            string[] arrkey = {
+                @"7n_peU2KqUtUCYhVH4cVc7y1of2IFarZRBatwTG781iKJDq2kRtZQU34ONMFsXFX"
+                , @"scDh3DwQjjPhAkUblTJV662GZEa8sz_kW15bpuJFv2a518Z0Ia7EewvfIxhvcSkF"
+                , @"MijRqE54mxRAXkfamUXfJW8Q5KlYukFlZzHMz2jkaWYB1MiYPUKf5zHEWJkaxdwS"
+                , @"iPAVZ0NqQLjHkGkmM8ivnN14eF0tzuSkpIlXQ6exVFxhyOlGlXu1yA4GPBQqd14z"
+                , @"oKcN9KyJ2OpJCUH4cQLjnZRRHfAanklvqrO07vRwYRW81DnGh3DrmHVTZdbU7OT7"
+                , @"CmCX9NpY1BIq1C1Jiu5EuKmXH9P_56y1lRtHr4ux4LU_4YI1rbyNYI2O4rArCXJ_"
+                , @"SRIgginwSOqM0VgoU0_tf7MaMM2dguqzExJbfUIaAyAw0EXcIRlH1GCyopkJo3WS"
+                , @"Z59GZwUbH0SecBMVkec5VBtRi9KaEnYSa6wvDP8fpq095PnK2NgHh52_lpb6qgoa"
+            };
+
+            s = Regex.Replace(s, @"define\( 'AUTH_KEY',         'put your unique phrase here' \);", @"define( 'AUTH_KEY', '" + arrkey[0] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'SECURE_AUTH_KEY',  'put your unique phrase here' \);", @"define( 'SECURE_AUTH_KEY', '" + arrkey[1] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'LOGGED_IN_KEY',    'put your unique phrase here' \);", @"define( 'LOGGED_IN_KEY', '" + arrkey[2] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'NONCE_KEY',        'put your unique phrase here' \);", @"define( 'NONCE_KEY', '" + arrkey[3] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'AUTH_SALT',        'put your unique phrase here' \);", @"define( 'AUTH_SALT', '" + arrkey[4] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'SECURE_AUTH_SALT', 'put your unique phrase here' \);", @"define( 'SECURE_AUTH_SALT', '" + arrkey[5] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'LOGGED_IN_SALT',   'put your unique phrase here' \);", @"define( 'LOGGED_IN_SALT', '" + arrkey[6] + "' );", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"define\( 'NONCE_SALT',       'put your unique phrase here' \);", @"define( 'NONCE_SALT', '" + arrkey[7] + "' );", RegexOptions.Multiline);
+
+            //aggiunta di nuovi parametri al file di config
+
+            //disabilito l'auto update (altrimenti se installo una versione specifica con l'autoupdate mi perdo quella versione perchè wp si aggiorna in automatico)
+            string comment1 = @"\/\* Add any custom values between this line and the ""stop editing"" line. \*\/";
+            string comment2 = "/* Add any custom values between this line and the \"stop editing\" line. */";
+            s = Regex.Replace(s, comment1, comment2 + Environment.NewLine + @"define( 'WP_AUTO_UPDATE_CORE', false );", RegexOptions.Multiline);
+
+
+            System.IO.File.WriteAllText(wp_config_path, s);
+        }
+        private void addtext(string str)
+        {
+            txtOut.Invoke(new Action(() => txtOut.Text += str + Environment.NewLine));
+        }
+
+        private void runbash()
+        {
+            using (var p = new Process())
+            {
+                var s = p.StartInfo;
+                s.UseShellExecute = false;
+                s.RedirectStandardOutput = true;
+                s.CreateNoWindow = true;
+                s.FileName = @"C:\Program Files\Git\git-bash.exe"; //Using GitBash to do the dirty work
+                s.Arguments = @"C:\dev\scripts\some-script.sh";
+
+                p.ErrorDataReceived += (_, args) => Console.WriteLine(args.Data);
+
+                var stdOutput = new StringBuilder();
+
+                p.OutputDataReceived += (_, args) =>
+                {
+                    Console.WriteLine(args.Data);
+
+                    stdOutput.AppendLine(args.Data);
+                };
+
+                p.Start();
+                p.WaitForExit();
+
+                var output = stdOutput.ToString();
+            }
+        }
         //private void bEnable_btn_install()
         //{
         //    bool b_enable_btn = true;
@@ -507,9 +616,6 @@ namespace ZampGUI
         //}
         #endregion
 
-        private void label3_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
