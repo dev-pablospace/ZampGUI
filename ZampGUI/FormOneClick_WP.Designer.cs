@@ -33,12 +33,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ddlWordpressVersion = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnInstall = new System.Windows.Forms.Button();
             this.txt_nomesito = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ddlWordpressVersion = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +95,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Wordpress Configuration";
             // 
+            // ddlWordpressVersion
+            // 
+            this.ddlWordpressVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlWordpressVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlWordpressVersion.FormattingEnabled = true;
+            this.ddlWordpressVersion.Location = new System.Drawing.Point(153, 68);
+            this.ddlWordpressVersion.Name = "ddlWordpressVersion";
+            this.ddlWordpressVersion.Size = new System.Drawing.Size(293, 23);
+            this.ddlWordpressVersion.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(126, 15);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Wordpress Version";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -135,26 +155,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "(name of the website)";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 15);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Wordpress Version";
-            // 
-            // ddlWordpressVersion
-            // 
-            this.ddlWordpressVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ddlWordpressVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlWordpressVersion.FormattingEnabled = true;
-            this.ddlWordpressVersion.Location = new System.Drawing.Point(153, 68);
-            this.ddlWordpressVersion.Name = "ddlWordpressVersion";
-            this.ddlWordpressVersion.Size = new System.Drawing.Size(293, 23);
-            this.ddlWordpressVersion.TabIndex = 15;
-            // 
             // FormOneClick_WP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -169,6 +169,7 @@
             this.Name = "FormOneClick_WP";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormOneClick_WP";
+            this.Load += new System.EventHandler(this.FormOneClick_WP_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

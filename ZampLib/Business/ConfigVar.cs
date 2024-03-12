@@ -312,7 +312,7 @@ namespace ZampLib.Business
             this.pathGit = (string)json[_env]["pathGit"];
             this.pathSass = (string)json[_env]["pathSass"];
             this.pathNode = (string)json[_env]["pathNode"];
-            this.pathWPcli = (string)json[_env]["PathWPcli"];
+            this.pathWPcli = (string)json[_env]["pathWPcli"];
             this.pathBackupSQLFolder = (string)json[_env]["pathBackupSQLFolder"];
 
 

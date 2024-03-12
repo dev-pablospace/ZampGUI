@@ -301,6 +301,7 @@ namespace ZampGUI
                 var output = stdOutput.ToString();
             }
         }
+
         //private void bEnable_btn_install()
         //{
         //    bool b_enable_btn = true;
@@ -616,6 +617,9 @@ namespace ZampGUI
         //}
         #endregion
 
+        private void FormOneClick_WP_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

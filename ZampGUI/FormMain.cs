@@ -353,14 +353,16 @@ namespace ZampGUI
                 return;
             }
 
-            FormOneClick_WP frm_wp = new FormOneClick_WP(cv);
-            if (frm_wp.ShowDialog(this) == DialogResult.OK)
-            {
-                //cv = frm2.cv;
-                //cv.updatePort();
-                //cv.updateDefaultEditor(cv.default_editor_path);
-            }
+            //FormOneClick_WP frm_wp = new FormOneClick_WP(cv);
+            //if (frm_wp.ShowDialog(this) == DialogResult.OK)
+            //{
 
+            //}
+            //frm_wp.Dispose();
+
+
+            FormOneClick_WP2 frm_wp = new FormOneClick_WP2(cv);
+            frm_wp.ShowDialog(this);
             frm_wp.Dispose();
         }
         private void pHPFoldeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -531,6 +533,7 @@ namespace ZampGUI
             string php_dir = System.IO.Path.Combine(cv.App_Path, cv.PHP_current);
             //string node_path = System.IO.Path.Combine(cv.pathBase, "Apps", "node-x64");
             //string sass_path = System.IO.Path.Combine(cv.pathBase, "Apps", "dart-sass");
+            string wpcli_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathWPcli);
 
             string drive_letter = System.IO.Path.GetPathRoot(cv.pathBase).Substring(0, 1);
             //MessageBox.Show(drive_letter);
@@ -548,9 +551,9 @@ namespace ZampGUI
             {
                 ListPathConsole += ";\"" + cv.pathNode + "\"";
             }
-            if (System.IO.Directory.Exists(cv.pathWPcli))
+            if (System.IO.Directory.Exists(wpcli_path))
             {
-                ListPathConsole += ";\"" + cv.pathWPcli + "\"";
+                ListPathConsole += ";\"" + wpcli_path + "\"";
             }
 
             //ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
@@ -604,7 +607,7 @@ namespace ZampGUI
                 //listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
                 //listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
                 //listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
-                //listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
             }
             
 

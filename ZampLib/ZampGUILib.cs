@@ -201,6 +201,46 @@ namespace ZampLib
             return _outstring;
         }
 
+        public static Tuple<string, string> startProc_and_wait_output2(string path_exe, string args, bool bhide = false, string working_dir = null, string enviromentPath = null, Dictionary<string,string> otherenvvars = null)
+        {
+            string _outstring = "";
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            if (!string.IsNullOrEmpty(working_dir))
+            {
+                process.StartInfo.WorkingDirectory = working_dir;
+            }
+            process.StartInfo.Arguments = "/c \"" + path_exe + " " + args + "\"";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = bhide;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            
+            if(!string.IsNullOrEmpty(enviromentPath))
+            {
+                process.StartInfo.EnvironmentVariables["PATH"] = enviromentPath;
+            }
+
+            if(otherenvvars != null)
+            {
+                foreach(var arg in otherenvvars)
+                {
+                    process.StartInfo.EnvironmentVariables[arg.Key] = arg.Value;
+                }
+            }
+
+                
+            process.Start();
+            //* Read the output (or the error)
+            _outstring = process.StandardOutput.ReadToEnd();
+            //Console.WriteLine(output);
+            string err = process.StandardError.ReadToEnd();
+            //Console.WriteLine(err);
+            process.WaitForExit();
+            return new Tuple<string, string>(_outstring, err);
+        }
+
         public static void startProc_as_admin(string path_exe, string args)
         {
             ProcessStartInfo proc = new ProcessStartInfo();

@@ -13,7 +13,7 @@
     "pathGit": "",
     "pathSass": "",
     "pathNode": "",
-    "pathWPcli": "",
+    "pathWPcli": "wp-cli",
     "checkBackUpAllDBOnExit": false,
     "checkUpdateZampgui": true,
     "default_editor": "notepad.exe",
@@ -33,7 +33,7 @@
       "git_vers": "",
       "node_vers": "",
       "sass_vers": "",
-      "wp_cli_vers": ""
+      "wp_cli_vers": "2.10.0"
     }
   },
   "pc_cameretta": {
@@ -64,7 +64,7 @@
       "git_vers": "",
       "node_vers": "",
       "sass_vers": "",
-      "wp_cli_vers": ""
+      "wp_cli_vers": "2.10.0"
     }
   },
   "acer_nitro": {
