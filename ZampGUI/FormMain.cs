@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using ZampLib;
 using ZampLib.Business;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace ZampGUI
 {
@@ -396,9 +397,45 @@ namespace ZampGUI
         #endregion
 
         #region Console
-        private void consoleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void consoleWithAllProgrammsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openConsole();
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithApachePHPMariadbToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithPHPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithMariaDBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithApacheToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithComposerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithGitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithNodejsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithDartsassToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
+        }
+        private void consoleWithWpcliToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openConsole(((System.Windows.Forms.ToolStripItem)sender).Name);
         }
         #endregion
 
@@ -525,48 +562,65 @@ namespace ZampGUI
         #endregion
 
         #region private method
-        private void openConsole()
+        private void openConsole(string nomeMenuChiamante)
         {
+            List<string> listapath = new List<string>();
+            listapath.AddRange(cv.ListPathConsole); //clono la lista dentro dv in un altra lista
+
             string apache_dir_bin = System.IO.Path.Combine(cv.App_Path, cv.Apache_current, "bin");
             string mariadb_dir_bin = System.IO.Path.Combine(cv.App_Path, cv.MariaDB_current, "bin");
-            string composer_path = System.IO.Path.Combine(cv.App_Path, "composer");
             string php_dir = System.IO.Path.Combine(cv.App_Path, cv.PHP_current);
-            //string node_path = System.IO.Path.Combine(cv.pathBase, "Apps", "node-x64");
-            //string sass_path = System.IO.Path.Combine(cv.pathBase, "Apps", "dart-sass");
+            string composer_path = System.IO.Path.Combine(cv.App_Path, "composer");
+            string node_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathNode);
+            string sass_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathSass);
+            string git_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathGit);
             string wpcli_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathWPcli);
 
-            string drive_letter = System.IO.Path.GetPathRoot(cv.pathBase).Substring(0, 1);
-            //MessageBox.Show(drive_letter);
-            string ListPathConsole = cv.ListPathConsole.Count == 0 ? "": ";\"" + String.Join("\";\"", cv.ListPathConsole.ToArray()) + "\"";
+            switch(nomeMenuChiamante)
+            {
+                case "consoleWithAllProgrammsToolStripMenuItem":
+                    if (Directory.Exists(apache_dir_bin)) { listapath.Add(apache_dir_bin); }
+                    if (Directory.Exists(mariadb_dir_bin)) { listapath.Add(mariadb_dir_bin); }
+                    if (Directory.Exists(php_dir)) { listapath.Add(php_dir); }
+                    if (Directory.Exists(composer_path)) { listapath.Add(composer_path); }
+                    if (Directory.Exists(node_path)) { listapath.Add(node_path); }
+                    if (Directory.Exists(sass_path)) { listapath.Add(sass_path); }
+                    if (Directory.Exists(git_path)) { listapath.Add(git_path); }
+                    if (Directory.Exists(wpcli_path)) { listapath.Add(wpcli_path); }
+                    break;
+                case "consoleWithApachePHPMariadbToolStripMenuItem":
+                    if (Directory.Exists(apache_dir_bin)) { listapath.Add(apache_dir_bin); }
+                    if (Directory.Exists(mariadb_dir_bin)) { listapath.Add(mariadb_dir_bin); }
+                    if (Directory.Exists(php_dir)) { listapath.Add(php_dir); }
+                    break;
+                case "consoleWithApacheToolStripMenuItem":
+                    if (Directory.Exists(apache_dir_bin)) { listapath.Add(apache_dir_bin); }
+                    break;
+                case "consoleWithPHPToolStripMenuItem":
+                    if (Directory.Exists(php_dir)) { listapath.Add(php_dir); }
+                    break;
+                case "consoleWithMariaDBToolStripMenuItem":
+                    if (Directory.Exists(mariadb_dir_bin)) { listapath.Add(mariadb_dir_bin); }
+                    break;
+                case "consoleWithComposerToolStripMenuItem":
+                    if (Directory.Exists(php_dir)) { listapath.Add(php_dir); }
+                    if (Directory.Exists(composer_path)) { listapath.Add(composer_path); }
+                    break;
+                case "consoleWithGitToolStripMenuItem":
+                    if (Directory.Exists(git_path)) { listapath.Add(git_path); }
+                    break;
+                case "consoleWithNodejsToolStripMenuItem":
+                    if (Directory.Exists(node_path)) { listapath.Add(node_path); }
+                    break;
+                case "consoleWithDartsassToolStripMenuItem":
+                    if (Directory.Exists(sass_path)) { listapath.Add(sass_path); }
+                    break;
+                case "consoleWithWpcliToolStripMenuItem":
+                    if (Directory.Exists(php_dir)) { listapath.Add(php_dir); }
+                    if (Directory.Exists(wpcli_path)) { listapath.Add(wpcli_path); }
+                    break;
+            }
 
-            if(System.IO.Directory.Exists(cv.pathGit))
-            {
-                ListPathConsole += ";\"" + cv.pathGit + "\"";
-            }
-            if (System.IO.Directory.Exists(cv.pathSass))
-            {
-                ListPathConsole += ";\"" + cv.pathSass + "\"";
-            }
-            if (System.IO.Directory.Exists(cv.pathNode))
-            {
-                ListPathConsole += ";\"" + cv.pathNode + "\"";
-            }
-            if (System.IO.Directory.Exists(wpcli_path))
-            {
-                ListPathConsole += ";\"" + wpcli_path + "\"";
-            }
-
-            //ManZampLib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
-            //        new string[] { apache_dir_bin, cv.pathPHP, mariadb_dir_bin, composer_path, node_path, sass_path, drive_letter, cv.pathBase }
-            //);
-
-            //System.Diagnostics.Process process = new System.Diagnostics.Process();
-            //System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            //startInfo.FileName = "cmd.exe";
-            ////startInfo.Arguments = "/C copy /b Image1.jpg + Archive.rar Image2.jpg";
-            //process.StartInfo = startInfo;
-            //process.Start();
 
             ProcessStartInfo pro = new ProcessStartInfo();
             pro.FileName = "cmd.exe";
@@ -575,16 +629,12 @@ namespace ZampGUI
             Process proStart = new Process();
             proStart.StartInfo = pro;
 
-            string addToPath = "\"" + apache_dir_bin + "\";\"" + php_dir + "\";\"" + mariadb_dir_bin + "\";\"" + composer_path + "\"" + ListPathConsole;
+            string strpath = listapath.Count == 0 ? "" : ";\"" + String.Join("\";\"", listapath.ToArray()) + "\"";
             string PATH = Environment.GetEnvironmentVariable("PATH");
-            pro.EnvironmentVariables["PATH"] = addToPath + ";" + PATH;
+            pro.EnvironmentVariables["PATH"] = strpath + ";" + PATH;
+
             proStart.Start();
             
-            //proStart.StandardInput.WriteLine("cls");
-
-            //ZampGUILib.ExecuteBatchFile_dont_wait(System.IO.Path.Combine(cv.pathBase, "scripts", "open_console.bat"),
-            //        new string[] { apache_dir_bin, cv.PHP_path_scelto, mariadb_dir_bin, composer_path, drive_letter, cv.pathBase, ListPathConsole }
-            //);
         }
         private void refreshStatusForm(bool AggiornaPercorsi = false)
         {
@@ -604,9 +654,9 @@ namespace ZampGUI
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "MariaDB", cv.mariadb_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "PHP", cv.php_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Composer", cv.composer_vers }));     
-                //listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
-                //listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
-                //listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Git", cv.git_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
             }
             
@@ -804,6 +854,7 @@ namespace ZampGUI
                 //MessageBox.Show("Service not available at the moment");
             }
         }
+
 
 
         #endregion

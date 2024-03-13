@@ -34,6 +34,15 @@ namespace ZampGUI
             this.cv = cv;
             ricaricaComboIstanzeWP();
 
+            if(cv.uuid_str == "mio")
+            {
+                txt_User.Text = "admin";
+                txt_Pwd.Text = "admin";
+                txt_Email.Text = "admin@gmail.com";
+                txt_DisplayName.Text = "pabloindev";
+                checkBox_DisableAutoUpdate.Checked = true;
+            }
+
             //backgroundWorker2 = new BackgroundWorker();
             //backgroundWorker2.WorkerReportsProgress = true;
             //backgroundWorker2.DoWork += new DoWorkEventHandler(esegui_worker);
@@ -97,18 +106,29 @@ namespace ZampGUI
 
             Directory.CreateDirectory(path_folder_wp);
             disabilita_comandi_form();
+            txtOut.Text = "Downloading Wordpress ...." + Environment.NewLine;
+            Application.DoEvents();
 
 
             //sezione in cui avvio il job in un altro thread
             var progress = new Progress<string>(arg => txtOut.Text += arg + Environment.NewLine);
             await Task.Factory.StartNew(() => this.esegui_worker(progress), TaskCreationOptions.LongRunning);
+
+            //finito job asincrono
             abilita_comandi_form();
-            MessageBox.Show("Completed - Please Visit" + Environment.NewLine + "http://localhost/" + nome_sito);
+            ricaricaComboIstanzeWP();
+
+            DialogResult dialogResult = MessageBox.Show("Completed " + Environment.NewLine + "Would like to visit http://localhost/" + nome_sito, "Wordpress Installation OK", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start("http://localhost/" + nome_sito);
+            }
             
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            txtOut.Text = "";
             string nomeistanza = comboBoxWpDelete.SelectedItem.ToString();
 
             if (string.IsNullOrEmpty(nomeistanza))
@@ -116,8 +136,10 @@ namespace ZampGUI
                 MessageBox.Show("please choose a web site from combobox");
                 return;
             }
-
+            disabilita_comandi_form();
             cancellaIstanzaWp(nomeistanza);
+            abilita_comandi_form();
+            txtOut.Text = "Wordpress \"" + nomeistanza + "\" deleted";
             ricaricaComboIstanzeWP();
         }
 
@@ -132,7 +154,7 @@ namespace ZampGUI
 
             if(string.IsNullOrEmpty(nomeistanza))
             {
-                MessageBox.Show("please choose a web site from combobox");
+                MessageBox.Show("please choose a web site from the combobox on the left");
                 return;
             }
 
@@ -147,22 +169,25 @@ namespace ZampGUI
             output += "Zip file \"" + path_folder_zip + "\"";
             abilita_comandi_form();
 
-            txtOut.Text = output;
-
-            MessageBox.Show("File saved inside " + cv.Apache_htdocs_path + Environment.NewLine + "with the following name" + Environment.NewLine + Path.GetFileName(path_folder_zip));
+            string msg = "File saved inside " + cv.Apache_htdocs_path + Environment.NewLine + "with the following name" + Environment.NewLine + Path.GetFileName(path_folder_zip);
+            txtOut.Text = output + Environment.NewLine + msg;
+            MessageBox.Show(msg);
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
         {
             txtOut.Text = "";
             string enviromentPath = cv.PHP_path + ";" + Path.Combine(cv.MariaDB_path, "bin") + ";" + System.Environment.GetEnvironmentVariable("PATH");
-            string nomeistanza = comboBoxWpRestore.SelectedItem.ToString();
+            string nomeistanza = (comboBoxWpRestore.SelectedItem != null? comboBoxWpRestore.SelectedItem.ToString(): comboBoxWpRestore.Text);
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nomeistanza);
-            string comando_restore_db = "mysql -u root --password=root " + nomeistanza + " < \"" + Path.Combine(path_folder_wp, nomeistanza) + ".sql\"";
+
+            string comando_sql1 = "mysql -u root --password=root -e \"DROP DATABASE IF EXISTS " + nomeistanza + ";CREATE DATABASE " + nomeistanza + " DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;\"";
+            string comando_sql2 = "mysql -u root --password=root " + nomeistanza + " < \"" + Path.Combine(path_folder_wp, nomeistanza) + ".sql\"";
             
+
             if (string.IsNullOrEmpty(nomeistanza))
             {
-                MessageBox.Show("please choose a web site from combobox");
+                MessageBox.Show("please choose a web site from the combobox on the left");
                 return;
             }
 
@@ -182,19 +207,29 @@ namespace ZampGUI
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(openFileDialog1.FileName);
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to restore " + Path.GetFileName(openFileDialog1.FileName) + " inside " + Path.GetFileName(path_folder_wp) + "?", "Restore Confirm Operation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    disabilita_comandi_form();
 
-                disabilita_comandi_form();
+                    //cancello istanza nel caso esista già
+                    cancellaIstanzaWp(nomeistanza);
 
-                ZipFile.ExtractToDirectory(openFileDialog1.FileName, path_folder_wp);
-                txtOut.Text += "Wordpress Directory \"" + path_folder_wp + "\"";
-                txtOut.Text += eseguiComando(comando_restore_db, path_folder_wp, enviromentPath);
+                    ZipFile.ExtractToDirectory(openFileDialog1.FileName, path_folder_wp);
+                    txtOut.Text += "Folder \"" + path_folder_wp + "\" created";
+                    txtOut.Text += eseguiComando(comando_sql1, path_folder_wp, enviromentPath);
+                    txtOut.Text += eseguiComando(comando_sql2, path_folder_wp, enviromentPath);
 
-                abilita_comandi_form();
+                    abilita_comandi_form();
 
-                ricaricaComboIstanzeWP();
+                    ricaricaComboIstanzeWP();
 
-                MessageBox.Show("Wordpress \"" + nomeistanza + "\" restored inside folder \"" + path_folder_wp + "\"");
+                    string msg = "Wordpress \"" + nomeistanza + "\" restored inside folder \"" + path_folder_wp + "\"";
+                    txtOut.Text += msg;
+                    MessageBox.Show(msg);
+                }
+
+                
             }
 
         }
@@ -214,20 +249,49 @@ namespace ZampGUI
             string enviromentPath = cv.PHP_path + ";" + Path.Combine(cv.MariaDB_path, "bin") + ";" + System.Environment.GetEnvironmentVariable("PATH");
 
             List<string> comandi_create_wp_cli = new List<string>();
-            comandi_create_wp_cli.Add(path_wp + " core download");
-            comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
-            comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
-            comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
-            comandi_create_wp_cli.Add(path_wp + " db create");
-            comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
-            comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
-            comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
-            //comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
-            //comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
-            comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
-            comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
-            comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
-            comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
+
+            if(cv.uuid_str == "mio")
+            {
+                //specifiche cofig per la mia istanza
+                comandi_create_wp_cli.Add(path_wp + " core download");
+                comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
+                comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
+                if (checkBox_DisableAutoUpdate.Checked)
+                {
+                    comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
+                }
+                comandi_create_wp_cli.Add(path_wp + " db create");
+                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+                comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
+                comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
+                comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
+                comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
+                comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
+                comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
+                comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
+                comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
+            }
+            else
+            {
+                //tutti gli altri
+                comandi_create_wp_cli.Add(path_wp + " core download");
+                comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
+                //comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
+                if (checkBox_DisableAutoUpdate.Checked)
+                {
+                    comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
+                }
+                comandi_create_wp_cli.Add(path_wp + " db create");
+                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+                comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
+                //comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
+                //comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
+                //comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
+                //comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
+                //comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
+                comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
+                //comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
+            }
 
 
             foreach (string comando in comandi_create_wp_cli)
@@ -245,6 +309,11 @@ namespace ZampGUI
             List<string> lista_folder = (from x in System.IO.Directory.GetDirectories(cv.Apache_htdocs_path) select Path.GetFileName(x)).ToList();
             List<string> lista_db = ZampGUILib.getAllDB(cv.mariadb_port);
             var CommonList = lista_folder.Intersect(lista_db);
+
+            comboBoxWpDelete.Items.Clear();
+            comboBoxWpBackup.Items.Clear();
+            comboBoxWpRestore.Items.Clear();
+            comboBoxWpRestore.Text = "";
 
             foreach (string file in CommonList)
             {

@@ -60,6 +60,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxWpDelete = new System.Windows.Forms.ComboBox();
+            this.checkBox_DisableAutoUpdate = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabInstall.SuspendLayout();
@@ -101,11 +102,11 @@
             // checkBox_Sovrascrivi
             // 
             this.checkBox_Sovrascrivi.AutoSize = true;
-            this.checkBox_Sovrascrivi.Location = new System.Drawing.Point(32, 147);
+            this.checkBox_Sovrascrivi.Location = new System.Drawing.Point(19, 148);
             this.checkBox_Sovrascrivi.Name = "checkBox_Sovrascrivi";
-            this.checkBox_Sovrascrivi.Size = new System.Drawing.Size(257, 19);
-            this.checkBox_Sovrascrivi.TabIndex = 23;
-            this.checkBox_Sovrascrivi.Text = "Overwrite existing Wordpress site";
+            this.checkBox_Sovrascrivi.Size = new System.Drawing.Size(222, 19);
+            this.checkBox_Sovrascrivi.TabIndex = 6;
+            this.checkBox_Sovrascrivi.Text = "Overwrite existing Wordpress";
             this.checkBox_Sovrascrivi.UseVisualStyleBackColor = true;
             // 
             // txt_DisplayName
@@ -113,8 +114,7 @@
             this.txt_DisplayName.Location = new System.Drawing.Point(527, 96);
             this.txt_DisplayName.Name = "txt_DisplayName";
             this.txt_DisplayName.Size = new System.Drawing.Size(211, 21);
-            this.txt_DisplayName.TabIndex = 21;
-            this.txt_DisplayName.Text = "pablo";
+            this.txt_DisplayName.TabIndex = 5;
             // 
             // label6
             // 
@@ -130,8 +130,7 @@
             this.txt_Email.Location = new System.Drawing.Point(62, 97);
             this.txt_Email.Name = "txt_Email";
             this.txt_Email.Size = new System.Drawing.Size(259, 21);
-            this.txt_Email.TabIndex = 19;
-            this.txt_Email.Text = "admin@gmail.com";
+            this.txt_Email.TabIndex = 4;
             // 
             // label5
             // 
@@ -147,8 +146,7 @@
             this.txt_Pwd.Location = new System.Drawing.Point(528, 59);
             this.txt_Pwd.Name = "txt_Pwd";
             this.txt_Pwd.Size = new System.Drawing.Size(210, 21);
-            this.txt_Pwd.TabIndex = 17;
-            this.txt_Pwd.Text = "admin";
+            this.txt_Pwd.TabIndex = 3;
             // 
             // label4
             // 
@@ -164,8 +162,7 @@
             this.txt_User.Location = new System.Drawing.Point(62, 59);
             this.txt_User.Name = "txt_User";
             this.txt_User.Size = new System.Drawing.Size(259, 21);
-            this.txt_User.TabIndex = 15;
-            this.txt_User.Text = "admin";
+            this.txt_User.TabIndex = 2;
             // 
             // label2
             // 
@@ -204,8 +201,7 @@
             this.txt_nomesito.Location = new System.Drawing.Point(151, 21);
             this.txt_nomesito.Name = "txt_nomesito";
             this.txt_nomesito.Size = new System.Drawing.Size(208, 21);
-            this.txt_nomesito.TabIndex = 3;
-            this.txt_nomesito.Text = "wp1";
+            this.txt_nomesito.TabIndex = 1;
             // 
             // label3
             // 
@@ -228,6 +224,7 @@
             // 
             // tabInstall
             // 
+            this.tabInstall.Controls.Add(this.checkBox_DisableAutoUpdate);
             this.tabInstall.Controls.Add(this.checkBox_Sovrascrivi);
             this.tabInstall.Controls.Add(this.txt_nomesito);
             this.tabInstall.Controls.Add(this.btnInstall);
@@ -293,7 +290,6 @@
             // comboBoxWpRestore
             // 
             this.comboBoxWpRestore.AccessibleRole = System.Windows.Forms.AccessibleRole.Clock;
-            this.comboBoxWpRestore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxWpRestore.FormattingEnabled = true;
             this.comboBoxWpRestore.Location = new System.Drawing.Point(368, 140);
             this.comboBoxWpRestore.Name = "comboBoxWpRestore";
@@ -383,6 +379,16 @@
             this.comboBoxWpDelete.Size = new System.Drawing.Size(261, 23);
             this.comboBoxWpDelete.TabIndex = 0;
             // 
+            // checkBox_DisableAutoUpdate
+            // 
+            this.checkBox_DisableAutoUpdate.AutoSize = true;
+            this.checkBox_DisableAutoUpdate.Location = new System.Drawing.Point(257, 148);
+            this.checkBox_DisableAutoUpdate.Name = "checkBox_DisableAutoUpdate";
+            this.checkBox_DisableAutoUpdate.Size = new System.Drawing.Size(159, 19);
+            this.checkBox_DisableAutoUpdate.TabIndex = 21;
+            this.checkBox_DisableAutoUpdate.Text = "Disable Auto Update";
+            this.checkBox_DisableAutoUpdate.UseVisualStyleBackColor = true;
+            // 
             // FormOneClick_WP2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -441,5 +447,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBoxWpBackup;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox checkBox_DisableAutoUpdate;
     }
 }

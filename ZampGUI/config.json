@@ -10,9 +10,9 @@
       "php-8.2.1"
     ],
     "PHP_current": "php-8.2.1",
-    "pathGit": "",
-    "pathSass": "",
-    "pathNode": "",
+    "pathGit": "PortableGit",
+    "pathSass": "dart-sass",
+    "pathNode": "node-v20.11.1",
     "pathWPcli": "wp-cli",
     "checkBackUpAllDBOnExit": false,
     "checkUpdateZampgui": true,
@@ -30,9 +30,9 @@
       "php_vers": "8.2.1",
       "mariadb_vers": "10.6.11",
       "composer_vers": "2.5.1",
-      "git_vers": "",
-      "node_vers": "",
-      "sass_vers": "",
+      "git_vers": "2.44.0",
+      "node_vers": "20.11.1",
+      "sass_vers": "1.71.1",
       "wp_cli_vers": "2.10.0"
     }
   },

@@ -78,6 +78,18 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.localhostRootFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithAllProgrammsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.consoleWithApachePHPMariadbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.consoleWithPHPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithMariaDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithApacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithComposerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithGitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithNodejsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithDartsassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleWithWpcliToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -158,7 +170,7 @@
             // 
             this.checkStatusToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_circle_exclamation_icon;
             this.checkStatusToolStripMenuItem.Name = "checkStatusToolStripMenuItem";
-            this.checkStatusToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.checkStatusToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.checkStatusToolStripMenuItem.Text = "Check status";
             this.checkStatusToolStripMenuItem.Click += new System.EventHandler(this.checkStatusToolStripMenuItem_Click);
             // 
@@ -166,7 +178,7 @@
             // 
             this.stopAllProgrammToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_x_circle_icon;
             this.stopAllProgrammToolStripMenuItem.Name = "stopAllProgrammToolStripMenuItem";
-            this.stopAllProgrammToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.stopAllProgrammToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.stopAllProgrammToolStripMenuItem.Text = "Stop All";
             this.stopAllProgrammToolStripMenuItem.Click += new System.EventHandler(this.stopAllProgrammToolStripMenuItem_Click);
             // 
@@ -174,20 +186,20 @@
             // 
             this.runAllProgramToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_play_icon;
             this.runAllProgramToolStripMenuItem.Name = "runAllProgramToolStripMenuItem";
-            this.runAllProgramToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.runAllProgramToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.runAllProgramToolStripMenuItem.Text = "Run All";
             this.runAllProgramToolStripMenuItem.Click += new System.EventHandler(this.runAllProgramToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_logout_icon;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -348,7 +360,7 @@
             this.phpinfoToolStripMenuItem});
             this.apacheHomeToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_globe_icon;
             this.apacheHomeToolStripMenuItem.Name = "apacheHomeToolStripMenuItem";
-            this.apacheHomeToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.apacheHomeToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.apacheHomeToolStripMenuItem.Text = "Apache";
             // 
             // phpinfoToolStripMenuItem
@@ -366,7 +378,7 @@
             this.adminerToolStripMenuItem});
             this.mariaDBToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_database_icon;
             this.mariaDBToolStripMenuItem.Name = "mariaDBToolStripMenuItem";
-            this.mariaDBToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.mariaDBToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.mariaDBToolStripMenuItem.Text = "MariaDB ";
             // 
             // phpMyAdminToolStripMenuItem
@@ -388,20 +400,20 @@
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(144, 6);
             // 
             // sitesToolStripMenuItem
             // 
             this.sitesToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_website;
             this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
-            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.sitesToolStripMenuItem.Text = "Sites";
             // 
             // manageSitesToolStripMenuItem
             // 
             this.manageSitesToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_website;
             this.manageSitesToolStripMenuItem.Name = "manageSitesToolStripMenuItem";
-            this.manageSitesToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.manageSitesToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.manageSitesToolStripMenuItem.Text = "Manage sites";
             this.manageSitesToolStripMenuItem.Click += new System.EventHandler(this.manageSitesToolStripMenuItem_Click);
             // 
@@ -505,11 +517,103 @@
             // 
             // consoleToolStripMenuItem
             // 
+            this.consoleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.consoleWithAllProgrammsToolStripMenuItem,
+            this.toolStripSeparator12,
+            this.consoleWithApachePHPMariadbToolStripMenuItem,
+            this.toolStripSeparator13,
+            this.consoleWithApacheToolStripMenuItem,
+            this.consoleWithPHPToolStripMenuItem,
+            this.consoleWithMariaDBToolStripMenuItem,
+            this.consoleWithComposerToolStripMenuItem,
+            this.consoleWithGitToolStripMenuItem,
+            this.consoleWithNodejsToolStripMenuItem,
+            this.consoleWithDartsassToolStripMenuItem,
+            this.consoleWithWpcliToolStripMenuItem});
             this.consoleToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.iconfinder_f_command_256_282475;
             this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
             this.consoleToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.consoleToolStripMenuItem.Text = "Console";
-            this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
+            // 
+            // consoleWithAllProgrammsToolStripMenuItem
+            // 
+            this.consoleWithAllProgrammsToolStripMenuItem.Name = "consoleWithAllProgrammsToolStripMenuItem";
+            this.consoleWithAllProgrammsToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithAllProgrammsToolStripMenuItem.Text = "Console with all Applications";
+            this.consoleWithAllProgrammsToolStripMenuItem.Click += new System.EventHandler(this.consoleWithAllProgrammsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(263, 6);
+            // 
+            // consoleWithApachePHPMariadbToolStripMenuItem
+            // 
+            this.consoleWithApachePHPMariadbToolStripMenuItem.Name = "consoleWithApachePHPMariadbToolStripMenuItem";
+            this.consoleWithApachePHPMariadbToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithApachePHPMariadbToolStripMenuItem.Text = "Console with Apache, PHP, MariaDB";
+            this.consoleWithApachePHPMariadbToolStripMenuItem.Click += new System.EventHandler(this.consoleWithApachePHPMariadbToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(263, 6);
+            // 
+            // consoleWithPHPToolStripMenuItem
+            // 
+            this.consoleWithPHPToolStripMenuItem.Name = "consoleWithPHPToolStripMenuItem";
+            this.consoleWithPHPToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithPHPToolStripMenuItem.Text = "Console with PHP";
+            this.consoleWithPHPToolStripMenuItem.Click += new System.EventHandler(this.consoleWithPHPToolStripMenuItem_Click);
+            // 
+            // consoleWithMariaDBToolStripMenuItem
+            // 
+            this.consoleWithMariaDBToolStripMenuItem.Name = "consoleWithMariaDBToolStripMenuItem";
+            this.consoleWithMariaDBToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithMariaDBToolStripMenuItem.Text = "Console with MariaDB";
+            this.consoleWithMariaDBToolStripMenuItem.Click += new System.EventHandler(this.consoleWithMariaDBToolStripMenuItem_Click);
+            // 
+            // consoleWithApacheToolStripMenuItem
+            // 
+            this.consoleWithApacheToolStripMenuItem.Name = "consoleWithApacheToolStripMenuItem";
+            this.consoleWithApacheToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithApacheToolStripMenuItem.Text = "Console with Apache";
+            this.consoleWithApacheToolStripMenuItem.Click += new System.EventHandler(this.consoleWithApacheToolStripMenuItem_Click);
+            // 
+            // consoleWithComposerToolStripMenuItem
+            // 
+            this.consoleWithComposerToolStripMenuItem.Name = "consoleWithComposerToolStripMenuItem";
+            this.consoleWithComposerToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithComposerToolStripMenuItem.Text = "Console with Composer";
+            this.consoleWithComposerToolStripMenuItem.Click += new System.EventHandler(this.consoleWithComposerToolStripMenuItem_Click);
+            // 
+            // consoleWithGitToolStripMenuItem
+            // 
+            this.consoleWithGitToolStripMenuItem.Name = "consoleWithGitToolStripMenuItem";
+            this.consoleWithGitToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithGitToolStripMenuItem.Text = "Console with Git";
+            this.consoleWithGitToolStripMenuItem.Click += new System.EventHandler(this.consoleWithGitToolStripMenuItem_Click);
+            // 
+            // consoleWithNodejsToolStripMenuItem
+            // 
+            this.consoleWithNodejsToolStripMenuItem.Name = "consoleWithNodejsToolStripMenuItem";
+            this.consoleWithNodejsToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithNodejsToolStripMenuItem.Text = "Console with Node.js";
+            this.consoleWithNodejsToolStripMenuItem.Click += new System.EventHandler(this.consoleWithNodejsToolStripMenuItem_Click);
+            // 
+            // consoleWithDartsassToolStripMenuItem
+            // 
+            this.consoleWithDartsassToolStripMenuItem.Name = "consoleWithDartsassToolStripMenuItem";
+            this.consoleWithDartsassToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithDartsassToolStripMenuItem.Text = "Console with Dart-Sass";
+            this.consoleWithDartsassToolStripMenuItem.Click += new System.EventHandler(this.consoleWithDartsassToolStripMenuItem_Click);
+            // 
+            // consoleWithWpcliToolStripMenuItem
+            // 
+            this.consoleWithWpcliToolStripMenuItem.Name = "consoleWithWpcliToolStripMenuItem";
+            this.consoleWithWpcliToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.consoleWithWpcliToolStripMenuItem.Text = "Console with WP-CLI";
+            this.consoleWithWpcliToolStripMenuItem.Click += new System.EventHandler(this.consoleWithWpcliToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -528,20 +632,20 @@
             // 
             this.helpToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_hand_icon;
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(170, 26);
             this.helpToolStripMenuItem1.Text = "Doc Online";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(167, 6);
             // 
             // checkForUpdateToolStripMenuItem
             // 
             this.checkForUpdateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_arrow_down_icon_1_;
             this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
             this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
             this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
@@ -549,7 +653,7 @@
             // 
             this.aboutToolStripMenuItem1.Image = global::ZampGUI.Properties.Resources.menu_menu_icon;
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(170, 26);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -557,7 +661,7 @@
             // 
             this.donateToolStripMenuItem.Image = global::ZampGUI.Properties.Resources.menu_coin_dollar_money_icon;
             this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
             this.donateToolStripMenuItem.Text = "Donate";
             this.donateToolStripMenuItem.Visible = false;
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
@@ -773,6 +877,18 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelMainForm;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithAllProgrammsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithApachePHPMariadbToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithPHPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithMariaDBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithComposerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithGitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithNodejsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithDartsassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithWpcliToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleWithApacheToolStripMenuItem;
     }
 }
 
