@@ -25,6 +25,8 @@ namespace ZampGUI
     {
         #region vars
         public ConfigVar cv;
+        public ComboboxItem currentItem;
+        public string defaultLang = "en_US";
         #endregion
 
         #region constructor
@@ -34,7 +36,23 @@ namespace ZampGUI
             this.cv = cv;
             ricaricaComboIstanzeWP();
 
-            if(cv.uuid_str == "mio")
+
+            var list = listLocale();
+            foreach ( var item in list )
+            {
+                comboBoxLang.Items.Add(item);
+            }
+
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = list;
+            comboBoxLang.DataSource = bindingSource1.DataSource;
+            comboBoxLang.ValueMember = "Value";
+            comboBoxLang.DisplayMember = "Text";
+            //comboBoxLang.SelectedIndex = comboBoxLang.FindString("English");
+            //comboBoxLang.Items.AddRange(list.ToArray());
+            comboBoxLang.SelectedItem = (from x in list where x.Value == defaultLang select x).First();
+
+            if (cv.uuid_str == "mio" || cv.uuid_str == "tuo")
             {
                 txt_User.Text = "admin";
                 txt_Pwd.Text = "admin";
@@ -63,7 +81,8 @@ namespace ZampGUI
             string displayname = txt_DisplayName.Text.ToLower().Trim();
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nome_sito);
             string path_wp = Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat");
-
+            this.currentItem = (ComboboxItem)comboBoxLang.SelectedItem;
+            
 
             string sout_err = "";
             sout_err += controllaCampo(nome_sito, "name website");
@@ -244,6 +263,12 @@ namespace ZampGUI
             string pwd = txt_Pwd.Text.ToLower().Trim();
             string email = txt_Email.Text.ToLower().Trim();
             string displayname = txt_DisplayName.Text.ToLower().Trim();
+            
+            //string lang = comboBoxLang.SelectedItem.ToString();
+            //ComboboxItem item = (ComboboxItem)comboBoxLang.SelectedItem;
+            //string lang = item.Value.ToString();
+            string lang = this.currentItem.Value.ToString();
+
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nome_sito);
             string path_wp = Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat");
             string enviromentPath = cv.PHP_path + ";" + Path.Combine(cv.MariaDB_path, "bin") + ";" + System.Environment.GetEnvironmentVariable("PATH");
@@ -262,6 +287,11 @@ namespace ZampGUI
                 }
                 comandi_create_wp_cli.Add(path_wp + " db create");
                 comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+                if (lang != defaultLang)
+                {
+                    comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
+                    comandi_create_wp_cli.Add(path_wp + " site switch-language " + lang);
+                }
                 comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
                 comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
                 comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
@@ -283,6 +313,11 @@ namespace ZampGUI
                 }
                 comandi_create_wp_cli.Add(path_wp + " db create");
                 comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+                if(lang != defaultLang)
+                {
+                    comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
+                    comandi_create_wp_cli.Add(path_wp + " site switch-language " + lang);
+                }
                 comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
                 //comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
                 //comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
@@ -362,6 +397,7 @@ namespace ZampGUI
             btnDelete.Enabled = true;
             btnRestore.Enabled = true;
             btnBackup.Enabled = true;
+            this.Focus();
         }
         private string eseguiComando(string comando, string currentdir, string enviromentPath)
         {
@@ -417,9 +453,259 @@ namespace ZampGUI
             return regex.IsMatch(email);
         }
 
+        public List<ComboboxItem> listLocale()
+        {
+            List<ComboboxItem> list = new List<ComboboxItem>();
+            
+            //https://wpastra.com/docs/complete-list-wordpress-locale-codes/
+            string scodici = @"
+                Afrikaans	af
+                Albanian	sq
+                Algerian Arabic	arq
+                Akan	ak
+                Amharic	am
+                Arabic	ar
+                Armenian	hy
+                Aromanian	rup_MK
+                Arpitan	frp
+                Assamese	as
+                Asturian	ast
+                Azerbaijani	az
+                Azerbaijani (Turkey)	az_TR
+                Balochi Southern	bcc
+                Bashkir	ba
+                Basque	eu
+                Belarusian	bel
+                Bengali	bn_BD
+                Bengali (India)	bn_IN
+                Bhojpuri	bho
+                Bodo	brx
+                Borana-Arsi-Guji Oromo	gax
+                Bosnian	bs_BA
+                Breton	bre
+                Bulgarian	bg_BG
+                Burmese	my_MM
+                Catalan	ca
+                Catalan (Balear)	bal
+                Cebuano	ceb
+                Chinese (China)	zh_CN
+                Chinese (Hong Kong)	zh_HK
+                Chinese (Singapore)	zh_SG
+                Chinese (Taiwan)	zh_TW
+                Cornish	cor
+                Corsican	co
+                Croatian	hr
+                Czech	cs_CZ
+                Danish	da_DK
+                Dhivehi	dv
+                Dutch	nl_NL
+                Dutch (Belgium)	nl_BE
+                Dzongkha	dzo
+                Emoji	art-xemoji
+                English	en_US
+                English (Australia)	en_AU
+                English (Canada)	en_CA
+                English (New Zealand)	en_NZ
+                English (Pirate)	art_xpirate
+                English (South Africa)	en_SA
+                English (UK)	en_GB
+                Esperanto	eo
+                Estonian	et
+                Ewe	ewe
+                Faroese	fo
+                Finnish	fi
+                Fon	fon
+                French (Belgium)	fr_BE
+                French (Canada)	fr_CA
+                French (France)	fr_FR
+                Frisian	fy
+                Friulian	fur
+                Fulah	fuc
+                Galician	gl_ES
+                Georgian	ka_GE
+                German	de_DE
+                German (Austria)	de_AT
+                German (Switzerland)	de_CH
+                Greek	el
+                Greenlandic	kal
+                Guaraní	gn
+                Gujarati	gu_IN
+                Hawaiian	haw_US
+                Haitian Creole	hat
+                Hausa	hau
+                Hazaragi	haz
+                Hebrew	he_IL
+                Hindi	hi_IN
+                Hungarian	hu_HU
+                Icelandic	is_IS
+                Ido	ido
+                Igbo	ibo
+                Indonesian	id_ID
+                Irish	ga
+                Italian	it_IT
+                Japanese	ja
+                Javanese	jv_ID
+                Kabyle	kab
+                Kannada	kn
+                Karakalpak	kaa
+                Kazakh	kk
+                Khmer	km
+                Kinyarwanda	kin
+                Kirghiz	ky_KY
+                Korean	ko_KR
+                Kurdish (Sorani)	ckb
+                Kurdish (Kurmanji)	kmr
+                Kyrgyz	kir
+                Lao	lo
+                Latvian	lv
+                Latin	la
+                Ligurian	lij
+                Limburgish	li
+                Lingala	lin
+                Lithuanian	lt_LT
+                Lombard	lmo
+                Lower Sorbian	dsb
+                Luganda	lug
+                Luxembourgish	lb_LU
+                Macedonian	mk_MK
+                Maithili	mai
+                Malagasy	mg_MG
+                Maltese	mlt
+                Malay	ms_MY
+                Malayalam	ml_IN
+                Maori	mri
+                Mauritian Creole	mfe
+                Marathi	mr
+                Mingrelian	xmf
+                Mongolian	mn
+                Montenegrin	me_ME
+                Moroccan Arabic	ary
+                Myanmar (Burmese)	my_MM
+                Nepali	ne_NP
+                Nigerian Pidgin	pcm
+                N’ko	nqo
+                Norwegian (Bokmål)	nb_NO
+                Norwegian (Nynorsk)	nn_NO
+                Occitan	oci
+                Oriya	ory
+                Ossetic	os
+                Pashto	ps
+                Panjabi (India)	pa_IN
+                Papiamento (Aruba)	pap_AW
+                Papiamento (Curaçao and Bonaire)	pap_CW
+                Persian	fa_IR
+                Persian (Afghanistan)	fa_AF
+                Polish	pl_PL
+                Portuguese (Angola)	pt_AO
+                Portuguese (Brazil)	pt_BR
+                Portuguese (Portugal)	pt_PT
+                Punjabi	pa_IN
+                Rohingya	rhg
+                Romanian	ro_RO
+                Romansh	roh
+                Russian	ru_RU
+                Russian (Ukraine)	ru_UA
+                Rusyn	rue
+                Sakha	sah
+                Sanskrit	sa_IN
+                Saraiki	skr
+                Sardinian	srd
+                Scottish Gaelic	gd
+                Serbian	sr_RS
+                Shona	sna
+                Shqip (Kosovo)	sq_XK
+                Sicilian	scn
+                Sindhi	sd_PK
+                Sinhala	si_LK
+                Silesian	szl
+                Slovak	sk_SK
+                Slovenian	sl_SI
+                Somali	so_SO
+                South Azerbaijani	azb
+                Spanish (Argentina)	es_AR
+                Spanish (Chile)	es_CL
+                Spanish (Costa Rica)	es_CR
+                Spanish (Colombia)	es_CO
+                Spanish (Dominican Republic)	es_DO
+                Spanish (Ecuador)	es_EC
+                Spanish (Guatemala)	es_GT
+                Spanish (Honduras)	es_HN
+                Spanish (Mexico)	es_MX
+                Spanish (Peru)	es_PE
+                Spanish (Puerto Rico)	es_PR
+                Spanish (Spain)	es_ES
+                Spanish (Uruguay)	es_UY
+                Spanish (Venezuela)	es_VE
+                Sundanese	su_ID
+                Swati	ssw
+                Swahili	sw
+                Swedish	sv_SE
+                Swiss German	gsw
+                Syriac	syr
+                Tagalog	tl
+                Tahitian	tah
+                Tajik	tg
+                Tamazight (Central Atlas)	tzm
+                Tamazight	zgh
+                Tamil	ta_IN
+                Tamil (Sri Lanka)	ta_LK
+                Tatar	tt_RU
+                Telugu	te
+                Thai	th
+                Tibetan	bo
+                Tigrinya	tir
+                Turkish	tr_TR
+                Turkmen	tuk
+                Tweants	twd
+                Uighur	ug_CN
+                Ukrainian	uk
+                Upper Sorbian	hsb
+                Urdu	ur
+                Uzbek	uz_UZ
+                Venetian	vec
+                Vietnamese	vi
+                Walloon	wa
+                Welsh	cy
+                Wolof	wol
+                Xhosa	xho
+                Yoruba	yor
+                Zulu	zul
+                ";
+
+            string[] lines = scodici.Split(new string[] { Environment.NewLine },StringSplitOptions.None);
+            foreach (string line in lines) 
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+                
+                string[] locale_codice = line.Split(new string[] { "\t" },StringSplitOptions.None);
+                //var item = new KeyValuePair<string, string>(locale_codice[1].Trim(), locale_codice[0].Trim());
+
+                ComboboxItem c = new ComboboxItem();
+                c.Text = locale_codice[0].Trim();
+                c.Value = locale_codice[1].Trim();
+                list.Add(c);
+            }
+
+            return list;
+        }
+
         #endregion
 
-        
-        
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public string Value { get; set; }
+
+            //public override string ToString()
+            //{
+            //    return Text;
+            //}
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

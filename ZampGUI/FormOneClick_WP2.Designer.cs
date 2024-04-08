@@ -47,6 +47,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabInstall = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboBoxLang = new System.Windows.Forms.ComboBox();
+            this.checkBox_DisableAutoUpdate = new System.Windows.Forms.CheckBox();
             this.tabBackup = new System.Windows.Forms.TabPage();
             this.btnRestore = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -60,7 +63,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxWpDelete = new System.Windows.Forms.ComboBox();
-            this.checkBox_DisableAutoUpdate = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabInstall.SuspendLayout();
@@ -224,6 +226,8 @@
             // 
             // tabInstall
             // 
+            this.tabInstall.Controls.Add(this.label14);
+            this.tabInstall.Controls.Add(this.comboBoxLang);
             this.tabInstall.Controls.Add(this.checkBox_DisableAutoUpdate);
             this.tabInstall.Controls.Add(this.checkBox_Sovrascrivi);
             this.tabInstall.Controls.Add(this.txt_nomesito);
@@ -245,6 +249,35 @@
             this.tabInstall.TabIndex = 0;
             this.tabInstall.Text = "Install Wordpress";
             this.tabInstall.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(480, 149);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(63, 15);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Language";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // comboBoxLang
+            // 
+            this.comboBoxLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLang.FormattingEnabled = true;
+            this.comboBoxLang.Location = new System.Drawing.Point(549, 145);
+            this.comboBoxLang.Name = "comboBoxLang";
+            this.comboBoxLang.Size = new System.Drawing.Size(189, 23);
+            this.comboBoxLang.TabIndex = 22;
+            // 
+            // checkBox_DisableAutoUpdate
+            // 
+            this.checkBox_DisableAutoUpdate.AutoSize = true;
+            this.checkBox_DisableAutoUpdate.Location = new System.Drawing.Point(257, 148);
+            this.checkBox_DisableAutoUpdate.Name = "checkBox_DisableAutoUpdate";
+            this.checkBox_DisableAutoUpdate.Size = new System.Drawing.Size(159, 19);
+            this.checkBox_DisableAutoUpdate.TabIndex = 21;
+            this.checkBox_DisableAutoUpdate.Text = "Disable Auto Update";
+            this.checkBox_DisableAutoUpdate.UseVisualStyleBackColor = true;
             // 
             // tabBackup
             // 
@@ -379,16 +412,6 @@
             this.comboBoxWpDelete.Size = new System.Drawing.Size(261, 23);
             this.comboBoxWpDelete.TabIndex = 0;
             // 
-            // checkBox_DisableAutoUpdate
-            // 
-            this.checkBox_DisableAutoUpdate.AutoSize = true;
-            this.checkBox_DisableAutoUpdate.Location = new System.Drawing.Point(257, 148);
-            this.checkBox_DisableAutoUpdate.Name = "checkBox_DisableAutoUpdate";
-            this.checkBox_DisableAutoUpdate.Size = new System.Drawing.Size(159, 19);
-            this.checkBox_DisableAutoUpdate.TabIndex = 21;
-            this.checkBox_DisableAutoUpdate.Text = "Disable Auto Update";
-            this.checkBox_DisableAutoUpdate.UseVisualStyleBackColor = true;
-            // 
             // FormOneClick_WP2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -448,5 +471,7 @@
         private System.Windows.Forms.ComboBox comboBoxWpBackup;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox checkBox_DisableAutoUpdate;
+        private System.Windows.Forms.ComboBox comboBoxLang;
+        private System.Windows.Forms.Label label14;
     }
 }
