@@ -364,6 +364,18 @@ namespace ZampGUI
 
             FormOneClick_WP2 frm_wp = new FormOneClick_WP2(cv);
             frm_wp.ShowDialog(this);
+            if(frm_wp.requestAddSites)
+            {
+                //requested adding a new entry in the menu "List Sites"
+                cv = frm_wp.cv;
+
+                //save json
+                cv.updateSites(); 
+
+                //reload sites from json
+                cv.caricasites();
+                crealinkSite(cv.listaSites);
+            }
             frm_wp.Dispose();
         }
         private void pHPFoldeToolStripMenuItem_Click(object sender, EventArgs e)

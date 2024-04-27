@@ -18,6 +18,8 @@ using System.IO.Compression;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Runtime.InteropServices.ComTypes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace ZampGUI
 {
@@ -27,6 +29,7 @@ namespace ZampGUI
         public ConfigVar cv;
         public ComboboxItem currentItem;
         public string defaultLang = "en_US";
+        public bool requestAddSites = false;
         #endregion
 
         #region constructor
@@ -136,6 +139,18 @@ namespace ZampGUI
             //finito job asincrono
             abilita_comandi_form();
             ricaricaComboIstanzeWP();
+
+            //carico la lista dei siti salvati
+            string fullurl = "http://localhost/" + nome_sito;
+            if(this.cv.listaSites.Where(x => x.Url.Equals(fullurl, StringComparison.CurrentCultureIgnoreCase)).Count() == 0)
+            {
+                DialogResult dialogResult2 = MessageBox.Show("Would like to add http://localhost/" + nome_sito + " to \"Link -> Sites\" Menu?", "Wordpress Installation OK", MessageBoxButtons.YesNo);
+                if (dialogResult2 == DialogResult.Yes)
+                {
+                    this.cv.listaSites.Add(new RigaSite() { Name = nome_sito, Url = fullurl });
+                    requestAddSites = true;
+                }
+            }
 
             DialogResult dialogResult = MessageBox.Show("Completed " + Environment.NewLine + "Would like to visit http://localhost/" + nome_sito, "Wordpress Installation OK", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
@@ -270,7 +285,7 @@ namespace ZampGUI
             string lang = this.currentItem.Value.ToString();
 
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nome_sito);
-            string path_wp = Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat");
+            string path_wp = "\"" +  Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat") + "\"";
             string enviromentPath = cv.PHP_path + ";" + Path.Combine(cv.MariaDB_path, "bin") + ";" + System.Environment.GetEnvironmentVariable("PATH");
 
             List<string> comandi_create_wp_cli = new List<string>();

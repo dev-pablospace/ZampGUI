@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -823,6 +824,22 @@ namespace ZampLib.Business
                 System.IO.File.WriteAllText(phpmyadmin_config, text);
             }
         }
+        public void updateSites()
+        {
+            List<JProperty> arr = new List<JProperty>();
+            foreach (var item in this.listaSites)
+            {
+                if (!string.IsNullOrEmpty(item.Name) && !string.IsNullOrEmpty(item.Url))
+                {
+                    arr.Add(new JProperty(item.Name, item.Url));
+                }
+            }
+
+            this.json = this.json ?? ZampGUILib.getJson_Env();
+            this.json[this._env]["sites"] = new JObject(arr);
+            ZampGUILib.setJson_Env(this.json);
+        }
+
         public void updatePID(typeProg type_program, typeStartorKill type_op, int? pid)
         {
             this.json = this.json ?? ZampGUILib.getJson_Env();
