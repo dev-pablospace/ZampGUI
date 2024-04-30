@@ -47,6 +47,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabInstall = new System.Windows.Forms.TabPage();
+            this.txt_Description = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txt_SiteName = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txt_numpost = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxWPVersion = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.comboBoxLang = new System.Windows.Forms.ComboBox();
             this.checkBox_DisableAutoUpdate = new System.Windows.Forms.CheckBox();
@@ -66,6 +74,7 @@
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabInstall.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_numpost)).BeginInit();
             this.tabBackup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +88,7 @@
             this.txtOut.Name = "txtOut";
             this.txtOut.ReadOnly = true;
             this.txtOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOut.Size = new System.Drawing.Size(734, 155);
+            this.txtOut.Size = new System.Drawing.Size(807, 155);
             this.txtOut.TabIndex = 1;
             this.txtOut.WordWrap = false;
             // 
@@ -96,74 +105,76 @@
             // 
             this.panel2.Controls.Add(this.txtOut);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(22, 308);
+            this.panel2.Location = new System.Drawing.Point(18, 354);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(762, 208);
+            this.panel2.Size = new System.Drawing.Size(835, 208);
             this.panel2.TabIndex = 5;
             // 
             // checkBox_Sovrascrivi
             // 
             this.checkBox_Sovrascrivi.AutoSize = true;
-            this.checkBox_Sovrascrivi.Location = new System.Drawing.Point(19, 148);
+            this.checkBox_Sovrascrivi.Location = new System.Drawing.Point(290, 199);
             this.checkBox_Sovrascrivi.Name = "checkBox_Sovrascrivi";
-            this.checkBox_Sovrascrivi.Size = new System.Drawing.Size(222, 19);
+            this.checkBox_Sovrascrivi.Size = new System.Drawing.Size(292, 19);
             this.checkBox_Sovrascrivi.TabIndex = 6;
-            this.checkBox_Sovrascrivi.Text = "Overwrite existing Wordpress";
+            this.checkBox_Sovrascrivi.Text = "Overwrite existing website (id exists)";
             this.checkBox_Sovrascrivi.UseVisualStyleBackColor = true;
             // 
             // txt_DisplayName
             // 
-            this.txt_DisplayName.Location = new System.Drawing.Point(527, 96);
+            this.txt_DisplayName.Location = new System.Drawing.Point(92, 97);
             this.txt_DisplayName.Name = "txt_DisplayName";
-            this.txt_DisplayName.Size = new System.Drawing.Size(211, 21);
+            this.txt_DisplayName.Size = new System.Drawing.Size(160, 21);
             this.txt_DisplayName.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(347, 100);
+            this.label6.Location = new System.Drawing.Point(16, 100);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(168, 15);
+            this.label6.Size = new System.Drawing.Size(70, 15);
             this.label6.TabIndex = 20;
-            this.label6.Text = "Nickname / Display name";
+            this.label6.Text = "Nickname*";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // txt_Email
             // 
-            this.txt_Email.Location = new System.Drawing.Point(62, 97);
+            this.txt_Email.Location = new System.Drawing.Point(607, 60);
             this.txt_Email.Name = "txt_Email";
-            this.txt_Email.Size = new System.Drawing.Size(259, 21);
+            this.txt_Email.Size = new System.Drawing.Size(200, 21);
             this.txt_Email.TabIndex = 4;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 100);
+            this.label5.Location = new System.Drawing.Point(548, 65);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 15);
+            this.label5.Size = new System.Drawing.Size(49, 15);
             this.label5.TabIndex = 18;
-            this.label5.Text = "Email";
+            this.label5.Text = "Email*";
             // 
             // txt_Pwd
             // 
-            this.txt_Pwd.Location = new System.Drawing.Point(528, 59);
+            this.txt_Pwd.Location = new System.Drawing.Point(349, 60);
             this.txt_Pwd.Name = "txt_Pwd";
-            this.txt_Pwd.Size = new System.Drawing.Size(210, 21);
+            this.txt_Pwd.Size = new System.Drawing.Size(181, 21);
             this.txt_Pwd.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(454, 62);
+            this.label4.Location = new System.Drawing.Point(273, 62);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 15);
+            this.label4.Size = new System.Drawing.Size(70, 15);
             this.label4.TabIndex = 16;
-            this.label4.Text = "Password";
+            this.label4.Text = "Password*";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txt_User
             // 
-            this.txt_User.Location = new System.Drawing.Point(62, 59);
+            this.txt_User.Location = new System.Drawing.Point(69, 59);
             this.txt_User.Name = "txt_User";
-            this.txt_User.Size = new System.Drawing.Size(259, 21);
+            this.txt_User.Size = new System.Drawing.Size(183, 21);
             this.txt_User.TabIndex = 2;
             // 
             // label2
@@ -171,9 +182,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(16, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 15);
+            this.label2.Size = new System.Drawing.Size(42, 15);
             this.label2.TabIndex = 14;
-            this.label2.Text = "User";
+            this.label2.Text = "User*";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label9
             // 
@@ -188,9 +200,9 @@
             // 
             this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInstall.Location = new System.Drawing.Point(13, 181);
+            this.btnInstall.Location = new System.Drawing.Point(13, 238);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(725, 34);
+            this.btnInstall.Size = new System.Drawing.Size(794, 34);
             this.btnInstall.TabIndex = 7;
             this.btnInstall.Text = "Install Wordpress";
             this.btnInstall.UseVisualStyleBackColor = true;
@@ -202,17 +214,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_nomesito.Location = new System.Drawing.Point(151, 21);
             this.txt_nomesito.Name = "txt_nomesito";
-            this.txt_nomesito.Size = new System.Drawing.Size(208, 21);
+            this.txt_nomesito.Size = new System.Drawing.Size(277, 21);
             this.txt_nomesito.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(410, 24);
+            this.label3.Location = new System.Drawing.Point(440, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 15);
+            this.label3.Size = new System.Drawing.Size(112, 15);
             this.label3.TabIndex = 0;
-            this.label3.Text = "(name website)";
+            this.label3.Text = "(name website)*";
             // 
             // tabControl1
             // 
@@ -221,11 +233,19 @@
             this.tabControl1.Location = new System.Drawing.Point(18, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(770, 272);
+            this.tabControl1.Size = new System.Drawing.Size(839, 326);
             this.tabControl1.TabIndex = 7;
             // 
             // tabInstall
             // 
+            this.tabInstall.Controls.Add(this.txt_Description);
+            this.tabInstall.Controls.Add(this.label18);
+            this.tabInstall.Controls.Add(this.txt_SiteName);
+            this.tabInstall.Controls.Add(this.label17);
+            this.tabInstall.Controls.Add(this.label16);
+            this.tabInstall.Controls.Add(this.txt_numpost);
+            this.tabInstall.Controls.Add(this.comboBoxWPVersion);
+            this.tabInstall.Controls.Add(this.label15);
             this.tabInstall.Controls.Add(this.label14);
             this.tabInstall.Controls.Add(this.comboBoxLang);
             this.tabInstall.Controls.Add(this.checkBox_DisableAutoUpdate);
@@ -245,15 +265,82 @@
             this.tabInstall.Location = new System.Drawing.Point(4, 24);
             this.tabInstall.Name = "tabInstall";
             this.tabInstall.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInstall.Size = new System.Drawing.Size(762, 244);
+            this.tabInstall.Size = new System.Drawing.Size(831, 298);
             this.tabInstall.TabIndex = 0;
             this.tabInstall.Text = "Install Wordpress";
             this.tabInstall.UseVisualStyleBackColor = true;
             // 
+            // txt_Description
+            // 
+            this.txt_Description.Location = new System.Drawing.Point(490, 145);
+            this.txt_Description.Name = "txt_Description";
+            this.txt_Description.Size = new System.Drawing.Size(309, 21);
+            this.txt_Description.TabIndex = 31;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(400, 148);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(84, 15);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "Description";
+            // 
+            // txt_SiteName
+            // 
+            this.txt_SiteName.Location = new System.Drawing.Point(92, 145);
+            this.txt_SiteName.Name = "txt_SiteName";
+            this.txt_SiteName.Size = new System.Drawing.Size(279, 21);
+            this.txt_SiteName.TabIndex = 29;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(16, 148);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 15);
+            this.label17.TabIndex = 28;
+            this.label17.Text = "Site Name";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(16, 199);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(126, 15);
+            this.label16.TabIndex = 27;
+            this.label16.Text = "Create Dummy Post";
+            // 
+            // txt_numpost
+            // 
+            this.txt_numpost.Location = new System.Drawing.Point(151, 197);
+            this.txt_numpost.Name = "txt_numpost";
+            this.txt_numpost.Size = new System.Drawing.Size(73, 21);
+            this.txt_numpost.TabIndex = 26;
+            // 
+            // comboBoxWPVersion
+            // 
+            this.comboBoxWPVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxWPVersion.FormattingEnabled = true;
+            this.comboBoxWPVersion.Location = new System.Drawing.Point(631, 97);
+            this.comboBoxWPVersion.Name = "comboBoxWPVersion";
+            this.comboBoxWPVersion.Size = new System.Drawing.Size(127, 23);
+            this.comboBoxWPVersion.TabIndex = 25;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(548, 103);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(77, 15);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "WP Version";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(480, 149);
+            this.label14.Location = new System.Drawing.Point(280, 100);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(63, 15);
             this.label14.TabIndex = 23;
@@ -264,15 +351,15 @@
             // 
             this.comboBoxLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLang.FormattingEnabled = true;
-            this.comboBoxLang.Location = new System.Drawing.Point(549, 145);
+            this.comboBoxLang.Location = new System.Drawing.Point(349, 97);
             this.comboBoxLang.Name = "comboBoxLang";
-            this.comboBoxLang.Size = new System.Drawing.Size(189, 23);
+            this.comboBoxLang.Size = new System.Drawing.Size(181, 23);
             this.comboBoxLang.TabIndex = 22;
             // 
             // checkBox_DisableAutoUpdate
             // 
             this.checkBox_DisableAutoUpdate.AutoSize = true;
-            this.checkBox_DisableAutoUpdate.Location = new System.Drawing.Point(257, 148);
+            this.checkBox_DisableAutoUpdate.Location = new System.Drawing.Point(627, 199);
             this.checkBox_DisableAutoUpdate.Name = "checkBox_DisableAutoUpdate";
             this.checkBox_DisableAutoUpdate.Size = new System.Drawing.Size(159, 19);
             this.checkBox_DisableAutoUpdate.TabIndex = 21;
@@ -296,7 +383,7 @@
             this.tabBackup.Location = new System.Drawing.Point(4, 24);
             this.tabBackup.Name = "tabBackup";
             this.tabBackup.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBackup.Size = new System.Drawing.Size(762, 244);
+            this.tabBackup.Size = new System.Drawing.Size(831, 298);
             this.tabBackup.TabIndex = 1;
             this.tabBackup.Text = "Backup Restore Delete";
             this.tabBackup.UseVisualStyleBackColor = true;
@@ -417,13 +504,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(802, 534);
+            this.ClientSize = new System.Drawing.Size(869, 572);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(818, 573);
-            this.MinimumSize = new System.Drawing.Size(818, 573);
             this.Name = "FormOneClick_WP2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormOneClick_WP";
@@ -432,6 +517,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabInstall.ResumeLayout(false);
             this.tabInstall.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_numpost)).EndInit();
             this.tabBackup.ResumeLayout(false);
             this.tabBackup.PerformLayout();
             this.ResumeLayout(false);
@@ -473,5 +559,13 @@
         private System.Windows.Forms.CheckBox checkBox_DisableAutoUpdate;
         private System.Windows.Forms.ComboBox comboBoxLang;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox comboBoxWPVersion;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown txt_numpost;
+        private System.Windows.Forms.TextBox txt_SiteName;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txt_Description;
+        private System.Windows.Forms.Label label18;
     }
 }

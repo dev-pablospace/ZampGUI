@@ -27,7 +27,8 @@ namespace ZampGUI
     {
         #region vars
         public ConfigVar cv;
-        public ComboboxItem currentItem;
+        public ComboboxItem comboBoxSelItem_Lang;
+        public ComboboxItem comboBoxSelItem_WPVers;
         public string defaultLang = "en_US";
         public bool requestAddSites = false;
         #endregion
@@ -51,17 +52,31 @@ namespace ZampGUI
             comboBoxLang.DataSource = bindingSource1.DataSource;
             comboBoxLang.ValueMember = "Value";
             comboBoxLang.DisplayMember = "Text";
-            //comboBoxLang.SelectedIndex = comboBoxLang.FindString("English");
-            //comboBoxLang.Items.AddRange(list.ToArray());
             comboBoxLang.SelectedItem = (from x in list where x.Value == defaultLang select x).First();
 
+
+            var lista2 = listVersioni();
+            foreach (var item in lista2)
+            {
+                comboBoxWPVersion.Items.Add(item);
+            }
+            var bindingSource2 = new BindingSource();
+            bindingSource2.DataSource = lista2;
+            comboBoxWPVersion.DataSource = bindingSource2.DataSource;
+            comboBoxWPVersion.ValueMember = "Value";
+            comboBoxWPVersion.DisplayMember = "Text";
+            comboBoxWPVersion.SelectedItem = (from x in list where x.Value == defaultLang select x).First();
+
+            //default values for input text
+            txt_User.Text = "admin";
+            txt_Pwd.Text = "admin";
+            txt_DisplayName.Text = "admin";
+            txt_Email.Text = "admin@gmail.com";
             if (cv.uuid_str == "mio" || cv.uuid_str == "tuo")
             {
-                txt_User.Text = "admin";
-                txt_Pwd.Text = "admin";
-                txt_Email.Text = "admin@gmail.com";
                 txt_DisplayName.Text = "pabloindev";
                 checkBox_DisableAutoUpdate.Checked = true;
+                txt_numpost.Value = 3;
             }
 
             //backgroundWorker2 = new BackgroundWorker();
@@ -84,8 +99,9 @@ namespace ZampGUI
             string displayname = txt_DisplayName.Text.ToLower().Trim();
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nome_sito);
             string path_wp = Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat");
-            this.currentItem = (ComboboxItem)comboBoxLang.SelectedItem;
-            
+            this.comboBoxSelItem_Lang = (ComboboxItem)comboBoxLang.SelectedItem;
+            this.comboBoxSelItem_WPVers = (ComboboxItem)comboBoxWPVersion.SelectedItem;
+
 
             string sout_err = "";
             sout_err += controllaCampo(nome_sito, "name website");
@@ -278,11 +294,15 @@ namespace ZampGUI
             string pwd = txt_Pwd.Text.ToLower().Trim();
             string email = txt_Email.Text.ToLower().Trim();
             string displayname = txt_DisplayName.Text.ToLower().Trim();
-            
-            //string lang = comboBoxLang.SelectedItem.ToString();
-            //ComboboxItem item = (ComboboxItem)comboBoxLang.SelectedItem;
-            //string lang = item.Value.ToString();
-            string lang = this.currentItem.Value.ToString();
+
+            string sitename = txt_SiteName.Text.ToLower().Trim();
+            string description = txt_Description.Text.ToLower().Trim();
+            sitename = string.IsNullOrEmpty(sitename) ? nome_sito : sitename;
+
+            string lang = this.comboBoxSelItem_Lang.Value.ToString();
+            string wpvers = this.comboBoxSelItem_WPVers.Value.ToString();
+            string theme = (from x in cv.Vers_WP where x.num == wpvers select x.theme).SingleOrDefault(); //unused, right now i'm using --all option from theme delete - delete all theme except the active one
+
 
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nome_sito);
             string path_wp = "\"" +  Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat") + "\"";
@@ -293,7 +313,7 @@ namespace ZampGUI
             if(cv.uuid_str == "mio")
             {
                 //specifiche cofig per la mia istanza
-                comandi_create_wp_cli.Add(path_wp + " core download");
+                comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
                 comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
                 comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
                 if (checkBox_DisableAutoUpdate.Checked)
@@ -301,25 +321,32 @@ namespace ZampGUI
                     comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
                 }
                 comandi_create_wp_cli.Add(path_wp + " db create");
-                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + sitename + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
                 if (lang != defaultLang)
                 {
                     comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
                     comandi_create_wp_cli.Add(path_wp + " site switch-language " + lang);
                 }
                 comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
-                comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
+                //comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
+                comandi_create_wp_cli.Add(path_wp + " theme delete --all");
                 comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
                 comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
                 comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
                 comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
+                if(!string.IsNullOrEmpty(description))
+                {
+                    comandi_create_wp_cli.Add(path_wp + " option update blogdescription \"" + description + "\"");
+                }
+                
+                
                 comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
                 comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
             }
             else
             {
                 //tutti gli altri
-                comandi_create_wp_cli.Add(path_wp + " core download");
+                comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
                 comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
                 //comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
                 if (checkBox_DisableAutoUpdate.Checked)
@@ -327,7 +354,7 @@ namespace ZampGUI
                     comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
                 }
                 comandi_create_wp_cli.Add(path_wp + " db create");
-                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + nome_sito + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + sitename + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
                 if(lang != defaultLang)
                 {
                     comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
@@ -339,6 +366,10 @@ namespace ZampGUI
                 //comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
                 //comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
                 //comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
+                if (!string.IsNullOrEmpty(description))
+                {
+                    comandi_create_wp_cli.Add(path_wp + " option update blogdescription \"" + description + "\"");
+                }
                 comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
                 //comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
             }
@@ -348,6 +379,46 @@ namespace ZampGUI
             {
                 string output = eseguiComando(comando, path_folder_wp, enviromentPath);
                 progress.Report(output);
+            }
+
+
+            // ------------------------------------------------------------------------------------------------
+            //creating dummy post
+            if (txt_numpost.Value > 0)
+            {
+                //creating 3 categories
+                string idcat = eseguiComando(path_wp + " term create category cat1 --porcelain", path_folder_wp, enviromentPath);
+                string idimg = eseguiComando(path_wp + " media import " + "\"" + Path.Combine(cv.App_Path, cv.pathWPcli, "imgplaceholder.png") + "\"" + " --porcelain", path_folder_wp, enviromentPath);
+
+                // cleaning the output
+                idcat = idcat.Trim();
+                idimg = idimg.Trim();
+
+
+                for (int numpost = 0; numpost < txt_numpost.Value; numpost++)
+                {
+                    //get content and excerpt
+                    string content = ZampGUILib.getRandomLorem();
+                    string excerpt = "";
+                    foreach (var s in content.Split(' '))
+                    {
+                        excerpt += s + " ";
+                        if (excerpt.Length > 100)
+                        {
+                            excerpt = excerpt.Trim();
+                            break;
+                        }
+                    }
+
+                    //create a post
+                    string comando = path_wp + " post create --porcelain --post_status=publish --post_author=1 --post_title=\"Post " + (numpost + 1) + "\" --post_excerpt=\"" + excerpt + "\" --post_category=\"cat1\" --tags_input='tag" + (numpost + 1) + "' --post_content=\"" + content + "\"";
+                    string idpost = eseguiComando(comando, path_folder_wp, enviromentPath);
+                    idpost = idpost.Trim();
+
+                    //attach featured image
+                    comando = path_wp + " post meta update " + idpost + " _thumbnail_id " + idimg;
+                    eseguiComando(comando, path_folder_wp, enviromentPath);
+                }
             }
 
         }
@@ -705,6 +776,21 @@ namespace ZampGUI
             return list;
         }
 
+        public List<ComboboxItem> listVersioni()
+        {
+            List<ComboboxItem> list = new List<ComboboxItem>();
+
+            foreach(SingolaVersioneWP s in cv.Vers_WP)
+            {
+                ComboboxItem c = new ComboboxItem();
+                c.Text = s.num;
+                c.Value = s.num;
+                list.Add(c);
+            }
+            return list;
+        }
+
+
         #endregion
 
         public class ComboboxItem
@@ -719,6 +805,26 @@ namespace ZampGUI
         }
 
         private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

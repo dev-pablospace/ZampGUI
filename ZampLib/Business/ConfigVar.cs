@@ -34,6 +34,7 @@ namespace ZampLib.Business
         public string pathNode { get; set; }
         public string pathWPcli { get; set; }
         public string pathBackupSQLFolder { get; set; }
+        public List<SingolaVersioneWP> Vers_WP { get; set; } = new List<SingolaVersioneWP>();
 
 
         public bool checkBackUpAllDBOnExit { get; set; }
@@ -365,6 +366,16 @@ namespace ZampLib.Business
             wp_cli_vers = (string)json[_env]["vers_sf"]["wp_cli_vers"];
 
 
+            foreach (JToken item in (JArray)json[_env]["vers_wp"])
+            {
+                string num = item["num"].ToString();
+                string theme = item["theme"].ToString();
+                SingolaVersioneWP swp = new SingolaVersioneWP() { num = num, theme = theme };
+                Vers_WP.Add(swp);
+            }
+
+
+
             if (!string.IsNullOrEmpty(pid_currentproc_apache))
             {
                 if (!int.TryParse(pid_currentproc_apache, out int nd) || !ZampGUILib.checkRunningProc(pid_currentproc_apache) || ZampGUILib.getNameProc_fromPID(pid_currentproc_apache) != this.procApache)
@@ -647,6 +658,26 @@ namespace ZampLib.Business
                 rel.Add("sites", new JObject());
             }
 
+            if (rel["vers_wp"] == null)
+            {
+                JArray jarrayObjTemp = new JArray() {
+                    new JObject(
+                        new JProperty("num", "6.3.4")
+                        , new JProperty("theme", "")
+                    ),
+                    new JObject(
+                        new JProperty("num", "6.2.5")
+                        , new JProperty("theme", "")
+                    ),
+                    new JObject(
+                        new JProperty("num", "6.1.6")
+                        , new JProperty("theme", "")
+                    )
+                };
+                rel.Add("vers_wp", jarrayObjTemp);
+            }
+
+
             ZampGUILib.setJson_Env(jsonObject);
         }
         public string checkPortInUse()
@@ -839,6 +870,25 @@ namespace ZampLib.Business
             this.json[this._env]["sites"] = new JObject(arr);
             ZampGUILib.setJson_Env(this.json);
         }
+        public void updateWP_vers()
+        {
+            JArray arr = new JArray();
+
+            //List<JProperty> arr = new List<JProperty>();
+            foreach (var item in this.Vers_WP)
+            {
+                var obj = new JObject() { 
+                    new JProperty("num", item.num)
+                    , new JProperty("theme", item.theme) 
+                };
+                arr.Add(obj);
+            }
+
+            this.json = this.json ?? ZampGUILib.getJson_Env();
+            this.json[this._env]["vers_wp"] = arr;
+            ZampGUILib.setJson_Env(this.json);
+        }
+
 
         public void updatePID(typeProg type_program, typeStartorKill type_op, int? pid)
         {

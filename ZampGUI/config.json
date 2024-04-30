@@ -3,16 +3,16 @@
     "pathBase": "C:\\Users\\pablodev\\Desktop\\varie\\portable\\rolling_zamp\\ZampGUI_test",
     "Apache_current": "Apache24",
     "MariaDB_list": [
-      "mariadb-10.6.11"
+      "mariadb-10.11.7"
     ],
-    "MariaDB_current": "mariadb-10.6.11",
+    "MariaDB_current": "mariadb-10.11.7",
     "PHP_list": [
-      "php-8.2.1"
+      "php-8.2.18"
     ],
-    "PHP_current": "php-8.2.1",
+    "PHP_current": "php-8.2.18",
     "pathGit": "PortableGit",
     "pathSass": "dart-sass",
-    "pathNode": "node-v20.11.1",
+    "pathNode": "node-v20.12.2",
     "pathWPcli": "wp-cli",
     "checkBackUpAllDBOnExit": false,
     "checkUpdateZampgui": true,
@@ -26,15 +26,25 @@
     "sites": {},
     "uuid_str": "mio",
     "vers_sf": {
-      "apache_vers": "2.4.54",
-      "php_vers": "8.2.1",
-      "mariadb_vers": "10.6.11",
-      "composer_vers": "2.5.1",
+      "apache_vers": "2.4.59",
+      "php_vers": "8.2.18",
+      "mariadb_vers": "10.11.7",
+      "composer_vers": "2.7.4",
       "git_vers": "2.44.0",
-      "node_vers": "20.11.1",
-      "sass_vers": "1.71.1",
+      "node_vers": "20.12.2",
+      "sass_vers": "1.75.0",
       "wp_cli_vers": "2.10.0"
-    }
+    },
+    "vers_wp": [
+      {
+        "num": "6.1.6",
+        "theme": ""
+      },
+      {
+        "num": "6.0.8",
+        "theme": ""
+      }
+    ]
   },
   "pc_cameretta": {
     "pathBase": "H:\\SVL\\zampgui\\ZampGUI_1.1.02_php8.1.6",

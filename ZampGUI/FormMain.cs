@@ -844,6 +844,21 @@ namespace ZampGUI
                 JObject jobj = cv.getReqInfo_from_WebSite(ver);
 
                 string url_latest_vers = jobj.Value<string>("url_latest_vers");
+                
+                //update wp version available
+                List<SingolaVersioneWP> lista_versioni_wp = new List<SingolaVersioneWP>();
+                var objtemp = (JArray)jobj["vers_wp"];
+                foreach ( var obj in objtemp )
+                {
+                    SingolaVersioneWP ss = new SingolaVersioneWP();
+                    ss.num = obj.Value<string>("num");
+                    ss.theme = obj.Value<string>("theme");
+                    lista_versioni_wp.Add(ss);
+                }
+                this.cv.Vers_WP = lista_versioni_wp;
+                this.cv.updateWP_vers();
+
+
 
                 //mi occupo di fare il check sulla versione
                 string ver_web = jobj.Value<string>("ver");
