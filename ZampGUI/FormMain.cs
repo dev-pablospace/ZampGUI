@@ -279,12 +279,12 @@ namespace ZampGUI
 
                     if (cv.importJson(jimported))
                     {
-                        MessageBox.Show("File imported");
+                        MessageBox.Show("File loaded correctly");
                         crealinkSite(cv.listaSites);
                     }
                     else
                     {
-                        MessageBox.Show("File non imported");
+                        MessageBox.Show("Error import file json");
                     }
                 }
             }
@@ -376,6 +376,7 @@ namespace ZampGUI
                 cv.caricasites();
                 crealinkSite(cv.listaSites);
             }
+            cv.saveOptionsWP();
             frm_wp.Dispose();
         }
         private void pHPFoldeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -652,14 +653,6 @@ namespace ZampGUI
         {
             if(AggiornaPercorsi)
             {
-                //vecchia modalità
-                //lbVersion.Text = "Env: " + cv._env;
-                //lb_baseFolder.Text = "Base Folder: " + cv.pathBase;
-                //lbApache_ver.Text = cv.apache_vers;
-                //lbPHP_ver.Text = cv.php_vers;
-                //lbMariaDB_ver.Text = cv.mariadb_vers;
-                //lbComposer_ver.Text = cv.composer_vers;
-
                 listViewInfo.Items.Clear();
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Folder", cv.pathBase }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Apache", cv.apache_vers }));
@@ -670,6 +663,7 @@ namespace ZampGUI
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Node", cv.node_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "Dart Sass", cv.sass_vers }));
                 listViewInfo.Items.Add(new ListViewItem(new string[] { "WP cli", cv.wp_cli_vers }));
+                listViewInfo.Items.Add(new ListViewItem(new string[] { "uuid", cv.uuid_str }));
             }
             
 

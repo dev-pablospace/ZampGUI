@@ -70,6 +70,7 @@
     <Compile Include="Business\EnumVari.cs" />
     <Compile Include="Business\RigaSite.cs" />
     <Compile Include="Business\SingolaVersioneWP.cs" />
+    <Compile Include="Business\WP_Options.cs" />
     <Compile Include="ZampGUILib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

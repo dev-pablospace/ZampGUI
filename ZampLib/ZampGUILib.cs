@@ -186,7 +186,13 @@ namespace ZampLib
             {
                 process.StartInfo.WorkingDirectory = working_dir;
             }
+
+            //https://stackoverflow.com/questions/43171791/how-to-execute-a-cmd-c-command-with-round-bracket-in-the-path-name
+            path_exe = path_exe.Replace("(", "^(").Replace(")", "^)");
+
+
             process.StartInfo.Arguments = "/c \"" + path_exe + " " + args + "\"";
+            //process.StartInfo.Arguments = "/c \"" + path_exe + "\" " + args;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = bhide;
             process.StartInfo.RedirectStandardOutput = true;
@@ -559,7 +565,7 @@ namespace ZampLib
         }
 
 
-        public static string get_first_dir(string abs_main_path, string search)
+        public static string get_first_dir(string abs_main_path, string search, bool failifnotfound = true)
         {
             string[] arrdir = Directory.GetDirectories(Path.Combine(abs_main_path, "Apps"));
             foreach(string s in arrdir)
@@ -570,7 +576,15 @@ namespace ZampLib
                     return dir_name;
                 }
             }
-            throw new Exception(search + " folder not found");
+            
+            if(failifnotfound)
+            {
+                throw new Exception(search + " folder not found");
+            }
+            else
+            {
+                return "";
+            }
         }
         public static string[] get_dirs(string abs_main_path, string search)
         {

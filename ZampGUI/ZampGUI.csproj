@@ -150,6 +150,12 @@
     <Compile Include="FormOneClick_WP.Designer.cs">
       <DependentUpon>FormOneClick_WP.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOneClick_WP_Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOneClick_WP_Options.Designer.cs">
+      <DependentUpon>FormOneClick_WP_Options.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOneClick_WP.resx">
       <DependentUpon>FormOneClick_WP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOneClick_WP_Options.resx">
+      <DependentUpon>FormOneClick_WP_Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOptions.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>

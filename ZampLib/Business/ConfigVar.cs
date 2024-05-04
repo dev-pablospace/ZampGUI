@@ -48,6 +48,9 @@ namespace ZampLib.Business
         public string uuid_str { get; set; }
         public List<string> ListPathConsole { get; set; } //percorsi aggiuntivi che devo aggiungere alla %PATH% QUANDO apro la console
         public List<RigaSite> listaSites = new List<RigaSite>();
+
+        public WP_Options wpop { get; set; }
+
         #endregion
 
         #region prop che contiene le versioni dei programmi
@@ -342,6 +345,7 @@ namespace ZampLib.Business
                 Guid myuuid = Guid.NewGuid();
                 string myuuidAsString = myuuid.ToString();
                 this.uuid_str = myuuidAsString;
+                json[_env]["uuid_str"] = myuuidAsString;
             }
             else
             {
@@ -364,6 +368,38 @@ namespace ZampLib.Business
             node_vers = (string)json[_env]["vers_sf"]["node_vers"];
             sass_vers = (string)json[_env]["vers_sf"]["sass_vers"];
             wp_cli_vers = (string)json[_env]["vers_sf"]["wp_cli_vers"];
+
+
+            wpop = new WP_Options();
+            wpop.txt_nomesito = (string)json[_env]["wp_options"]["txt_nomesito"];
+            wpop.txt_User = (string)json[_env]["wp_options"]["txt_User"];
+            wpop.txt_Pwd = (string)json[_env]["wp_options"]["txt_Pwd"];
+            wpop.txt_Email = (string)json[_env]["wp_options"]["txt_Email"];
+            wpop.txt_DisplayName = (string)json[_env]["wp_options"]["txt_DisplayName"];
+            wpop.comboBoxLang = (string)json[_env]["wp_options"]["comboBoxLang"];
+            wpop.comboBoxWPVersion = (string)json[_env]["wp_options"]["comboBoxWPVersion"];
+
+            wpop.txtNumPost = (int)json[_env]["wp_options"]["txtNumPost"];
+            wpop.txtSiteName = (string)json[_env]["wp_options"]["txtSiteName"];
+            wpop.txtDescription = (string)json[_env]["wp_options"]["txtDescription"];
+            wpop.checkOverwriteWebSite = (bool)json[_env]["wp_options"]["checkOverwriteWebSite"];
+            wpop.checkDisableAutoUpdate = (bool)json[_env]["wp_options"]["checkDisableAutoUpdate"];
+            wpop.checkEnableWPPostRevision = (bool)json[_env]["wp_options"]["checkEnableWPPostRevision"];
+            wpop.txtNumericPostRevision = (int)json[_env]["wp_options"]["txtNumericPostRevision"];
+            wpop.checkRemoveDefaultPlugin = (bool)json[_env]["wp_options"]["checkRemoveDefaultPlugin"];
+            wpop.checkRemoveDefaultTheme = (bool)json[_env]["wp_options"]["checkRemoveDefaultTheme"];
+            wpop.txtPluginList = (string)json[_env]["wp_options"]["txtPluginList"];
+            wpop.txtThemeList = (string)json[_env]["wp_options"]["txtThemeList"];
+
+            wpop.timezone_string = (string)json[_env]["wp_options"]["timezone_string"];
+            wpop.time_format = (string)json[_env]["wp_options"]["time_format"];
+            wpop.rss_use_excerpt = (string)json[_env]["wp_options"]["rss_use_excerpt"];
+            wpop.uploads_use_yearmonth_folders = (string)json[_env]["wp_options"]["uploads_use_yearmonth_folders"];
+            wpop.permalink_string = (string)json[_env]["wp_options"]["permalink_string"];
+            
+
+
+
 
 
             foreach (JToken item in (JArray)json[_env]["vers_wp"])
@@ -403,17 +439,17 @@ namespace ZampLib.Business
             IList<string> keys = jimported.Properties().Select(p => p.Name).ToList(); //extract key
             JObject jimp_env = (JObject)jimported[keys[0]];
 
-            json[_env]["pathGit"] = jimp_env["pathGit"];
-            pathGit = (string)jimp_env["pathGit"];
+            //json[_env]["pathGit"] = jimp_env["pathGit"];
+            //pathGit = (string)jimp_env["pathGit"];
 
-            json[_env]["pathSass"] = jimp_env["pathSass"];
-            pathSass = (string)jimp_env["pathSass"];
+            //json[_env]["pathSass"] = jimp_env["pathSass"];
+            //pathSass = (string)jimp_env["pathSass"];
 
-            json[_env]["pathNode"] = jimp_env["pathNode"];
-            pathNode = (string)jimp_env["pathNode"];
+            //json[_env]["pathNode"] = jimp_env["pathNode"];
+            //pathNode = (string)jimp_env["pathNode"];
 
-            json[_env]["pathWPcli"] = jimp_env["pathWPcli"];
-            pathWPcli = (string)jimp_env["pathWPcli"];
+            //json[_env]["pathWPcli"] = jimp_env["pathWPcli"];
+            //pathWPcli = (string)jimp_env["pathWPcli"];
 
             json[_env]["pathBackupSQLFolder"] = jimp_env["pathBackupSQLFolder"];
             pathBackupSQLFolder = (string)jimp_env["pathBackupSQLFolder"];
@@ -446,8 +482,43 @@ namespace ZampLib.Business
             }
 
 
-            json[_env]["vers_sf"] = new JObject();
+            //json[_env]["vers_sf"] = new JObject();
+            if(jimp_env["wp_options"] != null)
+            {
+                this.wpop = new WP_Options();
+                JObject wp_options = (JObject)jimp_env["wp_options"];
+                json[_env]["wp_options"] = wp_options;
+                JProperty[] arr = wp_options.Properties().ToArray();
+                //this.wpop.txt_nomesito = wp_options.Properties().Where(x => x.Name == "txt_nomesito").Select(x => x.Value).FirstOrDefault();
+                this.wpop.txt_nomesito = wp_options.Property("txt_nomesito").Value.ToString();
+                this.wpop.txt_User = wp_options.Property("txt_User").Value.ToString();
+                this.wpop.txt_Pwd = wp_options.Property("txt_Pwd").Value.ToString();
+                this.wpop.txt_Email = wp_options.Property("txt_Email").Value.ToString();
+                this.wpop.txt_DisplayName = wp_options.Property("txt_DisplayName").Value.ToString();
+                this.wpop.comboBoxLang = wp_options.Property("comboBoxLang").Value.ToString();
+                this.wpop.comboBoxWPVersion = wp_options.Property("comboBoxWPVersion").Value.ToString();
+
+                this.wpop.txtNumPost = Convert.ToInt32(wp_options.Property("txtNumPost").Value.ToString());
+                this.wpop.txtSiteName = wp_options.Property("txtSiteName").Value.ToString();
+                this.wpop.txtDescription = wp_options.Property("txtDescription").Value.ToString();
+                this.wpop.checkOverwriteWebSite = wp_options.Property("checkOverwriteWebSite").Value.ToString().Trim().ToLower() == "true"? true: false;
+                this.wpop.checkDisableAutoUpdate = wp_options.Property("checkDisableAutoUpdate").Value.ToString().Trim().ToLower() == "true" ? true : false;
+                this.wpop.checkEnableWPPostRevision = wp_options.Property("checkEnableWPPostRevision").Value.ToString().Trim().ToLower() == "true" ? true : false;
+                this.wpop.txtNumericPostRevision = Convert.ToInt32(wp_options.Property("txtNumericPostRevision").Value.ToString());
+                this.wpop.checkRemoveDefaultPlugin = wp_options.Property("checkRemoveDefaultPlugin").Value.ToString().Trim().ToLower() == "true" ? true : false;
+                this.wpop.checkRemoveDefaultTheme = wp_options.Property("checkRemoveDefaultTheme").Value.ToString().Trim().ToLower() == "true" ? true : false;
+                this.wpop.txtPluginList = wp_options.Property("txtPluginList").Value.ToString();
+                this.wpop.txtThemeList = wp_options.Property("txtThemeList").Value.ToString();
+
+                this.wpop.timezone_string = wp_options.Property("timezone_string").Value.ToString();
+                this.wpop.time_format = wp_options.Property("time_format").Value.ToString();
+                this.wpop.rss_use_excerpt = wp_options.Property("rss_use_excerpt").Value.ToString();
+                this.wpop.uploads_use_yearmonth_folders = wp_options.Property("uploads_use_yearmonth_folders").Value.ToString();
+                this.wpop.permalink_string = wp_options.Property("permalink_string").Value.ToString();
+            }
             
+            
+
 
             json[_env]["sites"] = jimp_env["sites"];
             caricasites();
@@ -481,7 +552,10 @@ namespace ZampLib.Business
             {
                 rel = (JObject)jsonObject[_env];
             }
-            
+
+
+            string uuid_str = "";
+
             if (rel["pathBase"] == null)
             {
                 rel.Add("pathBase", rootFolder);
@@ -526,31 +600,41 @@ namespace ZampLib.Business
             
             if (rel["pathGit"] == null)
             {
-                rel.Add("pathGit", "");
+                string temppath = Path.Combine(rootFolder, "Apps", "PortableGit");
+                if (Directory.Exists(temppath))
+                {
+                    rel.Add("pathGit", "PortableGit");
+                }
             }
             
             if (rel["pathSass"] == null)
             {
-                rel.Add("pathSass", "");
+                string temppath = Path.Combine(rootFolder, "Apps", "dart-sass");
+                if (Directory.Exists(temppath))
+                {
+                    rel.Add("pathSass", "dart-sass");
+                }
             }
             
             if (rel["pathNode"] == null)
             {
-                rel.Add("pathNode", "");
+                string dir = ZampGUILib.get_first_dir(rootFolder, "node-", false);
+                rel.Add("pathNode", dir);
             }
 
             if (rel["pathWPcli"] == null)
             {
-                rel.Add("pathWPcli", "");
+                string temppath = Path.Combine(rootFolder, "Apps", "wp-cli");
+                if (Directory.Exists(temppath))
+                {
+                    rel.Add("pathWPcli", "wp-cli");
+                }
             }
 
             if (rel["pathBackupSQLFolder"] == null)
             {
                 rel.Add("pathBackupSQLFolder", "");
             }
-
-            
-
 
             if (rel["checkBackUpAllDBOnExit"] == null)
             {
@@ -564,7 +648,7 @@ namespace ZampLib.Business
 
             if (rel["default_editor"] == null)
             {
-                rel.Add("default_editor", "");
+                rel.Add("default_editor", "notepad.exe");
             }
             
             if (rel["apache_http_port"] == null)
@@ -595,6 +679,10 @@ namespace ZampLib.Business
             if (rel["uuid_str"] == null)
             {
                 rel.Add("uuid_str", "");
+            }
+            else
+            {
+                uuid_str = rel["uuid_str"].ToString();
             }
 
             if (rel["ListPathConsole"] == null)
@@ -653,6 +741,153 @@ namespace ZampLib.Business
                 }
             }
 
+            if (rel["wp_options"] == null)
+            {
+                rel.Add("wp_options", new JObject(
+                    new JProperty("txt_nomesito", "")
+                    , new JProperty("txt_User", "admin")
+                    , new JProperty("txt_Pwd", "admin")
+                    , new JProperty("txt_Email", "admin@gmail.com")
+                    , new JProperty("txt_DisplayName", "admin")
+                    , new JProperty("comboBoxLang", "en_US")
+                    , new JProperty("comboBoxWPVersion", "")
+                    
+                    , new JProperty("txtNumPost", "0")
+                    , new JProperty("txtSiteName", "")
+                    , new JProperty("txtDescription", "")
+                    , new JProperty("checkOverwriteWebSite", false)
+                    , new JProperty("checkDisableAutoUpdate", false)
+                    , new JProperty("checkEnableWPPostRevision", false)
+                    , new JProperty("txtNumericPostRevision", "1")
+                    , new JProperty("checkRemoveDefaultPlugin", false)
+                    , new JProperty("checkRemoveDefaultTheme", false)
+                    , new JProperty("txtPluginList", "")
+                    , new JProperty("txtThemeList", "")
+
+                    , new JProperty("timezone_string", "")
+                    , new JProperty("time_format", "")
+                    , new JProperty("rss_use_excerpt", "")
+                    , new JProperty("uploads_use_yearmonth_folders", "")
+                    , new JProperty("permalink_string", "")
+                ));
+
+                if (uuid_str == "mio")
+                {
+                    var wp_options = (JObject)rel["wp_options"];
+                    wp_options.Property("txt_DisplayName").Value = "pabloindev";
+                    wp_options.Property("txtNumPost").Value = "3";
+                    wp_options.Property("checkDisableAutoUpdate").Value = true;
+                    wp_options.Property("checkEnableWPPostRevision").Value = true;
+                    wp_options.Property("txtNumericPostRevision").Value = "10";
+                    wp_options["checkRemoveDefaultPlugin"] = true;
+                    wp_options["checkRemoveDefaultTheme"] = true;
+                    wp_options["txtPluginList"] = "custom-css-js svg-support";
+
+                    wp_options["timezone_string"] = "Europe/Rome";
+                    wp_options["time_format"] = "H:i";
+                    wp_options["rss_use_excerpt"] = "1";
+                    wp_options["uploads_use_yearmonth_folders"] = "0";
+                    wp_options["permalink_string"] = "/%postname%/";
+                }
+            }
+            else
+            {
+                var wp_options = (JObject)rel["wp_options"];
+                if (wp_options["txt_nomesito"] == null)
+                {
+                    wp_options.Add("txt_nomesito", "");
+                }
+                if (wp_options["txt_User"] == null)
+                {
+                    wp_options.Add("txt_User", "admin");
+                }
+                if (wp_options["txt_Pwd"] == null)
+                {
+                    wp_options.Add("txt_Pwd", "admin");
+                }
+                if (wp_options["txt_Email"] == null)
+                {
+                    wp_options.Add("txt_Email", "admin@gmail.com");
+                }
+                if (wp_options["txt_DisplayName"] == null)
+                {
+                    wp_options.Add("txt_DisplayName", "admin");
+                }
+                if (wp_options["comboBoxLang"] == null)
+                {
+                    wp_options.Add("comboBoxLang", "en_US");
+                }
+                if (wp_options["comboBoxWPVersion"] == null)
+                {
+                    wp_options.Add("comboBoxWPVersion", "");
+                }
+                if (wp_options["txtNumPost"] == null)
+                {
+                    wp_options.Add("txtNumPost", "0");
+                }
+                if (wp_options["txtSiteName"] == null)
+                {
+                    wp_options.Add("txtSiteName", "");
+                }
+                if (wp_options["txtDescription"] == null)
+                {
+                    wp_options.Add("txtDescription", "");
+                }
+                if (wp_options["checkOverwriteWebSite"] == null)
+                {
+                    wp_options.Add("checkOverwriteWebSite", false);
+                }
+                if (wp_options["checkDisableAutoUpdate"] == null)
+                {
+                    wp_options.Add("checkDisableAutoUpdate", false);
+                }
+                if (wp_options["checkEnableWPPostRevision"] == null)
+                {
+                    wp_options.Add("checkEnableWPPostRevision", false);
+                }
+                if (wp_options["txtNumericPostRevision"] == null)
+                {
+                    wp_options.Add("txtNumericPostRevision", "1");
+                }
+                if (wp_options["checkRemoveDefaultPlugin"] == null)
+                {
+                    wp_options.Add("checkRemoveDefaultPlugin", false);
+                }
+                if (wp_options["checkRemoveDefaultTheme"] == null)
+                {
+                    wp_options.Add("checkRemoveDefaultTheme", false);
+                }
+                if (wp_options["txtPluginList"] == null)
+                {
+                    wp_options.Add("txtPluginList", "");
+                }
+                if (wp_options["txtThemeList"] == null)
+                {
+                    wp_options.Add("txtThemeList", "");
+                }
+
+                if (wp_options["timezone_string"] == null)
+                {
+                    wp_options.Add("timezone_string", "Europe/Rome");
+                }
+                if (wp_options["time_format"] == null)
+                {
+                    wp_options.Add("time_format", "H:i");
+                }
+                if (wp_options["rss_use_excerpt"] == null)
+                {
+                    wp_options.Add("rss_use_excerpt", "1");
+                }
+                if (wp_options["uploads_use_yearmonth_folders"] == null)
+                {
+                    wp_options.Add("uploads_use_yearmonth_folders", "0");
+                }
+                if (wp_options["permalink_string"] == null)
+                {
+                    wp_options.Add("permalink_string", "/%postname%/");
+                }
+            }
+
             if (rel["sites"] == null)
             {
                 rel.Add("sites", new JObject());
@@ -661,6 +896,10 @@ namespace ZampLib.Business
             if (rel["vers_wp"] == null)
             {
                 JArray jarrayObjTemp = new JArray() {
+                    new JObject(
+                        new JProperty("num", "6.4.4")
+                        , new JProperty("theme", "")
+                    ),
                     new JObject(
                         new JProperty("num", "6.3.4")
                         , new JProperty("theme", "")
@@ -870,6 +1109,41 @@ namespace ZampLib.Business
             this.json[this._env]["sites"] = new JObject(arr);
             ZampGUILib.setJson_Env(this.json);
         }
+        public void saveOptionsWP()
+        {
+            JObject obj = new JObject(
+                new JProperty("txt_nomesito", this.wpop.txt_nomesito)
+                , new JProperty("txt_User", this.wpop.txt_User)
+                , new JProperty("txt_Pwd", this.wpop.txt_Pwd)
+                , new JProperty("txt_Email", this.wpop.txt_Email)
+                , new JProperty("txt_DisplayName", this.wpop.txt_DisplayName)
+                , new JProperty("comboBoxLang", this.wpop.comboBoxLang)
+                , new JProperty("comboBoxWPVersion", this.wpop.comboBoxWPVersion)
+
+                , new JProperty("txtNumPost", this.wpop.txtNumPost)
+                , new JProperty("txtSiteName", this.wpop.txtSiteName)
+                , new JProperty("txtDescription", this.wpop.txtDescription)
+                , new JProperty("checkOverwriteWebSite", this.wpop.checkOverwriteWebSite)
+                , new JProperty("checkDisableAutoUpdate", this.wpop.checkDisableAutoUpdate)
+                , new JProperty("checkEnableWPPostRevision", this.wpop.checkEnableWPPostRevision)
+                , new JProperty("txtNumericPostRevision", this.wpop.txtNumericPostRevision)
+                , new JProperty("checkRemoveDefaultPlugin", this.wpop.checkRemoveDefaultPlugin)
+                , new JProperty("checkRemoveDefaultTheme", this.wpop.checkRemoveDefaultTheme)
+                , new JProperty("txtPluginList", this.wpop.txtPluginList)
+                , new JProperty("txtThemeList", this.wpop.txtThemeList)
+
+                , new JProperty("timezone_string", this.wpop.timezone_string)
+                , new JProperty("time_format", this.wpop.time_format)
+                , new JProperty("rss_use_excerpt", this.wpop.rss_use_excerpt)
+                , new JProperty("uploads_use_yearmonth_folders", this.wpop.uploads_use_yearmonth_folders)
+                , new JProperty("permalink_string", this.wpop.permalink_string)
+            );
+
+            this.json = this.json ?? ZampGUILib.getJson_Env();
+            this.json[this._env]["wp_options"] = obj;
+            ZampGUILib.setJson_Env(this.json);
+        }
+
         public void updateWP_vers()
         {
             JArray arr = new JArray();
@@ -1107,20 +1381,7 @@ namespace ZampLib.Business
                     vers_sf["wp_cli_vers"] = wp_cli_vers;
                     bSaveJson = true;
                 }
-
-                //json[_env]["vers_sf"] = new JObject(
-                //               new JProperty("apache_vers", apache_vers)
-                //               , new JProperty("php_vers", php_vers)
-                //               , new JProperty("mariadb_vers", mariadb_vers)
-                //               , new JProperty("composer_vers", composer_vers)
-                //               , new JProperty("git_vers", git_vers)
-                //               , new JProperty("node_vers", node_vers)
-                //               , new JProperty("sass_vers", sass_vers)
-                //               , new JProperty("wp_cli_vers", wp_cli_vers)
-                //               );
-                //ZampGUILib.setJson_Env(json);
             }
-
 
             if(bSaveJson)
             {
@@ -1204,76 +1465,79 @@ namespace ZampLib.Business
         #region private
         private string refresh_wpcli_vers()
         {
-            string str = "";
+            string sout = "";
             Regex regex;
             Match match;
-
-            if (System.IO.Directory.Exists(pathWPcli))
+            string fullpath_wpcli = System.IO.Path.Combine(App_Path, pathWPcli);
+            if (!string.IsNullOrEmpty(pathWPcli) && System.IO.Directory.Exists(fullpath_wpcli))
             {
-                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathWPcli, "wp.bat"), " cli info", true, PHP_path);
+                string temp = ZampGUILib.startProc_and_wait_output(PHP_exe, " wp-cli.phar --info", true, fullpath_wpcli);
                 regex = new Regex(@"WP-CLI version:.\d+\.\d+\.\d+");
-                match = regex.Match(str);
+                match = regex.Match(temp);
                 if (match.Success)
                 {
-                    str = match.Value.Replace("WP-CLI version", "").Trim().Trim(':');
+                    sout = match.Value.Replace("WP-CLI version:", "").Trim();
                 }
             }
-            return str;
+            return sout;
         }
         private string refresh_sass_vers()
         {
-            string str = "";
+            string sout = "";
             Regex regex;
             Match match;
-
-            if (System.IO.Directory.Exists(pathSass))
+            string fullpath_sass = System.IO.Path.Combine(App_Path, pathSass);
+            if (!string.IsNullOrEmpty(pathSass) && System.IO.Directory.Exists(fullpath_sass))
             {
-                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathSass, "sass.bat"), "--version", true, pathSass);
+                string temp = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(fullpath_sass, "sass.bat"), "--version", true, fullpath_sass);
                 //regex = new Regex(@"Composer version \d+\.\d+\.\d+");
-                //match = regex.Match(composer_vers);
+                //match = regex.Match(temp);
                 //if (match.Success)
                 //{
-                //    composer_vers = match.Value;
+                //    sout = match.Value;
                 //}
+                sout = temp.Trim();
             }
-            return str;
+            return sout;
         }
         private string refresh_node_vers()
         {
-            string str = "";
+            string sout = "";
             Regex regex;
             Match match;
-            if (System.IO.Directory.Exists(pathNode))
+            string fullpath_node = System.IO.Path.Combine(App_Path, pathNode);
+            if (!string.IsNullOrEmpty(pathNode) && System.IO.Directory.Exists(fullpath_node))
             {
-                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathNode, "node.exe"), "--version", true, pathNode);
-                //regex = new Regex(@"Composer version \d+\.\d+\.\d+");
-                //match = regex.Match(composer_vers);
-                //if (match.Success)
-                //{
-                //    composer_vers = match.Value;
-                //}
+                string temp = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(fullpath_node, "node.exe"), "--version", true, fullpath_node);
+                regex = new Regex(@"\d+\.\d+\.\d+");
+                match = regex.Match(temp);
+                if (match.Success)
+                {
+                    sout = match.Value;
+                }
             }
-            return str;
+            return sout;
         }
         private string refresh_git_vers()
         {
-            string str = "";
+            string sout = "";
             Regex regex;
             Match match;
 
-            if (System.IO.Directory.Exists(pathGit))
+            string fullpath_git = System.IO.Path.Combine(App_Path, pathGit);
+            if (!string.IsNullOrEmpty(pathGit) && System.IO.Directory.Exists(fullpath_git))
             {
-                str = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(pathGit, "git.exe"), "--version", true, pathGit);
-                str = str.Replace("git version ", "").Trim();
-                //regex = new Regex(@"Composer version \d+\.\d+\.\d+");
-                //match = regex.Match(composer_vers);
-                //if (match.Success)
-                //{
-                //    composer_vers = match.Value;
-                //}
+                string temp = ZampGUILib.startProc_and_wait_output(System.IO.Path.Combine(fullpath_git, "bin", "git.exe"), "--version", true, fullpath_git);
+                //str = str.Replace("git version ", "").Trim();
+                regex = new Regex(@"\d+\.\d+\.\d+");
+                match = regex.Match(temp);
+                if (match.Success)
+                {
+                    sout = match.Value;
+                }
             }
 
-            return str;
+            return sout;
         }
 
 

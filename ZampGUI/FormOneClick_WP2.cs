@@ -29,7 +29,6 @@ namespace ZampGUI
         public ConfigVar cv;
         public ComboboxItem comboBoxSelItem_Lang;
         public ComboboxItem comboBoxSelItem_WPVers;
-        public string defaultLang = "en_US";
         public bool requestAddSites = false;
         #endregion
 
@@ -40,7 +39,7 @@ namespace ZampGUI
             this.cv = cv;
             ricaricaComboIstanzeWP();
 
-
+            // combobox language
             var list = listLocale();
             foreach ( var item in list )
             {
@@ -52,9 +51,9 @@ namespace ZampGUI
             comboBoxLang.DataSource = bindingSource1.DataSource;
             comboBoxLang.ValueMember = "Value";
             comboBoxLang.DisplayMember = "Text";
-            comboBoxLang.SelectedItem = (from x in list where x.Value == defaultLang select x).First();
+            comboBoxLang.SelectedItem = (from x in list where x.Value == cv.wpop.comboBoxLang select x).First();
 
-
+            // combobox wp version
             var lista2 = listVersioni();
             foreach (var item in lista2)
             {
@@ -65,25 +64,19 @@ namespace ZampGUI
             comboBoxWPVersion.DataSource = bindingSource2.DataSource;
             comboBoxWPVersion.ValueMember = "Value";
             comboBoxWPVersion.DisplayMember = "Text";
-            comboBoxWPVersion.SelectedItem = (from x in list where x.Value == defaultLang select x).First();
-
-            //default values for input text
-            txt_User.Text = "admin";
-            txt_Pwd.Text = "admin";
-            txt_DisplayName.Text = "admin";
-            txt_Email.Text = "admin@gmail.com";
-            if (cv.uuid_str == "mio" || cv.uuid_str == "tuo")
+            if(!string.IsNullOrEmpty(cv.wpop.comboBoxWPVersion))
             {
-                txt_DisplayName.Text = "pabloindev";
-                checkBox_DisableAutoUpdate.Checked = true;
-                txt_numpost.Value = 3;
+                comboBoxWPVersion.SelectedItem = (from x in lista2 where x.Value == cv.wpop.comboBoxWPVersion select x).First();
             }
+            
 
-            //backgroundWorker2 = new BackgroundWorker();
-            //backgroundWorker2.WorkerReportsProgress = true;
-            //backgroundWorker2.DoWork += new DoWorkEventHandler(esegui_worker);
-            //backgroundWorker2.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_Completed);
-            //backgroundWorker2.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
+
+            //default values
+            txt_User.Text = cv.wpop.txt_User;
+            txt_Pwd.Text = cv.wpop.txt_Pwd;
+            txt_DisplayName.Text = cv.wpop.txt_DisplayName;
+            txt_Email.Text = cv.wpop.txt_Email;
+            
 
         }
         #endregion
@@ -117,7 +110,7 @@ namespace ZampGUI
             }
 
             
-            if (checkBox_Sovrascrivi.Checked)
+            if (cv.wpop.checkOverwriteWebSite)
             {
                 //cancello tutto db e cartella
                 cancellaIstanzaWp(nome_sito);
@@ -284,95 +277,128 @@ namespace ZampGUI
 
         }
 
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            FormOneClick_WP_Options frm_op = new FormOneClick_WP_Options(cv);
+            frm_op.ShowDialog(this);
+            //if(frm_op.ButtonPressed == "OK")
+            //{
+            //    this.wpop = frm_op.wpop;
+            //}
+            frm_op.Dispose();
+        }
+        private void FormOneClick_WP2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.cv.wpop.txt_User = txt_User.Text.Trim();
+            this.cv.wpop.txt_Pwd = txt_Pwd.Text.Trim();
+            this.cv.wpop.txt_Email = txt_Email.Text.Trim();
+            this.cv.wpop.txt_DisplayName = txt_DisplayName.Text.Trim();
+
+            this.comboBoxSelItem_Lang = (ComboboxItem)comboBoxLang.SelectedItem;
+            this.comboBoxSelItem_WPVers = (ComboboxItem)comboBoxWPVersion.SelectedItem;
+
+            this.cv.wpop.comboBoxLang = this.comboBoxSelItem_Lang.Value.ToString();
+            this.cv.wpop.comboBoxWPVersion = this.comboBoxSelItem_WPVers.Value.ToString();
+        }
         #endregion
 
         #region metodi background worker
         private void esegui_worker(IProgress<string> progress)
         {
+            //main form
             string nome_sito = txt_nomesito.Text.ToLower().Trim();
             string user = txt_User.Text.ToLower().Trim();
             string pwd = txt_Pwd.Text.ToLower().Trim();
             string email = txt_Email.Text.ToLower().Trim();
             string displayname = txt_DisplayName.Text.ToLower().Trim();
-
-            string sitename = txt_SiteName.Text.ToLower().Trim();
-            string description = txt_Description.Text.ToLower().Trim();
-            sitename = string.IsNullOrEmpty(sitename) ? nome_sito : sitename;
-
             string lang = this.comboBoxSelItem_Lang.Value.ToString();
             string wpvers = this.comboBoxSelItem_WPVers.Value.ToString();
-            string theme = (from x in cv.Vers_WP where x.num == wpvers select x.theme).SingleOrDefault(); //unused, right now i'm using --all option from theme delete - delete all theme except the active one
+            //string theme = (from x in cv.Vers_WP where x.num == wpvers select x.theme).SingleOrDefault(); //unused, right now i'm using --all option from theme delete - delete all theme except the active one
 
 
+            //options
+            string sitename = cv.wpop.txtSiteName;
+            sitename = string.IsNullOrEmpty(sitename) ? nome_sito : sitename;
+
+
+            //paths
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nome_sito);
             string path_wp = "\"" +  Path.Combine(cv.App_Path, cv.pathWPcli, "wp.bat") + "\"";
             string enviromentPath = cv.PHP_path + ";" + Path.Combine(cv.MariaDB_path, "bin") + ";" + System.Environment.GetEnvironmentVariable("PATH");
 
+            //all comands
             List<string> comandi_create_wp_cli = new List<string>();
 
-            if(cv.uuid_str == "mio")
+            comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
+            comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
+            if(cv.wpop.checkEnableWPPostRevision)
             {
-                //specifiche cofig per la mia istanza
-                comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
-                comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
-                comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
-                if (checkBox_DisableAutoUpdate.Checked)
-                {
-                    comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
-                }
-                comandi_create_wp_cli.Add(path_wp + " db create");
-                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + sitename + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
-                if (lang != defaultLang)
-                {
-                    comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
-                    comandi_create_wp_cli.Add(path_wp + " site switch-language " + lang);
-                }
+                comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS " + cv.wpop.txtNumericPostRevision + " --raw");
+            }
+            if (cv.wpop.checkDisableAutoUpdate)
+            {
+                comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
+            }
+            comandi_create_wp_cli.Add(path_wp + " db create");
+            comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + sitename + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
+            comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
+            if (lang != cv.wpop.comboBoxLang)
+            {
+                comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
+                comandi_create_wp_cli.Add(path_wp + " site switch-language " + lang);
+            }
+            if(cv.wpop.checkRemoveDefaultPlugin)
+            {
                 comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
-                //comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
+            }
+            if(cv.wpop.checkRemoveDefaultTheme)
+            {
                 comandi_create_wp_cli.Add(path_wp + " theme delete --all");
-                comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
-                comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
-                comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
-                comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
-                if(!string.IsNullOrEmpty(description))
-                {
-                    comandi_create_wp_cli.Add(path_wp + " option update blogdescription \"" + description + "\"");
-                }
-                
-                
-                comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
-                comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
             }
-            else
+            if (!string.IsNullOrEmpty(cv.wpop.txtDescription))
             {
-                //tutti gli altri
-                comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
-                comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
-                //comandi_create_wp_cli.Add(path_wp + " config set WP_POST_REVISIONS 10 --raw");
-                if (checkBox_DisableAutoUpdate.Checked)
-                {
-                    comandi_create_wp_cli.Add(path_wp + " config set WP_AUTO_UPDATE_CORE false --raw");
-                }
-                comandi_create_wp_cli.Add(path_wp + " db create");
-                comandi_create_wp_cli.Add(path_wp + " core install --url=\"http://localhost/" + nome_sito + "\" --title=\"" + sitename + "\" --admin_user=\"" + user + "\" --admin_password=\"" + pwd + "\" --admin_email=\"" + email + "\"");
-                if(lang != defaultLang)
-                {
-                    comandi_create_wp_cli.Add(path_wp + " language core install " + lang);
-                    comandi_create_wp_cli.Add(path_wp + " site switch-language " + lang);
-                }
-                comandi_create_wp_cli.Add(path_wp + " plugin delete hello akismet");
-                //comandi_create_wp_cli.Add(path_wp + " theme delete twentytwentythree twentytwentytwo");
-                //comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
-                //comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
-                //comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
-                //comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
-                if (!string.IsNullOrEmpty(description))
-                {
-                    comandi_create_wp_cli.Add(path_wp + " option update blogdescription \"" + description + "\"");
-                }
-                comandi_create_wp_cli.Add(path_wp + " user update 1 --nickname=\"" + displayname + "\" --display_name=\"" + displayname + "\"");
-                //comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
+                comandi_create_wp_cli.Add(path_wp + " option update blogdescription \"" + cv.wpop.txtDescription + "\"");
             }
+            if (!string.IsNullOrEmpty(cv.wpop.txtPluginList))
+            {
+                comandi_create_wp_cli.Add(path_wp + " plugin install " + cv.wpop.txtPluginList);
+            }
+            if (!string.IsNullOrEmpty(cv.wpop.txtThemeList))
+            {
+                comandi_create_wp_cli.Add(path_wp + " theme install " + cv.wpop.txtThemeList);
+            }
+
+            
+            //{
+            //    comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"Europe/Rome\"");
+            //    comandi_create_wp_cli.Add(path_wp + " option update time_format \"H:i\"");
+            //    comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt 1");
+            //    comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders 0");
+            //    comandi_create_wp_cli.Add(path_wp + " rewrite structure /%postname%/ --hard");
+            //}
+
+
+            if (!string.IsNullOrEmpty(cv.wpop.timezone_string))
+            {
+                comandi_create_wp_cli.Add(path_wp + " option update timezone_string \"" + cv.wpop.timezone_string + "\"");
+            }
+            if (!string.IsNullOrEmpty(cv.wpop.time_format))
+            {
+                comandi_create_wp_cli.Add(path_wp + " option update time_format \"" + cv.wpop.time_format + "\"");
+            }
+            if (!string.IsNullOrEmpty(cv.wpop.rss_use_excerpt))
+            {
+                comandi_create_wp_cli.Add(path_wp + " option update rss_use_excerpt " + cv.wpop.rss_use_excerpt);
+            }
+            if (!string.IsNullOrEmpty(cv.wpop.uploads_use_yearmonth_folders))
+            {
+                comandi_create_wp_cli.Add(path_wp + " option update uploads_use_yearmonth_folders " + cv.wpop.uploads_use_yearmonth_folders);
+            }
+            if (!string.IsNullOrEmpty(cv.wpop.permalink_string))
+            {
+                comandi_create_wp_cli.Add(path_wp + " rewrite structure " + cv.wpop.permalink_string + " --hard");
+            }
+
 
 
             foreach (string comando in comandi_create_wp_cli)
@@ -384,7 +410,7 @@ namespace ZampGUI
 
             // ------------------------------------------------------------------------------------------------
             //creating dummy post
-            if (txt_numpost.Value > 0)
+            if (cv.wpop.txtNumPost > 0)
             {
                 //creating 3 categories
                 string idcat = eseguiComando(path_wp + " term create category cat1 --porcelain", path_folder_wp, enviromentPath);
@@ -395,7 +421,7 @@ namespace ZampGUI
                 idimg = idimg.Trim();
 
 
-                for (int numpost = 0; numpost < txt_numpost.Value; numpost++)
+                for (int numpost = 0; numpost < cv.wpop.txtNumPost; numpost++)
                 {
                     //get content and excerpt
                     string content = ZampGUILib.getRandomLorem();
@@ -493,6 +519,7 @@ namespace ZampGUI
             map.Add("WP_CLI_CONFIG_PATH", Path.Combine(cv.App_Path, cv.pathWPcli, "config.yml"));
             tt = ZampGUILib.startProc_and_wait_output2(comando, "", true, currentdir, enviromentPath, map);
             string result = tt.Item1 + Environment.NewLine + tt.Item2;
+            //string result = tt.Item1;
             return result;
         }
         private string controllaCampo(string nomeCampo, string nomeEtichetta, bool b_controllomail = false)
@@ -544,6 +571,7 @@ namespace ZampGUI
             List<ComboboxItem> list = new List<ComboboxItem>();
             
             //https://wpastra.com/docs/complete-list-wordpress-locale-codes/
+
             string scodici = @"
                 Afrikaans	af
                 Albanian	sq
@@ -793,40 +821,14 @@ namespace ZampGUI
 
         #endregion
 
+        
+
+        
+
         public class ComboboxItem
         {
             public string Text { get; set; }
             public string Value { get; set; }
-
-            //public override string ToString()
-            //{
-            //    return Text;
-            //}
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

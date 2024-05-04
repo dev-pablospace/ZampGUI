@@ -24,27 +24,7 @@
     "pid_currentproc_mariadb": "",
     "ListPathConsole": [],
     "sites": {},
-    "uuid_str": "mio",
-    "vers_sf": {
-      "apache_vers": "2.4.59",
-      "php_vers": "8.2.18",
-      "mariadb_vers": "10.11.7",
-      "composer_vers": "2.7.4",
-      "git_vers": "2.44.0",
-      "node_vers": "20.12.2",
-      "sass_vers": "1.75.0",
-      "wp_cli_vers": "2.10.0"
-    },
-    "vers_wp": [
-      {
-        "num": "6.1.6",
-        "theme": ""
-      },
-      {
-        "num": "6.0.8",
-        "theme": ""
-      }
-    ]
+    "uuid_str": "mio"
   },
   "pc_cameretta": {
     "pathBase": "H:\\SVL\\zampgui\\ZampGUI_1.1.02_php8.1.6",
