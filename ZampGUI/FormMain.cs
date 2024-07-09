@@ -586,7 +586,7 @@ namespace ZampGUI
             string composer_path = System.IO.Path.Combine(cv.App_Path, "composer");
             string node_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathNode);
             string sass_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathSass);
-            string git_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathGit);
+            string git_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathGit, "bin");
             string wpcli_path = System.IO.Path.Combine(cv.pathBase, "Apps", cv.pathWPcli);
 
             switch(nomeMenuChiamante)
