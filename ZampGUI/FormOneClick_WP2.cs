@@ -64,9 +64,13 @@ namespace ZampGUI
             comboBoxWPVersion.DataSource = bindingSource2.DataSource;
             comboBoxWPVersion.ValueMember = "Value";
             comboBoxWPVersion.DisplayMember = "Text";
-            if(!string.IsNullOrEmpty(cv.wpop.comboBoxWPVersion))
+            if(comboBoxWPVersion.Items.Count > 0 && !string.IsNullOrEmpty(cv.wpop.comboBoxWPVersion))
             {
-                comboBoxWPVersion.SelectedItem = (from x in lista2 where x.Value == cv.wpop.comboBoxWPVersion select x).First();
+                var itemtest = (from x in lista2 where x.Value == cv.wpop.comboBoxWPVersion select x).FirstOrDefault();
+                if(itemtest != null)
+                {
+                    comboBoxWPVersion.SelectedItem = itemtest;//(from x in lista2 where x.Value == cv.wpop.comboBoxWPVersion select x).First();
+                }
             }
             
 
@@ -329,7 +333,14 @@ namespace ZampGUI
             //all comands
             List<string> comandi_create_wp_cli = new List<string>();
 
-            comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
+            if(wpvers == "latest")
+            {
+                comandi_create_wp_cli.Add(path_wp + " core download");
+            }
+            else
+            {
+                comandi_create_wp_cli.Add(path_wp + " core download --version=" + wpvers);
+            }
             comandi_create_wp_cli.Add(path_wp + " config create --dbname=\"" + nome_sito + "\" --dbuser=root --dbpass=root");
             if(cv.wpop.checkEnableWPPostRevision)
             {

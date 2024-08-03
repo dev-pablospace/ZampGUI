@@ -769,7 +769,11 @@ namespace ZampGUI
                 toolstr.Text = arrListSite[i].Name.Trim();
                 toolstr.Click += new EventHandler(delegate (object s, EventArgs ev)
                 {
-                    System.Diagnostics.Process.Start(surl);
+                    try
+                    {
+                        System.Diagnostics.Process.Start(surl);
+                    }
+                    catch { }
                 }); ;
                 this.sitesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolstr });
             }
