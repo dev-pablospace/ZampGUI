@@ -197,7 +197,7 @@ namespace ZampGUI
             string nomeistanza = comboBoxWpBackup.SelectedItem.ToString();
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nomeistanza);
             string path_folder_zip = Path.Combine(cv.Apache_htdocs_path, nomeistanza + "_" + DateTime.Now.ToString("yyyy-MM-dd_-_HH-mm-ss") + ".zip");
-            string comando_backup_db = "mysqldump -u root --password=root " + nomeistanza + " > \"" + Path.Combine(path_folder_wp, nomeistanza) + ".sql\"";
+            string comando_backup_db = "mariadb-dump -u root --password=root " + nomeistanza + " > \"" + Path.Combine(path_folder_wp, nomeistanza) + ".sql\"";
 
             if(string.IsNullOrEmpty(nomeistanza))
             {
@@ -228,8 +228,8 @@ namespace ZampGUI
             string nomeistanza = (comboBoxWpRestore.SelectedItem != null? comboBoxWpRestore.SelectedItem.ToString(): comboBoxWpRestore.Text);
             string path_folder_wp = Path.Combine(cv.Apache_htdocs_path, nomeistanza);
 
-            string comando_sql1 = "mysql -u root --password=root -e \"DROP DATABASE IF EXISTS " + nomeistanza + ";CREATE DATABASE " + nomeistanza + " DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;\"";
-            string comando_sql2 = "mysql -u root --password=root " + nomeistanza + " < \"" + Path.Combine(path_folder_wp, nomeistanza) + ".sql\"";
+            string comando_sql1 = "mariadb -u root --password=root -e \"DROP DATABASE IF EXISTS " + nomeistanza + ";CREATE DATABASE " + nomeistanza + " DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;\"";
+            string comando_sql2 = "mariadb -u root --password=root " + nomeistanza + " < \"" + Path.Combine(path_folder_wp, nomeistanza) + ".sql\"";
             
 
             if (string.IsNullOrEmpty(nomeistanza))

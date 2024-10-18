@@ -169,10 +169,7 @@ namespace ZampGUI
             addtext("Please visit: http://localhost/" + nome_sito + " - use the following parameters during installation");
             addtext("---------------------------");
             addtext("database name: " + nome_sito);
-            //addtext("username: root");
-            //addtext("password: root");
-            //addtext("database host: localhost");
-            //addtext("Table prefix: wp_   (if you want you can change it)");
+            
 
             create_wp_config(
                 System.IO.Path.Combine(cv.Apache_htdocs_path, nome_sito, "wp-config-sample.php")
@@ -184,26 +181,6 @@ namespace ZampGUI
             btnInstall.Enabled = true;
             txt_nomesito.Focus();
             
-            //var connString = "Server=127.0.0.1;User ID=root;Password=root;Database=mysql;port=" + port;
-            //using (var conn = new MySqlConnection(connString))
-            //{
-            //    conn.Open();
-
-            //    // Insert some data
-            //    using (var cmd = new MySqlCommand())
-            //    {
-            //        cmd.Connection = conn;
-            //        cmd.CommandText = "INSERT INTO data (some_field) VALUES (@p)";
-            //        cmd.Parameters.AddWithValue("p", "Hello world");
-            //        cmd.ExecuteNonQuery();
-            //    }
-
-            //    // Retrieve all rows
-            //    using (var cmd = new MySqlCommand("SHOW DATABASES;", conn))
-            //    using (var reader = cmd.ExecuteReader())
-            //        while (reader.Read())
-            //            tempList.Add(reader.GetString(0));
-            //}
         }
 
         #endregion

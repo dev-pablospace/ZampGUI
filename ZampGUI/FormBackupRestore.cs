@@ -203,8 +203,7 @@ namespace ZampGUI
 
 
 
-            string mysqlimport = System.IO.Path.Combine(cv.MariaDB_path, "bin", "mysql.exe");
-            //mysql --user=root --password=root < "Q:/SVL/zampgui/ZampGUI_1.1.03_php8.1.8/last_script.txt"
+            string mysqlimport = System.IO.Path.Combine(cv.MariaDB_path, "bin", "mariadb.exe");
             string argumentsString = "--user=root --password=root -e \"\\. " + path_last_script + "\"";
 
 
@@ -253,7 +252,7 @@ namespace ZampGUI
                 StreamWriter strBackupFile = new StreamWriter(strBackupFileName);
 
                 ProcessStartInfo psInfo = new ProcessStartInfo();
-                psInfo.FileName = System.IO.Path.Combine(cv.MariaDB_path, "bin", "mysqldump.exe");
+                psInfo.FileName = System.IO.Path.Combine(cv.MariaDB_path, "bin", "mariadb-dump.exe");
                 psInfo.RedirectStandardInput = false;
                 //psInfo.RedirectStandardOutput = false;
                 psInfo.Arguments = "--user root --password=root --routines --events --triggers --single-transaction " + str_db;
@@ -280,7 +279,7 @@ namespace ZampGUI
         {
             string contenuto_sql = System.IO.File.ReadAllText(nomebackup_file);
 
-            var startInfo = new ProcessStartInfo(System.IO.Path.Combine(cv.MariaDB_path, "bin", "mysql.exe"));
+            var startInfo = new ProcessStartInfo(System.IO.Path.Combine(cv.MariaDB_path, "bin", "mariadb.exe"));
             startInfo.RedirectStandardInput = true;
             //startInfo.RedirectStandardInput = false;
             startInfo.RedirectStandardOutput = false;
